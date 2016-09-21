@@ -4,3 +4,39 @@
 !_TAG_PROGRAM_NAME	Exuberant Ctags	//
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.8	//
+app	app.js	/^var app = express();$/;"	v
+author	package.json	/^  "author": "Alexander Beloglazov",$/;"	f
+body-parser	package.json	/^    "body-parser": "~1.15.1",$/;"	f
+bodyParser	app.js	/^var bodyParser = require('body-parser');$/;"	v
+bugs	package.json	/^  "bugs": {$/;"	f
+cookie-parser	package.json	/^    "cookie-parser": "~1.4.3",$/;"	f
+cookieParser	app.js	/^var cookieParser = require('cookie-parser');$/;"	v
+debug	package.json	/^    "debug": "~2.2.0",$/;"	f
+dependencies	package.json	/^  "dependencies": {$/;"	f
+description	package.json	/^  "description": "Application allows user to create simple web page using his voice",$/;"	f
+ejs	package.json	/^    "ejs": "~2.4.1",$/;"	f
+express	app.js	/^var express = require('express');$/;"	v
+express	package.json	/^    "express": "~4.13.4",$/;"	f
+express	routes/index.js	/^var express = require('express');$/;"	v
+express	routes/users.js	/^var express = require('express');$/;"	v
+favicon	app.js	/^var favicon = require('serve-favicon');$/;"	v
+homepage	package.json	/^  "homepage": "https:\/\/github.com\/pkb-team\/build-it#readme"$/;"	f
+license	package.json	/^  "license": "ISC",$/;"	f
+logger	app.js	/^var logger = require('morgan');$/;"	v
+main	package.json	/^  "main": "app.js",$/;"	f
+morgan	package.json	/^    "morgan": "~1.7.0",$/;"	f
+name	package.json	/^  "name": "build-it",$/;"	f
+path	app.js	/^var path = require('path');$/;"	v
+private	package.json	/^  "private": true,$/;"	f
+repository	package.json	/^  "repository": {$/;"	f
+router	routes/index.js	/^var router = express.Router();$/;"	v
+router	routes/users.js	/^var router = express.Router();$/;"	v
+routes	app.js	/^var routes = require('.\/routes\/index');$/;"	v
+scripts	package.json	/^  "scripts": {$/;"	f
+serve-favicon	package.json	/^    "serve-favicon": "~2.3.0"$/;"	f
+start	package.json	/^    "start": "node .\/bin\/www"$/;"	f
+type	package.json	/^    "type": "git",$/;"	f
+url	package.json	/^    "url": "git+https:\/\/github.com\/pkb-team\/build-it.git"$/;"	f
+url	package.json	/^    "url": "https:\/\/github.com\/pkb-team\/build-it\/issues"$/;"	f
+users	app.js	/^var users = require('.\/routes\/users');$/;"	v
+version	package.json	/^  "version": "0.1.0",$/;"	f
