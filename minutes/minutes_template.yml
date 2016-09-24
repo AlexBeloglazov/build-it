@@ -3,7 +3,7 @@ meeting_type: ta # meeting_type can "group", "ta", or "instructor"
 attendance: [<ubit0>, <ubit1>, <ubit2>, <ubit3>]
 absent: [<ubit4>, <ubit5>, <ubit6>]
 excused_absences: [ # Any legitamite excuses for absent team members
-  {ubit: <ubit5>, : reason: Had class. This was known through a Doodle poll before scheduling the meeting.},
+  {ubit: <ubit5>, reason: Had class. This was known through a Doodle poll before scheduling the meeting.},
   {ubit: <ubit6>, reason: Abducted by aliens 15 minutes before meeting}
   ]
 task_progress: [ # All group members must be included here even if they haven't made any progress since the last meeting
