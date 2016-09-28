@@ -1,11 +1,10 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
+<% include templates/head.ejs %>
   <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
+      <% include templates/navbar.ejs %>
+      <div class="main-part">
+          <div style="font-size:30px;">
+              Description goes here
+          </div>
+      </div>
   </body>
 </html>

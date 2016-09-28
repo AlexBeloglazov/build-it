@@ -18,9 +18,9 @@ ejs	package.json	/^    "ejs": "~2.4.1",$/;"	f
 express	app.js	/^var express = require('express');$/;"	v
 express	package.json	/^    "express": "~4.13.4",$/;"	f
 express	routes/index.js	/^var express = require('express');$/;"	v
-express	routes/users.js	/^var express = require('express');$/;"	v
 favicon	app.js	/^var favicon = require('serve-favicon');$/;"	v
 homepage	package.json	/^  "homepage": "https:\/\/github.com\/pkb-team\/build-it#readme"$/;"	f
+index	app.js	/^var index = require('.\/routes\/index');$/;"	v
 license	package.json	/^  "license": "ISC",$/;"	f
 logger	app.js	/^var logger = require('morgan');$/;"	v
 main	package.json	/^  "main": "app.js",$/;"	f
@@ -30,13 +30,10 @@ path	app.js	/^var path = require('path');$/;"	v
 private	package.json	/^  "private": true,$/;"	f
 repository	package.json	/^  "repository": {$/;"	f
 router	routes/index.js	/^var router = express.Router();$/;"	v
-router	routes/users.js	/^var router = express.Router();$/;"	v
-routes	app.js	/^var routes = require('.\/routes\/index');$/;"	v
 scripts	package.json	/^  "scripts": {$/;"	f
 serve-favicon	package.json	/^    "serve-favicon": "~2.3.0"$/;"	f
 start	package.json	/^    "start": "node .\/bin\/www"$/;"	f
 type	package.json	/^    "type": "git",$/;"	f
 url	package.json	/^    "url": "git+https:\/\/github.com\/pkb-team\/build-it.git"$/;"	f
 url	package.json	/^    "url": "https:\/\/github.com\/pkb-team\/build-it\/issues"$/;"	f
-users	app.js	/^var users = require('.\/routes\/users');$/;"	v
 version	package.json	/^  "version": "0.1.0",$/;"	f
