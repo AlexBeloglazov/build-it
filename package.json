@@ -1,11 +1,6 @@
 {
-<<<<<<< HEAD
   "name": "build-it",
   "version": "0.1.0",
-=======
-  "name": "builder",
-  "version": "0.0.0",
->>>>>>> voice-api
   "private": true,
   "scripts": {
     "start": "node ./bin/www"
@@ -18,7 +13,6 @@
     "express": "~4.13.4",
     "morgan": "~1.7.0",
     "serve-favicon": "~2.3.0"
-<<<<<<< HEAD
   },
   "description": "Application allows user to create simple web page using his voice",
   "main": "app.js",
@@ -32,7 +26,4 @@
     "url": "https://github.com/pkb-team/build-it/issues"
   },
   "homepage": "https://github.com/pkb-team/build-it#readme"
-=======
-  }
->>>>>>> voice-api
 }

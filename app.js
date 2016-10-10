@@ -10,10 +10,6 @@ var users = require('./routes/users');
 
 var app = express();
 
-<<<<<<< HEAD
-// view engine setup
-=======
->>>>>>> voice-api
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
@@ -59,14 +55,10 @@ app.use(function(err, req, res, next) {
   });
 });
 
-<<<<<<< HEAD
 
-module.exports = app;
-=======
 module.exports = app;
 
     //
     // SOURCES:
     // HTML+JS integration for API.AI : https://gist.github.com/artemgoncharuk/b31b6a656c954a2866e8
     // BOOTSTRAP : http://bootstrapdocs.com/v3.0.3/docs/getting-started/
->>>>>>> voice-api
