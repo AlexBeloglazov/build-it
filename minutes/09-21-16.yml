@@ -5,6 +5,6 @@ absent: []
 excused_absences: []
 task_progress: [
     {ubit: abelogla, progress: Created NodeJS package for the application. Added Express skeleton},
-    ]
+]
 issues: []
 Notes:  Discussed and defined the tasks we need to accomplish for Sprint1, assigned them to team members and created git issues.
