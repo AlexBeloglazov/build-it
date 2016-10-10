@@ -86,8 +86,3 @@ app.use(function(err, req, res, next) {
 
 
 module.exports = app;
-
-    //
-    // SOURCES:
-    // HTML+JS integration for API.AI : https://gist.github.com/artemgoncharuk/b31b6a656c954a2866e8
-    // BOOTSTRAP : http://bootstrapdocs.com/v3.0.3/docs/getting-started/
