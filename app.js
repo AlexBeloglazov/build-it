@@ -10,6 +10,19 @@ var app = express();
 var config = require('./config/config');
 
 /*
+    Connect to MongoDB
+*/
+var mongoose = require('mongoose');
+mongoose.connect(config.db.url);
+mongoose.connection.on('error', function() {
+    console.log('MongoDB connection error')
+});
+mongoose.connection.once('open', function() {
+    console.log('Connected to MongoDB at ' + config.db.url);
+});
+
+
+/*
     Middlewares
 */
 var path = require('path');
@@ -18,13 +31,16 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var session = require('express-session');
+var passport = require('passport');
+require('./config/passport')(passport);
 
 /*
     Route handlers
 */
 var index = require('./routes/index');
-var login = require('./routes/login');
-var logout = require('./routes/logout');
+var auth = require('./routes/auth');
+var user = require('./routes/user');
+// var login = require('./routes/login');
 // var register = require('./routes/register');
 
 /*
@@ -43,13 +59,16 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false}));
 app.use(cookieParser());
 app.use(session(config.session));
+app.use(passport.initialize());
+app.use(passport.session());
 
 /*
     Assign route handlers
 */
+app.use('/auth', auth(passport));
 app.use('/', index);
-app.use('/logout', logout);
-app.use('/login', login);
+app.use('/user', user);
+// app.use('/login', login);
 // app.use('/register', register);
 
 // catch 404 and forward to error handler
@@ -66,8 +85,8 @@ app.use(function(req, res, next) {
 // will print stacktrace
 if (app.get('env') === 'development') {
   app.use(function(err, req, res, next) {
-    res.status(err.status || 500);
-    res.render('error', {
+      res.status(err.status || 500);
+      res.render('error', {
       message: err.message,
       error: err
     });

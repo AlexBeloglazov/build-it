@@ -3,8 +3,7 @@
       <% include templates/navbar.ejs %>
       <div class="main-part">
           <div style="font-size:30px;">
-              Description goes here
-              <%# <a href="/auth/facebook" style='font-size: 50px;'><i class="fa fa-facebook-square" aria-hidden="true"></i></a>%>
+              Logged in as <%= user ? user.name : ''%>
           </div>
       </div>
   </body>

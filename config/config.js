@@ -1,7 +1,7 @@
 module.exports = {
 
     session: {
-        secret: process.env.SESSION_KEY || 'nisuhg93nxkw02snw01n',
+        secret: process.env.NODE_SESSION_KEY || 'nisuhg93nxkw02snw01n',
         resave: false,
         saveUninitialized: true
     },
@@ -11,14 +11,14 @@ module.exports = {
     auth: {
 
         fb: {
-            'clientID': 0,
-            'clientSecret': 0,
-            'callbackURL': ''
+            'clientID': 1799987136944506,
+            'clientSecret': process.env.FACEBOOK_SECRET,
+            'callbackURL': 'http://localhost:3000/auth/facebook/callback'
         },
 
         google: {
             'clientID': 0,
-            'clientSecret': 0,
+            'clientSecret': '',
             'callbackURL': ''
         }
     }
