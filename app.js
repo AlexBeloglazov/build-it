@@ -59,8 +59,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false}));
 app.use(cookieParser());
 app.use(session(config.session));
-app.use(passport.initialize());
-app.use(passport.session());
+app.use(passport.initialize()); // 
+app.use(passport.session()); // if session.passport.user exists deserializes user and attaches to req.user
 
 /*
     Assign route handlers
