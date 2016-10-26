@@ -1,0 +1,38 @@
+/*Gotham Light, Medium*/
+
+html, body {
+    height: 100%;
+    color: rgb(60, 60, 60);
+}
+
+textarea {
+    resize: none;
+}
+
+iframe {
+    display: block;
+    border: none;
+    margin: 0px;
+    padding: 0px;
+}
+
+.bottom {
+    overflow: auto;
+    min-width: 100%;
+    height: 25%;
+    background-color: rgb(237, 247, 255);
+    border-top: 2px solid rgb(191, 213, 245);
+}
+
+.bottom .row div:first-child input[type="text"] {
+    width: 100%;
+}
+
+.bottom div .row{
+    padding: 10px 0px;
+    border-top: 1px solid rgb(214, 229, 241);
+}
+
+.bottom div .row:first-child {
+    /*padding-top: 15px;*/
+}

@@ -40,7 +40,7 @@ require('./config/passport')(passport);
 var index = require('./routes/index');
 var auth = require('./routes/auth');
 var user = require('./routes/user');
-// var login = require('./routes/login');
+var login = require('./routes/login');
 // var register = require('./routes/register');
 
 /*
@@ -59,7 +59,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false}));
 app.use(cookieParser());
 app.use(session(config.session));
-app.use(passport.initialize()); // 
+app.use(passport.initialize()); //
 app.use(passport.session()); // if session.passport.user exists deserializes user and attaches to req.user
 
 /*
@@ -67,9 +67,18 @@ app.use(passport.session()); // if session.passport.user exists deserializes use
 */
 app.use('/auth', auth(passport));
 app.use('/', index);
-app.use('/user', user);
-// app.use('/login', login);
+app.use('/user', isLoggedIn, user);
+app.use('/login', login);
 // app.use('/register', register);
+
+// function checks whether a user is logged in
+function isLoggedIn(req, res, next) {
+    if (req.isAuthenticated())
+        next();
+    else {
+        res.redirect('/');
+    }
+};
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
