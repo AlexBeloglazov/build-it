@@ -1,10 +1,16 @@
-var targetContainerId;
+var targetContainerId = "page_body";
 
 
 $('document').ready(function() {
 
-    $('iframe#main').load(function() {
-        targetContainerId = $('iframe#main').contents().find('body').attr('id');
+    var frame = $('iframe#main');
+    frame.one("load", function() {
+        frame.on("load", function() {
+            frame.contents().scrollTop(frame.contents().height());
+            frame.animate({
+                opacity: 100
+            }, 4500);
+        });
     });
 
     $("a[name='remove']").bind('click', function() {
@@ -63,6 +69,7 @@ $('document').ready(function() {
 });
 
 function sendQuery(action, element, target, options) {
+    $('iframe#main').stop(true).css("opacity", "0");
     // send a query to the server
     $.ajax({
         url: "editor/query",
@@ -76,9 +83,6 @@ function sendQuery(action, element, target, options) {
             if (response.status === 'ok') {
                 // reload iframe
                 $('iframe#main').attr('src', $('iframe#main').attr('src'));
-                $('iframe#main').load(function() {
-                    $('iframe#main').contents().scrollTop($('iframe#main').contents().height());
-                });
                 okStatus(response.message);
             }
             else {

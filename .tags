@@ -71,7 +71,7 @@ sendQuery	public/javascripts/editor.js	/^function sendQuery(action, element, tar
 serve-favicon	package.json	/^    "serve-favicon": "~2.3.0"$/;"	f
 session	app.js	/^var session = require('express-session');$/;"	v
 start	package.json	/^    "start": "node .\/bin\/www"$/;"	f
-targetContainerId	public/javascripts/editor.js	/^var targetContainerId;$/;"	v
+targetContainerId	public/javascripts/editor.js	/^var targetContainerId = "page_body";$/;"	v
 type	package.json	/^    "type": "git",$/;"	f
 url	package.json	/^    "url": "git+https:\/\/github.com\/pkb-team\/build-it.git"$/;"	f
 url	package.json	/^    "url": "https:\/\/github.com\/pkb-team\/build-it\/issues"$/;"	f
