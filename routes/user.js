@@ -144,8 +144,10 @@ router.post('/editor/query', function(req, res) {
 /*
     Serve user's HTML page
 */
-router.get('/pages/:pageID', function(req, res) {
-    Page.findOne({_id: req.params.pageID}, function(err, webpage) {
+router.get('/pages/:pageid', function(req, res) {
+    Page.findOne({_id: req.params.pageid}, function(err, webpage) {
+        if (typeof webpage === "undefined")
+            return res.sendStatus(404);
         res.send(webpage.html);
     })
 });
