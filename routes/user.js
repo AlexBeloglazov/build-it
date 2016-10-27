@@ -10,7 +10,9 @@ var router = express.Router();
     Landing page for logged user
 */
 router.get('/', function(req, res) {
-    res.render('user', {title: 'build-it', user: req.user});
+    Page.find({user: req.user.id}, function(err, data) {
+        res.render('user', {title: 'build-it', user: req.user, ids: data});
+    });
 });
 
 
@@ -27,10 +29,13 @@ router.get('/logout', function(req, res) {
     Open editor for either empty or chosen webpage
 */
 router.get('/editor', function(req, res) {
+    // existed webpage requested
     if (req.query.webpageid) {
-        // open existing webpage
-        // TODO
+        // save id of chosen webpage in session
+        req.session.webpageid = req.query.webpageid;
+        res.render('editor', {user: req.user, pageid: req.query.webpageid});
     }
+    // user creates new webpage
     else {
         // create document with empty webpage
         webpage = new Page();
@@ -39,11 +44,12 @@ router.get('/editor', function(req, res) {
             // populate document's fields
             webpage.user = req.user.id;
             webpage.html = html;
+            webpage.nextid = 0;
             webpage.save();
-            // remember webpage id in session object
+            // remember webpage id in session
             req.session.webpageid = webpage._id;
             // pass newly created webpage id to renderer
-            res.render('editor', {user: req.user, siteid: webpage._id});
+            res.render('editor', {user: req.user, pageid: webpage._id});
         });
     }
 });
@@ -53,19 +59,92 @@ router.get('/editor', function(req, res) {
     Handle editing request
 */
 router.post('/editor/query', function(req, res) {
-    var $;
+    // grab a webpage user currently working with
     Page.findOne({_id: req.session.webpageid}, function(err, webpage) {
-        $ = cheerio.load(webpage.html);
+        console.log(req.body);
+        var $ = cheerio.load(webpage.html);
+        var nextid = String(webpage.nextid);
+        var target = '#'+req.body.target;
+        // handle action
+        switch(req.body.action) {
+            case 'add':
+            // figure which element to add
+            switch(req.body.element) {
+                case 'jumbotron':
+                $("<div>").addClass("jumbotron")
+                    .attr("id", nextid)
+                    .append($("<h2>").html(req.body.options.text))
+                    .appendTo(target);
+                break;
+
+                case 'paragraph':
+                $("<p>").attr("id", nextid).html(req.body.options.text).appendTo(target);
+                break;
+
+                case 'h1':
+                $("<h1>").attr("id", nextid).html(req.body.options.text).appendTo(target);
+                break;
+
+                case 'h2':
+                $("<h2>").attr("id", nextid).html(req.body.options.text).appendTo(target);
+                break;
+
+                case 'h3':
+                $("<h3>").attr("id", nextid).html(req.body.options.text).appendTo(target);
+                break;
+
+                case 'button':
+                $("<button>").attr("id", nextid).addClass("btn btn-primary").html("Button").appendTo(target);
+                break;
+
+                case 'image':
+                $("<img>").attr({
+                    "id": nextid,
+                    "src": req.body.options.link,
+                    "height": req.body.options.height,
+                    "width": req.body.options.width,
+                }).appendTo(target);
+                break;
+
+                default:
+                return sendErr("bad element");
+            }
+            webpage.nextid += 1;
+            webpage.html = $.html();
+            webpage.save();
+            sendOk("element added");
+            break;
+
+            case 'delete':
+            var last = $(target).children().last();
+            if (last.length === 0)
+                return sendErr("no elements in container");
+            last.remove();
+            webpage.html = $.html();
+            webpage.save();
+            sendOk("element deleted");
+            break;
+
+            default:
+            return sendErr("bad action");
+        }
+
     });
-    // parse request and make changes
-    // TODO
+
+    function sendOk(message) {
+        res.json({"status": "ok", "message": message});
+    }
+
+    function sendErr(message) {
+        res.json({"status": "error", "message": message});
+    }
 });
 
 
 /*
     Serve user's HTML page
 */
-router.get('/sites/:pageID', function(req, res) {
+router.get('/pages/:pageID', function(req, res) {
     Page.findOne({_id: req.params.pageID}, function(err, webpage) {
         res.send(webpage.html);
     })

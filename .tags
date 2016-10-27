@@ -7,13 +7,11 @@
 Page	routes/user.js	/^var Page = require('..\/models\/page');$/;"	v
 User	config/passport.js	/^var User = require('..\/models\/user');$/;"	v
 User	models/user.js	/^var User = mongoose.model('user', userSchema)$/;"	v
-addElement	public/javascripts/editor.js	/^function addElement(element, error) {$/;"	f
 app	app.js	/^var app = express();$/;"	v
 auth	app.js	/^var auth = require('.\/routes\/auth');$/;"	v
 author	package.json	/^  "author": "Alexander Beloglazov",$/;"	f
 body-parser	package.json	/^    "body-parser": "~1.15.1",$/;"	f
 bodyParser	app.js	/^var bodyParser = require('body-parser');$/;"	v
-btnCounter	public/javascripts/editor.js	/^var btnCounter = 1;$/;"	v
 bugs	package.json	/^  "bugs": {$/;"	f
 cheerio	package.json	/^    "cheerio": "^0.22.0",$/;"	f
 cheerio	routes/user.js	/^var cheerio = require('cheerio');$/;"	v
@@ -21,12 +19,12 @@ config	app.js	/^var config = require('.\/config\/config');$/;"	v
 config	config/passport.js	/^var config = require('.\/config');$/;"	v
 cookie-parser	package.json	/^    "cookie-parser": "~1.4.3",$/;"	f
 cookieParser	app.js	/^var cookieParser = require('cookie-parser');$/;"	v
-currentContainer	public/javascripts/editor.js	/^var currentContainer;$/;"	v
 debug	package.json	/^    "debug": "~2.2.0",$/;"	f
 dependencies	package.json	/^  "dependencies": {$/;"	f
 description	package.json	/^  "description": "Application allows user to create simple web page using his voice",$/;"	f
 ejs	package.json	/^    "ejs": "~2.4.1",$/;"	f
 ejs	routes/user.js	/^var ejs = require('ejs');$/;"	v
+errStatus	public/javascripts/editor.js	/^function errStatus(message) {$/;"	f
 express	app.js	/^var express = require('express');$/;"	v
 express	package.json	/^    "express": "~4.13.4",$/;"	f
 express	routes/auth.js	/^var express = require('express');$/;"	v
@@ -56,12 +54,12 @@ morgan	package.json	/^    "morgan": "~1.7.0",$/;"	f
 myFunction	442homepage.html	/^function myFunction(selectTag) {$/;"	f
 mypanel	442homepage.html	/^function mypanel(selectTag) {$/;"	f
 name	package.json	/^  "name": "build-it",$/;"	f
+okStatus	public/javascripts/editor.js	/^function okStatus(message) {$/;"	f
 passport	app.js	/^var passport = require('passport');$/;"	v
 passport	package.json	/^    "passport": "^0.3.2",$/;"	f
 passport-facebook	package.json	/^    "passport-facebook": "^2.1.1",$/;"	f
 path	app.js	/^var path = require('path');$/;"	v
 private	package.json	/^  "private": true,$/;"	f
-removeElement	public/javascripts/editor.js	/^function removeElement(element, error) {$/;"	f
 repository	package.json	/^  "repository": {$/;"	f
 route	routes/auth.js	/^var route = express.Router();$/;"	v
 router	routes/index.js	/^var router = express.Router();$/;"	v
@@ -69,11 +67,12 @@ router	routes/login.js	/^var router = express.Router();$/;"	v
 router	routes/register.js	/^var router = express.Router();$/;"	v
 router	routes/user.js	/^var router = express.Router();$/;"	v
 scripts	package.json	/^  "scripts": {$/;"	f
+sendQuery	public/javascripts/editor.js	/^function sendQuery(action, element, target, options) {$/;"	f
 serve-favicon	package.json	/^    "serve-favicon": "~2.3.0"$/;"	f
 session	app.js	/^var session = require('express-session');$/;"	v
 start	package.json	/^    "start": "node .\/bin\/www"$/;"	f
+targetContainerId	public/javascripts/editor.js	/^var targetContainerId;$/;"	v
 type	package.json	/^    "type": "git",$/;"	f
-updateStatus	public/javascripts/editor.js	/^function updateStatus(code, message) {$/;"	f
 url	package.json	/^    "url": "git+https:\/\/github.com\/pkb-team\/build-it.git"$/;"	f
 url	package.json	/^    "url": "https:\/\/github.com\/pkb-team\/build-it\/issues"$/;"	f
 user	app.js	/^var user = require('.\/routes\/user');$/;"	v
