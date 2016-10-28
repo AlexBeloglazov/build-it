@@ -21,7 +21,7 @@ module.exports = function(passport) {
 
     passport.use(new fbStrategy({
         clientID: config.auth.fb.clientID,
-        clientSecret: process.env.FACEBOOK_SECRET || '',
+        clientSecret: config.auth.fb.clientSecret,
         callbackURL: config.auth.fb.callbackURL,
         },
         function(accessToken, refreshToken, profile, done) {
