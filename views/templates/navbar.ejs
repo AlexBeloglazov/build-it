@@ -2,14 +2,22 @@
     <div class="header-centered">
         <h1 class="header-left">Build It</h1>
         <div class="header-right">
-            <a href="/register" class="btn btn-default">Sign up</a>
-            <a href="/login" class="btn btn-default">Login</a>
+            <%# <a href="/register" class="btn btn-default">Sign up</a>%>
+            <% if (user) {%>
+                <a href="/user/logout" class="btn btn-default">Logout</a>
+            <% } else { %>
+                <a href="/auth/facebook" class=""><i class="fa fa-2x fa-facebook-square"></i></a>
+                <a href="/auth/google" class=""><i class="fa fa-2x fa-google-plus-square"></i></a>
+            <% } %>
+
         </div>
+        <% if (!user) {%>
         <div class="header-middle text-center">
                 <ul>
-                    <li><a href="#">creators</a></li>
+                    <li><a href="#">about</a></li>
                     <li><a href="#">documentation</a></li>
                 </ul>
         </div>
+        <% } %>
     </div>
 </div>

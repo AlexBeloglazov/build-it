@@ -1,0 +1,20 @@
+<% include templates/head.ejs %>
+  <body>
+      <% include templates/navbar.ejs %>
+      <div style="padding-top: 72px;" class="container">
+          <h2>Welcome back, <%= user ? user.name : ''%></h2>
+          <p>
+              Here is your pages:
+          </p>
+          <ul>
+              <% for(var i=0; i<ids.length; i++) {%>
+                  <li><a href="user/editor?webpageid=<%=ids[i]._id%>">Webpage id#<%=ids[i]._id%></a></li>
+              <% } %>
+          </ul>
+          <p>
+              <a href="/user/editor" class="btn btn-default">Add new page</a>
+          </p>
+
+      </div>
+  </body>
+</html>

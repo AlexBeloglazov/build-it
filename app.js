@@ -10,6 +10,19 @@ var app = express();
 var config = require('./config/config');
 
 /*
+    Connect to MongoDB
+*/
+var mongoose = require('mongoose');
+mongoose.connect(config.db.url);
+mongoose.connection.on('error', function() {
+    console.log('MongoDB connection error');
+});
+mongoose.connection.once('open', function() {
+    console.log('Connected to MongoDB at ' + config.db.url);
+});
+
+
+/*
     Middlewares
 */
 var path = require('path');
@@ -18,13 +31,16 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var session = require('express-session');
+var passport = require('passport');
+
 
 /*
     Route handlers
 */
 var index = require('./routes/index');
+var auth = require('./routes/auth');
+var user = require('./routes/user');
 var login = require('./routes/login');
-var logout = require('./routes/logout');
 // var register = require('./routes/register');
 
 /*
@@ -43,14 +59,27 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false}));
 app.use(cookieParser());
 app.use(session(config.session));
+app.use(passport.initialize()); //
+app.use(passport.session()); // if session.passport.user exists deserializes user and attaches to req.user
 
 /*
     Assign route handlers
 */
+app.use('/auth', auth);
 app.use('/', index);
-app.use('/logout', logout);
+app.use('/user', isLoggedIn, user);
 app.use('/login', login);
 // app.use('/register', register);
+
+// function checks whether a user is logged in
+function isLoggedIn(req, res, next) {
+    if (req.isAuthenticated())
+        next();
+    else {
+        // res.status(401).send("You are not logged in");
+        res.redirect('/');
+    }
+};
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -66,8 +95,8 @@ app.use(function(req, res, next) {
 // will print stacktrace
 if (app.get('env') === 'development') {
   app.use(function(err, req, res, next) {
-    res.status(err.status || 500);
-    res.render('error', {
+      res.status(err.status || 500);
+      res.render('error', {
       message: err.message,
       error: err
     });
@@ -86,8 +115,3 @@ app.use(function(err, req, res, next) {
 
 
 module.exports = app;
-
-    //
-    // SOURCES:
-    // HTML+JS integration for API.AI : https://gist.github.com/artemgoncharuk/b31b6a656c954a2866e8
-    // BOOTSTRAP : http://bootstrapdocs.com/v3.0.3/docs/getting-started/
