@@ -10,6 +10,8 @@ var router = express.Router();
     Landing page for logged user
 */
 router.get('/', function(req, res) {
+    console.log("SESSION: ", req.session);
+    console.log("COOKIE: ", req.cookies);
     Page.find({user: req.user.id}, function(err, data) {
         res.render('user', {title: 'build-it', user: req.user, ids: data});
     });
@@ -61,7 +63,10 @@ router.get('/editor', function(req, res) {
 router.post('/editor/query', function(req, res) {
     // grab a webpage user currently working with
     Page.findOne({_id: req.session.webpageid}, function(err, webpage) {
+        console.log("Error: ", err);
         console.log(req.body);
+        if (!webpage)
+            return sendErr("bad request");
         var $ = cheerio.load(webpage.html);
         var nextid = String(webpage.nextid);
         var target = '#'+req.body.target;

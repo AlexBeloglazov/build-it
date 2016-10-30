@@ -15,7 +15,7 @@ var config = require('./config/config');
 var mongoose = require('mongoose');
 mongoose.connect(config.db.url);
 mongoose.connection.on('error', function() {
-    console.log('MongoDB connection error')
+    console.log('MongoDB connection error');
 });
 mongoose.connection.once('open', function() {
     console.log('Connected to MongoDB at ' + config.db.url);
@@ -32,7 +32,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var session = require('express-session');
 var passport = require('passport');
-require('./config/passport')(passport);
+
 
 /*
     Route handlers
@@ -65,7 +65,7 @@ app.use(passport.session()); // if session.passport.user exists deserializes use
 /*
     Assign route handlers
 */
-app.use('/auth', auth(passport));
+app.use('/auth', auth);
 app.use('/', index);
 app.use('/user', isLoggedIn, user);
 app.use('/login', login);
@@ -76,6 +76,7 @@ function isLoggedIn(req, res, next) {
     if (req.isAuthenticated())
         next();
     else {
+        // res.status(401).send("You are not logged in");
         res.redirect('/');
     }
 };

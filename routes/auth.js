@@ -1,17 +1,27 @@
 var express = require('express');
 var route = express.Router();
+var configuredPassport = require('../config/auth');
 
-module.exports = function(passport) {
-    /*
-        Route to facebook auth page
-    */
-    route.get('/facebook', passport.authenticate('facebook'));
+/*
+    Route to facebook auth page
+*/
+route.get('/facebook', configuredPassport.authenticate('facebook'));
 
-    /*
-        Defines callback route from facebook
-    */
-    route.get('/facebook/callback', passport.authenticate('facebook', { successRedirect: '/user',
-                                                                        failureRedirect: '/'}));
+/*
+    Defines callback route for facebook
+*/
+route.get('/facebook/callback', configuredPassport.authenticate('facebook', { successRedirect: '/user',
+                                                                    failureRedirect: '/'}));
 
-    return route;
-};
+/*
+    Route to google auth page
+*/
+route.get('/google', configuredPassport.authenticate('google', {scope: ['https://www.googleapis.com/auth/plus.login']}));
+
+/*
+    Defines callback route for google
+*/
+route.get('/google/callback', configuredPassport.authenticate('google', { successRedirect: '/user',
+                                                                    failureRedirect: '/'}));
+
+module.exports = route;

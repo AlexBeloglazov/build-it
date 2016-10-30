@@ -5,7 +5,6 @@
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.8	//
 Page	routes/user.js	/^var Page = require('..\/models\/page');$/;"	v
-User	config/passport.js	/^var User = require('..\/models\/user');$/;"	v
 User	models/user.js	/^var User = mongoose.model('user', userSchema)$/;"	v
 app	app.js	/^var app = express();$/;"	v
 auth	app.js	/^var auth = require('.\/routes\/auth');$/;"	v
@@ -16,7 +15,7 @@ bugs	package.json	/^  "bugs": {$/;"	f
 cheerio	package.json	/^    "cheerio": "^0.22.0",$/;"	f
 cheerio	routes/user.js	/^var cheerio = require('cheerio');$/;"	v
 config	app.js	/^var config = require('.\/config\/config');$/;"	v
-config	config/passport.js	/^var config = require('.\/config');$/;"	v
+configuredPassport	routes/auth.js	/^var configuredPassport = require('..\/config\/auth');$/;"	v
 cookie-parser	package.json	/^    "cookie-parser": "~1.4.3",$/;"	f
 cookieParser	app.js	/^var cookieParser = require('cookie-parser');$/;"	v
 debug	package.json	/^    "debug": "~2.2.0",$/;"	f
@@ -34,7 +33,7 @@ express	routes/register.js	/^var express = require('express');$/;"	v
 express	routes/user.js	/^var express = require('express');$/;"	v
 express-session	package.json	/^    "express-session": "^1.14.1",$/;"	f
 favicon	app.js	/^var favicon = require('serve-favicon');$/;"	v
-fbStrategy	config/passport.js	/^var fbStrategy = require('passport-facebook').Strategy;$/;"	v
+fbStrategy	config/auth.js	/^var fbStrategy = require('passport-facebook').Strategy,$/;"	v
 homepage	package.json	/^  "homepage": "https:\/\/github.com\/pkb-team\/build-it#readme"$/;"	f
 index	app.js	/^var index = require('.\/routes\/index');$/;"	v
 isLoggedIn	app.js	/^function isLoggedIn(req, res, next) {$/;"	f
@@ -42,8 +41,6 @@ license	package.json	/^  "license": "ISC",$/;"	f
 logger	app.js	/^var logger = require('morgan');$/;"	v
 login	app.js	/^var login = require('.\/routes\/login');$/;"	v
 main	package.json	/^  "main": "app.js",$/;"	f
-module.exports	config/passport.js	/^var User = require('..\/models\/user');$/;"	f
-module.exports	routes/auth.js	/^var route = express.Router();$/;"	f
 module.exports.session	config/config.js	/^module.exports = {$/;"	p
 mon	routes/login.js	/^var mon = require('..\/models\/user');$/;"	v
 mongoose	app.js	/^var mongoose = require('mongoose');$/;"	v
@@ -58,6 +55,7 @@ okStatus	public/javascripts/editor.js	/^function okStatus(message) {$/;"	f
 passport	app.js	/^var passport = require('passport');$/;"	v
 passport	package.json	/^    "passport": "^0.3.2",$/;"	f
 passport-facebook	package.json	/^    "passport-facebook": "^2.1.1",$/;"	f
+passport-google-oauth2	package.json	/^    "passport-google-oauth2": "^0.1.6",$/;"	f
 path	app.js	/^var path = require('path');$/;"	v
 private	package.json	/^  "private": true,$/;"	f
 repository	package.json	/^  "repository": {$/;"	f
@@ -76,4 +74,5 @@ type	package.json	/^    "type": "git",$/;"	f
 url	package.json	/^    "url": "git+https:\/\/github.com\/pkb-team\/build-it.git"$/;"	f
 url	package.json	/^    "url": "https:\/\/github.com\/pkb-team\/build-it\/issues"$/;"	f
 user	app.js	/^var user = require('.\/routes\/user');$/;"	v
+verifier	config/auth.js	/^var verifier = function(accessToken, refreshToken, profile, done) {$/;"	f
 version	package.json	/^  "version": "0.1.0",$/;"	f

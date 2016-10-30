@@ -2,16 +2,9 @@ var mongoose = require('mongoose');
 
 // Define schema for Document object
 var userSchema = new mongoose.Schema({
-    facebook: {
-        id: String,
-        token: String,
-        email: String,
-        name: String
-    },
-
-    google: {
-
-    }
+    id: String,
+    email: String,
+    name: String
 });
 
 // Create model and export
