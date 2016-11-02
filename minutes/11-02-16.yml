@@ -1,0 +1,10 @@
+date: November 2, 2016
+meeting_type: ta # meeting_type can "group", "ta", or "instructor"
+attendance: [abelogla, jpowathi,]
+absent: []
+excused_absences: [piyushka]
+task_progress: [
+    {ubit: abelogla, progress: Google+ authorization added. Editor page refactored},
+]
+issues: []
+Notes: Discussed current issues we have. Created a list of task for Sprint4.
