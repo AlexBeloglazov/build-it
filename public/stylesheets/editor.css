@@ -5,32 +5,57 @@ html, body {
     color: rgb(60, 60, 60);
 }
 
-textarea {
-    resize: none;
-}
-
-iframe {
+iframe#main {
     display: block;
     border: none;
+    height: calc(100% - 32px);
+    min-width: 100%;
+    margin: 0px;
 }
 
 .bottom {
-    overflow: auto;
+    margin: 0px;
+    padding: 0px;
+    position: relative;
     min-width: 100%;
-    height: 25%;
-    background-color: rgb(237, 247, 255);
-    border-top: 2px solid rgb(191, 213, 245);
+    height: 32px;
+    border-top: 1px solid rgb(221, 221, 221);
+    box-shadow: 0px 3px 15px 4px rgb(205, 205, 205);
+    display: flex;
+    align-items: center;
+
 }
 
-.bottom .row div:first-child input[type="text"] {
-    width: 100%;
+.bottom input {
+    font-size: 15px;
+    float: left;
+    color: rgb(124, 124, 124);
+    width: 80%;
+    border: none;
+    border-bottom: 1px solid rgb(181, 181, 181);
+    outline: none;
+    padding: 0px;
+    margin: 0px;
+    text-indent: 10px;
+    font-family: "Oxygen";
 }
 
-.bottom div .row{
-    padding: 10px 0px;
-    border-top: 1px solid rgb(214, 229, 241);
+.bottom input:focus {
+    border-bottom: 1px solid #5FB0E4;
 }
 
-.bottom div .row:first-child {
-    /*padding-top: 15px;*/
+.bottom .mic {
+    float: left;
+    width: 10%;
+    padding: 0px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.fa-microphone {
+    font-size: 25px;
+}
+
+.blue {
+    color: #5FB0E4;
 }

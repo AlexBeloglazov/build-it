@@ -3,6 +3,11 @@ var targetContainerId = "page_body";
 
 $('document').ready(function() {
 
+    $('.mic').on("click", function() {
+        $(".fa-microphone").toggleClass("blue");
+        $("input[name='speech']").focus();
+    })
+
     var frame = $('iframe#main');
     frame.one("load", function() {
         frame.on("load", function() {
