@@ -1,4 +1,4 @@
-var targetContainerId = "page_body";
+var $targetContainer;
 
 
 $('document').ready(function() {
@@ -8,13 +8,26 @@ $('document').ready(function() {
         $("input[name='speech']").focus();
     });
 
-    var frame = $('iframe#main');
-    frame.one("load", function() {
-        frame.on("load", function() {
-            frame.contents().scrollTop(frame.contents().height());
-            frame.animate({
+    // biniding events to iframe
+    var $frame = $('iframe#main');
+    $frame.one("load", function() {
+        $targetContainer = $frame.contents().find("body");
+        console.log($targetContainer.prop("tagName"));
+        $frame.on("load", function() {
+            $frame.contents().scrollTop($frame.contents().height());
+            $frame.animate({
                 opacity: 100
             }, 4500);
+        });
+        // handle clicks on iframe elements
+        $($frame.contents().get(0)).on("click", function(e) {
+            $clicked = $(e.target);
+            if ($targetContainer && !$clicked.is("html")) {
+                $targetContainer.css("outline", "none");
+                $targetContainer = $clicked;
+                $targetContainer.css({"outline": "2px dashed rgb(87, 176, 219)"});
+                console.log($targetContainer.prop("tagName"));
+            }
         });
     });
 
