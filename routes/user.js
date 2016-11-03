@@ -11,8 +11,14 @@ var router = express.Router();
 */
 router.get('/', function(req, res) {
     console.log("SESSION: ", req.session);
-    console.log("COOKIE: ", req.cookies);
+    console.log("COOKIES: ", req.cookies);
+    console.log("HEADERS: ", req.headers);
     Page.find({user: req.user.id}, function(err, data) {
+        if (err)
+            return res.sendStatus(500);
+        res.setHeader("Pragma","no-cache");
+        res.setHeader("Cache-Control","no-cache, no-store, must-revalidate");
+        res.setHeader("Expires","0");
         res.render('user', {title: 'build-it', user: req.user, ids: data});
     });
 });
@@ -150,11 +156,22 @@ router.post('/editor/query', function(req, res) {
     Serve user's HTML page
 */
 router.get('/pages/:pageid', function(req, res) {
-    Page.findOne({_id: req.params.pageid}, function(err, webpage) {
-        if (typeof webpage === "undefined")
+    Page.findOne({_id: req.params.pageid, user: req.user.id}, function(err, webpage) {
+        if (!webpage)
             return res.sendStatus(404);
         res.send(webpage.html);
     })
+});
+
+/*
+    Handle webpage deletion requests
+*/
+router.delete('/pages/delete', function(req, res) {
+    Page.findOneAndRemove({_id: req.body.pageid, user: req.user.id}, function(err, webpage) {
+        if (webpage)
+            return res.json({"status": "ok"});
+        return res.json({"status": "error"});
+    });
 });
 
 module.exports = router;
