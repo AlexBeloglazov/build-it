@@ -1,0 +1,10 @@
+date: November 7, 2016
+meeting_type: group # meeting_type can "group", "ta", or "instructor"
+attendance: [abelogla, jpowathi, piyushka]
+absent: []
+excused_absences: []
+task_progress: [
+    {ubit: abelogla, progress: Preview for existed webpages added. Selection of html object in Editor added},
+]
+issues: []
+Notes: Tentatively assigned tasks for each group member. Established the list of HTML elements a user can work with, as well as CSS properties that a user can change. Developed a set of rules for addition/deletion of elements.
