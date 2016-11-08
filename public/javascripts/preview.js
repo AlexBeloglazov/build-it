@@ -1,11 +1,12 @@
-$(".preview").on("mouseenter", function() {
-    var cover = $(this).next();
-    cover.find(".preview-cover-options").show();
-    cover.find(".preview-cover-confirm").hide();
-    cover.toggle();
-    cover.one("mouseleave", function() {
-        cover.fadeToggle(200, "linear");
-    });
+$(".preview-wrap").on("mouseenter", function() {
+    var $cover = $(this).find(".preview-cover");
+    $cover.find(".preview-cover-options").show();
+    $cover.find(".preview-cover-confirm").hide();
+    $cover.finish().fadeToggle(200);
+});
+
+$(".preview-wrap").on("mouseleave", function() {
+    $(this).children(".preview-cover").finish().fadeToggle(200);
 });
 
 $(".preview-cover").on("click", function(e){
