@@ -1,34 +1,53 @@
-var $targetContainer;
+var MAIN_CONTAINER = "iframe_main";
+var DIV_INFO = "<dl><dt>You can add:</dt><dd>- Paragraph</dd><dd>- Button</dd><dd>- Something</dd><dt>You can change:</dt><dd>- Color</dd><dd>- Font size</dd></dl>";
+var P_INFO = "<dl><dt>You can add:</dt><dd>- Image</dd><dd>- Links</dd><dt>You can change:</dt><dd>- Text color</dd><dd>- Font size</dd></dl>";
 
+var $frame = null;
+var $targetContainer = null;
+var $popOver = null;
+var targetContainerId = MAIN_CONTAINER;
 
 $('document').ready(function() {
+
+    // initialize popover
+    $popOver = $("#help").popover({html: "true", content: DIV_INFO});
+    // find frame
+    $frame = $('iframe#main');
 
     $('.mic').on("click", function() {
         $(".fa-microphone").toggleClass("blue");
         $("input[name='speech']").focus();
     });
 
-    // biniding events to iframe
-    var $frame = $('iframe#main');
+    $("#download").on("click", function() {
+        $('iframe#main').attr('src', $('iframe#main').attr('src'));
+    });
+
+    // handle clicks on iframe elements
+    $frame.on("load", function() {
+        $targetContainer = $frame.contents().find("#"+(targetContainerId || MAIN_CONTAINER));
+        $($frame.contents().get(0)).on("click", function(e) {
+            $clicked = $(e.target);
+            if ($targetContainer && !$clicked.is("html") && !$clicked.is("ul")) {
+                $targetContainer.css("outline", "none");
+                $targetContainer = $clicked;
+                targetContainerId = $targetContainer.prop("id");
+                $targetContainer.css({"outline": "2px dashed rgb(87, 176, 219)"});
+                $("#target").html($targetContainer.prop("tagName"))
+            }
+            updatePopOver();
+        });
+        $targetContainer.click();
+    });
+
     $frame.one("load", function() {
-        $targetContainer = $frame.contents().find("body");
-        console.log($targetContainer.prop("tagName"));
         $frame.on("load", function() {
             $frame.contents().scrollTop($frame.contents().height());
             $frame.animate({
                 opacity: 100
             }, 4500);
         });
-        // handle clicks on iframe elements
-        $($frame.contents().get(0)).on("click", function(e) {
-            $clicked = $(e.target);
-            if ($targetContainer && !$clicked.is("html")) {
-                $targetContainer.css("outline", "none");
-                $targetContainer = $clicked;
-                $targetContainer.css({"outline": "2px dashed rgb(87, 176, 219)"});
-                console.log($targetContainer.prop("tagName"));
-            }
-        });
+
     });
 
     $("a[name='remove']").bind('click', function() {
@@ -87,7 +106,7 @@ $('document').ready(function() {
 });
 
 function sendQuery(action, element, target, options) {
-    $('iframe#main').stop(true).css("opacity", "0");
+    $frame.stop(true).css("opacity", "0");
     // send a query to the server
     $.ajax({
         url: "editor/query",
@@ -98,17 +117,60 @@ function sendQuery(action, element, target, options) {
         // expected type of reply
         dataType: "json",
         success: function(response) {
+            $frame.attr('src', $frame.attr('src'));
             if (response.status === 'ok') {
                 // reload iframe
-                $('iframe#main').attr('src', $('iframe#main').attr('src'));
-                okStatus(response.message);
+                $frame.attr('src', $frame.attr('src'));
+                console.log(response.message);
             }
             else {
                 // server couldn't handle request
-                errStatus(response.message);
+                console.log(response.message);
             }
         },
     });
+}
+
+function deleteQuery(target) {
+    $frame.stop(true).css("opacity", "0");
+    // send a query to the server
+    $.ajax({
+        url: "editor/query",
+        type: "DELETE",
+        // payload as a string
+        data: JSON.stringify({"target": target}),
+        contentType: "application/json; charset=utf-8",
+        // expected type of reply
+        dataType: "json",
+        success: function(response) {
+            $frame.attr('src', $frame.attr('src'));
+            if (response.status === 'ok') {
+                // reload iframe
+                $frame.attr('src', $frame.attr('src'));
+                console.log(response.message);
+            }
+            else {
+                // server couldn't handle request
+                console.log(response.message);
+            }
+        },
+    });
+}
+
+function updatePopOver() {
+    switch($targetContainer.prop("tagName")) {
+        case "DIV":
+        $popOver.attr("data-content", DIV_INFO);
+        // $popOver.data('bs.popover').tip().find(".popover-content").html(DIV_INFO);
+        break;
+
+        case "P":
+        break;
+
+        default:
+        $popOver.attr("data-content", "Nothing");
+
+    }
 }
 
 function okStatus(message) {

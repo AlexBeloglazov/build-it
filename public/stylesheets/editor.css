@@ -8,9 +8,21 @@ html, body {
 iframe#main {
     display: block;
     border: none;
-    height: calc(100% - 32px);
+    height: calc(100% - 33px);
     min-width: 100%;
     margin: 0px;
+}
+
+dd {
+    margin-left: 15px;
+}
+
+dl {
+    margin: 0px;
+}
+
+dt:not(:first-child) {
+    margin-top: 10px;
 }
 
 .bottom {
@@ -23,21 +35,21 @@ iframe#main {
     box-shadow: 0px 3px 15px 4px rgb(205, 205, 205);
     display: flex;
     align-items: center;
-
+    color: rgb(113, 113, 113);
+    font-family: "Oxygen";
 }
 
 .bottom input {
     font-size: 15px;
     float: left;
-    color: rgb(124, 124, 124);
-    width: 80%;
+    /*color: rgb(124, 124, 124);*/
+    width: 70%;
     border: none;
     border-bottom: 1px solid rgb(181, 181, 181);
     outline: none;
     padding: 0px;
     margin: 0px;
     text-indent: 10px;
-    font-family: "Oxygen";
 }
 
 .bottom input:focus {
@@ -52,10 +64,48 @@ iframe#main {
     cursor: pointer;
 }
 
-.fa-microphone {
-    font-size: 25px;
-}
-
 .blue {
     color: #5FB0E4;
+}
+
+.list-unstyled {
+    padding: 0px;
+    margin: 0px 0px 0px 15px;
+    min-width: 200px;
+}
+
+.list-unstyled > li {
+    float: left;
+    display: inline-block;
+    padding: 0px 10px;
+    margin: 0px;
+    line-height: 32px;
+    border-right: 1px dotted rgb(227, 227, 227);
+}
+
+.list-unstyled > li:not(:first-child):hover {
+    color: rgb(64, 63, 63);
+}
+
+.list-unstyled > li:first-child {
+    min-width: 100px;
+    border-left: 1px dotted rgb(227, 227, 227);
+}
+
+#target {
+    background-color: rgb(204, 229, 245);
+    border: 1px solid white;
+    border-radius: 3px;
+    padding: 3px 3px;
+}
+
+.popover {
+    /*font-family: "Oxygen";*/
+    color: rgb(113, 113, 113);
+    font-size: 95%;
+    width: 170px;
+}
+
+.popover-title {
+    font-weight: bold;
 }

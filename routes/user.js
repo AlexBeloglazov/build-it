@@ -2,6 +2,7 @@ var express = require('express');
 var ejs = require('ejs');
 var Page = require('../models/page');
 var cheerio = require('cheerio');
+var html = require('html');
 
 var router = express.Router();
 
@@ -68,8 +69,7 @@ router.get('/editor', function(req, res) {
 */
 router.post('/editor/query', function(req, res) {
     // grab a webpage user currently working with
-    Page.findOne({_id: req.session.webpageid}, function(err, webpage) {
-        console.log("Error: ", err);
+    Page.findOne({_id: req.session.webpageid, user: req.user.id}, function(err, webpage) {
         console.log(req.body);
         if (!webpage)
             return sendErr("bad request");
@@ -78,8 +78,7 @@ router.post('/editor/query', function(req, res) {
         var target = '#'+req.body.target;
         // handle action
         switch(req.body.action) {
-            case 'add':
-            // figure which element to add
+            case "add":
             switch(req.body.element) {
                 case 'jumbotron':
                 $("<div>").addClass("jumbotron")
@@ -126,14 +125,8 @@ router.post('/editor/query', function(req, res) {
             sendOk("element added");
             break;
 
-            case 'delete':
-            var last = $(target).children().last();
-            if (last.length === 0)
-                return sendErr("no elements in container");
-            last.remove();
-            webpage.html = $.html();
-            webpage.save();
-            sendOk("element deleted");
+            case "set":
+            case "change":
             break;
 
             default:
@@ -153,13 +146,35 @@ router.post('/editor/query', function(req, res) {
 
 
 /*
+    Handle deletion request
+*/
+router.delete("/editor/query", function(req, res) {
+    Page.findOne({_id: req.session.webpageid, user: req.user.id}, function(err, webpage) {
+        if (!webpage)
+            return res.json({"status": "error", "message": "bad request"});
+        if (!req.body.target)
+            return res.json({"status": "error", "message": "no id"});
+        var $ = cheerio.load(webpage.html)
+        var target = $("#"+req.body.target);
+        if (target.length === 0)
+            return res.json({"status": "error", "message": "not found"});
+        if (target.is("body"))
+            return res.json({"status": "error", "message": "not allowed"});
+        target.remove();
+        webpage.html = $.html();
+        webpage.save();
+        res.json({"status": "ok", "message": "deleted", "next": 0});
+    });
+});
+
+/*
     Serve user's HTML page
 */
 router.get('/pages/:pageid', function(req, res) {
     Page.findOne({_id: req.params.pageid, user: req.user.id}, function(err, webpage) {
         if (!webpage)
             return res.sendStatus(404);
-        res.send(webpage.html);
+        res.send(html.prettyPrint(webpage.html));
     })
 });
 
