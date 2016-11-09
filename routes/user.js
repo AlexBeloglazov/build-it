@@ -73,6 +73,8 @@ router.post('/editor/query', function(req, res) {
         console.log(req.body);
         if (!webpage)
             return sendErr("bad request");
+        if (!req.body.target)
+            return sendErr("no id");
         var $ = cheerio.load(webpage.html);
         var nextid = String(webpage.nextid);
         var target = '#'+req.body.target;
@@ -149,6 +151,7 @@ router.post('/editor/query', function(req, res) {
     Handle deletion request
 */
 router.delete("/editor/query", function(req, res) {
+    console.log(req.body.target);
     Page.findOne({_id: req.session.webpageid, user: req.user.id}, function(err, webpage) {
         if (!webpage)
             return res.json({"status": "error", "message": "bad request"});
@@ -158,7 +161,7 @@ router.delete("/editor/query", function(req, res) {
         var target = $("#"+req.body.target);
         if (target.length === 0)
             return res.json({"status": "error", "message": "not found"});
-        if (target.is("body"))
+        if (target.is("body") || req.body.target === "iframe_main")
             return res.json({"status": "error", "message": "not allowed"});
         target.remove();
         webpage.html = $.html();
