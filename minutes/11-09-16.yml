@@ -1,0 +1,10 @@
+date: November 9, 2016
+meeting_type: ta # meeting_type can "group", "ta", or "instructor"
+attendance: [abelogla, jpowathi, piyushka]
+absent: []
+excused_absences: []
+task_progress: [
+    {ubit: abelogla, progress: Indicator for name of selected element added. Help popover added. Deletion happens through DELETE http request},
+]
+issues: []
+Notes:
