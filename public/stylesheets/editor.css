@@ -1,4 +1,5 @@
 /*Gotham Light, Medium*/
+/*Gotham SSm,Helvetica,Arial,sans-serif;*/
 
 html, body {
     height: 100%;
@@ -29,21 +30,21 @@ dt:not(:first-child) {
     margin: 0px;
     padding: 0px;
     position: relative;
-    min-width: 100%;
+    min-width: 1100px;
     height: 32px;
     border-top: 1px solid rgb(221, 221, 221);
     box-shadow: 0px 3px 15px 4px rgb(205, 205, 205);
     display: flex;
     align-items: center;
-    color: rgb(113, 113, 113);
+    color: rgb(159, 159, 159);
     font-family: "Oxygen";
+    font-weight: 100;
 }
 
 .bottom input {
     font-size: 15px;
     float: left;
-    /*color: rgb(124, 124, 124);*/
-    width: 70%;
+    min-width: 600px;
     border: none;
     border-bottom: 1px solid rgb(181, 181, 181);
     outline: none;
@@ -58,7 +59,7 @@ dt:not(:first-child) {
 
 .bottom .mic {
     float: left;
-    width: 10%;
+    min-width: 100px;
     padding: 0px;
     text-align: center;
     cursor: pointer;
@@ -71,7 +72,6 @@ dt:not(:first-child) {
 .list-unstyled {
     padding: 0px;
     margin: 0px 0px 0px 15px;
-    min-width: 200px;
 }
 
 .list-unstyled > li {
@@ -80,27 +80,49 @@ dt:not(:first-child) {
     padding: 0px 10px;
     margin: 0px;
     line-height: 32px;
-    border-right: 1px dotted rgb(227, 227, 227);
+    user-select: none;
+    cursor: default;
 }
 
-.list-unstyled > li:not(:first-child):hover {
+.list-unstyled > li:nth-child(2n+1) {
+    border-left: 1px dotted rgb(227, 227, 227);
+}
+
+.list-unstyled > li:nth-child(1n+5):hover {
     color: rgb(64, 63, 63);
 }
 
-.list-unstyled > li:first-child {
-    min-width: 100px;
+.list-unstyled > li:last-child {
+    border-right: 1px dotted rgb(227, 227, 227);
     border-left: 1px dotted rgb(227, 227, 227);
+}
+
+.list-unstyled > li:nth-child(2){
+    min-width: 150px;
+    text-align: center;
+    padding: 0px 10px 0px 0px;
+}
+
+.list-unstyled > li:nth-child(4){
+    min-width: 80px;
+    text-align: center;
+    padding: 0px 10px 0px 0px;
 }
 
 #target {
     background-color: rgb(204, 229, 245);
-    border: 1px solid white;
     border-radius: 3px;
-    padding: 3px 3px;
+    padding: 3px 5px;
+}
+
+#info {
+    background-color: rgb(229, 249, 221);
+    border-radius: 3px;
+    padding: 3px 5px;
 }
 
 .popover {
-    /*font-family: "Oxygen";*/
+    font-family: "Oxygen";
     color: rgb(113, 113, 113);
     font-size: 95%;
     width: 170px;

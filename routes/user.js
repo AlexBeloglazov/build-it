@@ -46,6 +46,7 @@ router.get('/editor', function(req, res) {
     }
     // user creates new webpage
     else {
+        console.log("here");
         // create document with empty webpage
         webpage = new Page();
         // render empty webpage to get string representation
@@ -58,7 +59,7 @@ router.get('/editor', function(req, res) {
             // remember webpage id in session
             req.session.webpageid = webpage._id;
             // pass newly created webpage id to renderer
-            res.render('editor', {user: req.user, pageid: webpage._id});
+            res.redirect('editor?webpageid='+webpage._id);
         });
     }
 });

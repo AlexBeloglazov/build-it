@@ -10,8 +10,8 @@ var targetId = MAIN_CONTAINER;
 $('document').ready(function() {
 
     // initialize popover
-    $popOver = $("#help").popover({html: "true", content: DIV_INFO});
-    // find frame
+    $popOver = $("#help").popover({html: "true"});
+    // grab iframe
     $frame = $('iframe#main');
 
     $('.mic').on("click", function() {
@@ -25,18 +25,26 @@ $('document').ready(function() {
 
     // handle clicks on iframe elements
     $frame.on("load", function() {
+        // get target element in iframe by id
         $target = $frame.contents().find("#"+(targetId || MAIN_CONTAINER));
+        // bind click event to iframe elements
         $($frame.contents().get(0)).on("click", function(e) {
             $clicked = $(e.target);
-            if ($target && !$clicked.is("html") && !$clicked.is("ul")) {
-                $target.css("outline", "none");
-                $target = $clicked;
-                targetId = $target.prop("id");
-                $target.css({"outline": "2px dashed rgb(87, 176, 219)"});
-                $("#target").html($target.prop("tagName"))
+            // filter clicked element
+            if (!$target || $clicked.is("body") || $clicked.is("html") || $clicked.is("ul")) {
+                return;
             }
+            $target.css("outline", "none");
+            $target = $clicked;
+            targetId = $target.prop("id");
+            $target.css({"outline": "2px dashed rgb(87, 176, 219)"});
+            $("#target").html($target.prop("tagName"))
+            // update help popover according to a clicked element
             updatePopOver();
+            console.log($target);
+
         });
+        // "click" an element after iframe has been refreshed
         $target.click();
     });
 
@@ -129,7 +137,6 @@ function updatePopOver() {
     switch($target.prop("tagName")) {
         case "DIV":
         $popOver.attr("data-content", DIV_INFO);
-        // $popOver.data('bs.popover').tip().find(".popover-content").html(DIV_INFO);
         break;
 
         case "P":
