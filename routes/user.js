@@ -11,15 +11,15 @@ var router = express.Router();
     Landing page for logged user
 */
 router.get('/', function(req, res) {
-    console.log("SESSION: ", req.session);
-    console.log("COOKIES: ", req.cookies);
-    console.log("HEADERS: ", req.headers);
+    // console.log("SESSION: ", req.session);
+    // console.log("COOKIES: ", req.cookies);
+    // console.log("HEADERS: ", req.headers);
     Page.find({user: req.user.id}, function(err, data) {
         if (err)
             return res.sendStatus(500);
-        res.setHeader("Pragma","no-cache");
-        res.setHeader("Cache-Control","no-cache, no-store, must-revalidate");
-        res.setHeader("Expires","0");
+        // res.setHeader("Pragma","no-cache");
+        // res.setHeader("Cache-Control","no-cache, no-store, must-revalidate");
+        // res.setHeader("Expires","0");
         res.render('user', {title: 'build-it', user: req.user, ids: data});
     });
 });
@@ -46,7 +46,6 @@ router.get('/editor', function(req, res) {
     }
     // user creates new webpage
     else {
-        console.log("here");
         // create document with empty webpage
         webpage = new Page();
         // render empty webpage to get string representation

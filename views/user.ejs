@@ -1,5 +1,11 @@
 <% include templates/head.ejs %>
   <body>
+      <script>
+        if (sessionStorage.getItem("fromEditor")) {
+            sessionStorage.removeItem("fromEditor");
+            window.location.reload(true);
+        }
+      </script>
       <% include templates/navbar.ejs %>
       <div style="padding-top: 72px;" class="container">
           <h2>Welcome back, <%= user ? user.name : ''%></h2>

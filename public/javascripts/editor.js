@@ -42,7 +42,6 @@ $('document').ready(function() {
             // update help popover according to a clicked element
             updatePopOver();
             console.log($target);
-
         });
         // "click" an element after iframe has been refreshed
         $target.click();

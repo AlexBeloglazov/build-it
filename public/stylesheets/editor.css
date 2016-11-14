@@ -9,9 +9,11 @@ html, body {
 iframe#main {
     display: block;
     border: none;
+    /*border: 1px solid pink;*/
     height: calc(100% - 33px);
-    min-width: 100%;
-    margin: 0px;
+    width: 100%;
+    min-width: 1100px;
+    margin: auto;
 }
 
 dd {
@@ -36,6 +38,7 @@ dt:not(:first-child) {
     box-shadow: 0px 3px 15px 4px rgb(205, 205, 205);
     display: flex;
     align-items: center;
+    justify-content: space-between;
     color: rgb(159, 159, 159);
     font-family: "Oxygen";
     font-weight: 100;
@@ -43,7 +46,7 @@ dt:not(:first-child) {
 
 .bottom input {
     font-size: 15px;
-    float: left;
+    /*float: left;*/
     min-width: 600px;
     border: none;
     border-bottom: 1px solid rgb(181, 181, 181);
@@ -58,7 +61,7 @@ dt:not(:first-child) {
 }
 
 .bottom .mic {
-    float: left;
+    /*float: left;*/
     min-width: 100px;
     padding: 0px;
     text-align: center;
@@ -70,6 +73,7 @@ dt:not(:first-child) {
 }
 
 .list-unstyled {
+
     padding: 0px;
     margin: 0px 0px 0px 15px;
 }

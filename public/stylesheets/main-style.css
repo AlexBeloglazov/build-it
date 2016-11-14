@@ -106,17 +106,8 @@ body .main-part {
     margin: auto;
 }
 
-iframe.preview {
-    position: relative;
-    width: 1280px;
-    height: 800px;
-    border: none;
-    -webkit-transform: scale(0.24);
-    -webkit-transform-origin: 0 0;
-}
-
 div.preview-wrap {
-    display: inline-block;
+    float: left;
     position: relative;
     width: 307px;
     height: 194px;
@@ -126,6 +117,15 @@ div.preview-wrap {
     padding: 0px;
     border-radius: 3px;
     margin: 10px 10px 10px 10px;
+}
+
+iframe.preview {
+    position: relative;
+    width: 1280px;
+    height: 800px;
+    border: none;
+    -webkit-transform: scale(0.24);
+    -webkit-transform-origin: 0 0;
 }
 
 div.preview-add-page {
