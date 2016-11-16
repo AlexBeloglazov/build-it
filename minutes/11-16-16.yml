@@ -1,0 +1,12 @@
+date: November 9, 2016
+meeting_type: group # meeting_type can "group", "ta", or "instructor"
+attendance: [abelogla, jpowathi]
+absent: []
+excused_absences: [piyushka]
+task_progress: [
+    {ubit: abelogla, progress: Bug fixes. Scroll down to added element},
+    {ubit: jpowathi, progress: Set up intent parser to extract intentions for all elements},
+    {ubit: piyushka, progress: Written text for About and Documentation pages},
+]
+issues: []
+Notes:
