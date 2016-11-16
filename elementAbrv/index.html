@@ -1,0 +1,94 @@
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="bootstrap.css">
+</head>
+
+<body>
+<a href="#" class="btn btn-default" id="openBtn">Show Details</a>
+
+<div id="myModalParagraph" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">To this paragraph, you can add</div>
+                    <div class="panel-body">
+                        <ul>
+                            <li>Links</li>
+                            <li>Margins</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">In this paragraph, you can change</div>
+                    <div class="panel-body">
+
+                        <ul>
+                            <li>Font size</li>
+                            <li>Font style</li>
+                            <li>Font color</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="myModalFooter" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">To this footer, you can add</div>
+                    <div class="panel-body">
+                        <ul>
+                            <li>Paragraphs</li>
+                            <li>Links</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">In this footer, you can change</div>
+                    <div class="panel-body">
+
+                        <ul>
+                            <li>Footer color</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+    var current = "paragraph"; // GET SELECTED ELEMENT FROM ALEX
+    $(document).ready(function () {
+        console.log("HELLO");
+        $('#openBtn').click(function () {
+            console.log("HELLO");
+            switch (current) {
+                    // ADD YOUR NEW CASES HERE
+                case "paragraph": {
+                    $('#myModalParagraph').modal('show');
+                    break;
+                }
+                case "footer": {
+                    $('#myModalFooter').modal('show');
+                    break;
+                }
+            }
+        });
+    });
+
+</script>
+</body>
+</html>
