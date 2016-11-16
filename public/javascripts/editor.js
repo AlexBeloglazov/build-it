@@ -41,21 +41,15 @@ $('document').ready(function() {
             $("#target").html($target.prop("tagName"))
             // update help popover according to a clicked element
             updatePopOver();
-            console.log($target);
         });
         // "click" an element after iframe has been refreshed
         $target.click();
+        // scroll to target element
+        var targetOffset = (targetId === MAIN_CONTAINER) ? 0 : ($target.offset().top + $target.innerHeight()/2) - $(window).height()/2;
+        $frame.contents().scrollTop(targetOffset);
+        $frame.animate({opacity: 100}, 4500);
     });
 
-    $frame.one("load", function() {
-        $frame.on("load", function() {
-            $frame.contents().scrollTop($frame.contents().height());
-            $frame.animate({
-                opacity: 100
-            }, 4500);
-        });
-
-    });
 
     // $("button[name='addImage']").bind('click', function() {
     //     attr = {

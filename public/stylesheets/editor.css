@@ -9,10 +9,8 @@ html, body {
 iframe#main {
     display: block;
     border: none;
-    /*border: 1px solid pink;*/
     height: calc(100% - 33px);
     width: 100%;
-    min-width: 1100px;
     margin: auto;
 }
 
@@ -32,21 +30,21 @@ dt:not(:first-child) {
     margin: 0px;
     padding: 0px;
     position: relative;
-    min-width: 1100px;
+    overflow: hidden;
     height: 32px;
-    border-top: 1px solid rgb(221, 221, 221);
-    box-shadow: 0px 3px 15px 4px rgb(205, 205, 205);
+    border-top: 1px solid rgb(245, 241, 241);
+    box-shadow: 0px 0px 5px 0px rgb(130, 130, 130);
     display: flex;
     align-items: center;
     justify-content: space-between;
     color: rgb(159, 159, 159);
     font-family: "Oxygen";
     font-weight: 100;
+    background-color: rgb(237, 237, 237);
 }
 
 .bottom input {
     font-size: 15px;
-    /*float: left;*/
     min-width: 600px;
     border: none;
     border-bottom: 1px solid rgb(181, 181, 181);
@@ -54,6 +52,8 @@ dt:not(:first-child) {
     padding: 0px;
     margin: 0px;
     text-indent: 10px;
+    background-color: transparent;
+    text-align: center;
 }
 
 .bottom input:focus {
@@ -61,7 +61,6 @@ dt:not(:first-child) {
 }
 
 .bottom .mic {
-    /*float: left;*/
     min-width: 100px;
     padding: 0px;
     text-align: center;
@@ -73,23 +72,24 @@ dt:not(:first-child) {
 }
 
 .list-unstyled {
-
+    white-space: nowrap;
     padding: 0px;
     margin: 0px 0px 0px 15px;
+    /*font-size: 0px;*/
 }
 
 .list-unstyled > li {
-    float: left;
     display: inline-block;
-    padding: 0px 10px;
+    padding: 0px 7px;
     margin: 0px;
     line-height: 32px;
     user-select: none;
     cursor: default;
+    /*font-size: 14px;*/
 }
 
 .list-unstyled > li:nth-child(2n+1) {
-    border-left: 1px dotted rgb(227, 227, 227);
+    border-left: 1px dotted rgb(198, 198, 198);
 }
 
 .list-unstyled > li:nth-child(1n+5):hover {
@@ -97,8 +97,8 @@ dt:not(:first-child) {
 }
 
 .list-unstyled > li:last-child {
-    border-right: 1px dotted rgb(227, 227, 227);
-    border-left: 1px dotted rgb(227, 227, 227);
+    /*border-right: 1px dotted rgb(198, 198, 198);*/
+    border-left: 1px dotted rgb(198, 198, 198);
 }
 
 .list-unstyled > li:nth-child(2){
@@ -116,13 +116,16 @@ dt:not(:first-child) {
 #target {
     background-color: rgb(204, 229, 245);
     border-radius: 3px;
-    padding: 3px 5px;
+    padding: 3px 7px;
+}
+
+.info {
+    background-color: rgb(199, 231, 188);
 }
 
 #info {
-    background-color: rgb(229, 249, 221);
     border-radius: 3px;
-    padding: 3px 5px;
+    padding: 3px 7px;
 }
 
 .popover {
