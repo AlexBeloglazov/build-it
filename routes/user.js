@@ -70,7 +70,7 @@ router.get('/editor', function(req, res) {
 router.post('/editor/query', function(req, res) {
     // grab a webpage user currently working with
     Page.findOne({_id: req.session.webpageid, user: req.user.id}, function(err, webpage) {
-        console.log(req.body);
+        // console.log(req.body);
         if (!webpage)
             return sendErr("bad request");
         if (!req.body.target)
@@ -124,7 +124,7 @@ router.post('/editor/query', function(req, res) {
             webpage.nextid += 1;
             webpage.html = $.html();
             webpage.save();
-            sendOk("element added");
+            sendOk("element added", nextid);
             break;
 
             case "set":
@@ -137,8 +137,8 @@ router.post('/editor/query', function(req, res) {
 
     });
 
-    function sendOk(message) {
-        res.json({"status": "ok", "message": message});
+    function sendOk(message, id) {
+        res.json({"status": "ok", "message": message, "id": id});
     }
 
     function sendErr(message) {
@@ -151,7 +151,6 @@ router.post('/editor/query', function(req, res) {
     Handle deletion request
 */
 router.delete("/editor/query", function(req, res) {
-    console.log(req.body.target);
     Page.findOne({_id: req.session.webpageid, user: req.user.id}, function(err, webpage) {
         if (!webpage)
             return res.json({"status": "error", "message": "bad request"});

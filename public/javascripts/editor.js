@@ -6,6 +6,8 @@ var $frame = null;
 var $target = null;
 var $popOver = null;
 var targetId = MAIN_CONTAINER;
+var topOffset = 0;
+var addedElement;
 
 $('document').ready(function() {
 
@@ -44,9 +46,14 @@ $('document').ready(function() {
         });
         // "click" an element after iframe has been refreshed
         $target.click();
-        // scroll to target element
-        var targetOffset = (targetId === MAIN_CONTAINER) ? 0 : ($target.offset().top + $target.innerHeight()/2) - $(window).height()/2;
-        $frame.contents().scrollTop(targetOffset);
+        // if new element added, find its offset
+        if (addedElement) {
+            $addElement = $frame.contents().find("#"+(addedElement));
+            topOffset = $addElement.offset().top + $addElement.innerHeight()/2 - $(window).height()/2;
+            addedElement = undefined;
+        }
+        // scroll to previous position or to newly added element
+        $frame.contents().scrollTop(topOffset);
         $frame.animate({opacity: 100}, 4500);
     });
 
@@ -71,6 +78,7 @@ $('document').ready(function() {
     options: a js object that contains additional information, e.g. text, modifier etc.
 */
 function sendQuery(action, element, target, options) {
+    topOffset = $frame.contents().find("body").scrollTop();
     $frame.stop(true).css("opacity", "0");
     // send a query to the server
     $.ajax({
@@ -84,6 +92,7 @@ function sendQuery(action, element, target, options) {
         success: function(response) {
             $frame.attr('src', $frame.attr('src'));
             if (response.status === 'ok') {
+                addedElement = response.id;
                 // reload iframe
                 $frame.attr('src', $frame.attr('src'));
             }
@@ -101,6 +110,7 @@ function sendQuery(action, element, target, options) {
 */
 
 function deleteQuery(target) {
+    topOffset = $frame.contents().find("body").scrollTop();
     $frame.stop(true).css("opacity", "0");
     // send a query to the server
     $.ajax({
