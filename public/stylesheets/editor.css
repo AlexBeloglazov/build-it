@@ -26,6 +26,13 @@ dt:not(:first-child) {
     margin-top: 10px;
 }
 
+li > a, li > a:hover, li > a:visited {
+    color: inherit;
+    text-decoration: inherit;
+    display: inline-block;
+    cursor: default;
+}
+
 .bottom {
     margin: 0px;
     padding: 0px;

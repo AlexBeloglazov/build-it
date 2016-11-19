@@ -3,6 +3,7 @@ var ejs = require('ejs');
 var Page = require('../models/page');
 var cheerio = require('cheerio');
 var html = require('html');
+var yazl = require('yazl');
 
 var router = express.Router();
 
@@ -190,5 +191,21 @@ router.delete('/pages/delete', function(req, res) {
         return res.json({"status": "error"});
     });
 });
+
+/*
+    Get archived webpage
+*/
+router.get('/editor/save', function(req,res) {
+    Page.findOne({_id: req.session.webpageid, user: req.user.id}, function(err, page) {
+        if (!page)
+            return res.sendStatus(404);
+        res.attachment("webpage.zip");
+        var zipFile = new yazl.ZipFile();
+        zipFile.addBuffer(new Buffer(html.prettyPrint(page.html), "utf-8"), "index.html");
+        zipFile.outputStream.pipe(res);
+        zipFile.end();
+    });
+});
+
 
 module.exports = router;

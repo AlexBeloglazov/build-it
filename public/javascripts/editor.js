@@ -21,10 +21,6 @@ $('document').ready(function() {
         $("input[name='speech']").focus();
     });
 
-    $("#download").on("click", function() {
-        $('iframe#main').attr('src', $('iframe#main').attr('src'));
-    });
-
     // handle clicks on iframe elements
     $frame.on("load", function() {
         // get target element in iframe by id
@@ -48,7 +44,7 @@ $('document').ready(function() {
         $target.click();
         // if new element added, find its offset
         if (addedElement) {
-            $addElement = $frame.contents().find("#"+(addedElement));
+            $addElement = $frame.contents().find("#"+addedElement);
             topOffset = $addElement.offset().top + $addElement.innerHeight()/2 - $(window).height()/2;
             addedElement = undefined;
         }
