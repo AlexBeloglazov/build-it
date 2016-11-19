@@ -3,6 +3,8 @@ var ejs = require('ejs');
 var Page = require('../models/page');
 var cheerio = require('cheerio');
 var html = require('html');
+var yazl = require('yazl');
+var element = require('../helpers/element'); // contains functions to change/add elements
 
 var router = express.Router();
 
@@ -53,7 +55,6 @@ router.get('/editor', function(req, res) {
             // populate document's fields
             webpage.user = req.user.id;
             webpage.html = html;
-            webpage.nextid = 0;
             webpage.save();
             // remember webpage id in session
             req.session.webpageid = webpage._id;
@@ -68,77 +69,41 @@ router.get('/editor', function(req, res) {
     Handle editing request
 */
 router.post('/editor/query', function(req, res) {
-    // grab a webpage user currently working with
+    if (!req.body.target)
+        return sendErr("no id");
+    // grab a webpage user currently is working with
     Page.findOne({_id: req.session.webpageid, user: req.user.id}, function(err, webpage) {
-        console.log(req.body);
+        // console.log(req.body);
+        if (err)
+            return sendErr("internal error");
         if (!webpage)
             return sendErr("bad request");
-        if (!req.body.target)
-            return sendErr("no id");
         var $ = cheerio.load(webpage.html);
-        var nextid = String(webpage.nextid);
-        var target = '#'+req.body.target;
-        // handle action
+        var $target = $('#'+req.body.target);
+        var status;
         switch(req.body.action) {
             case "add":
-            switch(req.body.element) {
-                case 'jumbotron':
-                $("<div>").addClass("jumbotron")
-                    .attr("id", nextid)
-                    .append($("<h2>").html(req.body.options.text))
-                    .appendTo(target);
-                break;
-
-                case 'paragraph':
-                $("<p>").attr("id", nextid).html(req.body.options.text).appendTo(target);
-                break;
-
-                case 'h1':
-                $("<h1>").attr("id", nextid).html(req.body.options.text).appendTo(target);
-                break;
-
-                case 'h2':
-                $("<h2>").attr("id", nextid).html(req.body.options.text).appendTo(target);
-                break;
-
-                case 'h3':
-                $("<h3>").attr("id", nextid).html(req.body.options.text).appendTo(target);
-                break;
-
-                case 'button':
-                $("<button>").attr("id", nextid).addClass("btn btn-primary").html("Button").appendTo(target);
-                break;
-
-                case 'image':
-                $("<img>").attr({
-                    "id": nextid,
-                    "src": req.body.options.link,
-                    "height": req.body.options.height,
-                    "width": req.body.options.width,
-                }).appendTo(target);
-                break;
-
-                default:
-                return sendErr("bad element");
-            }
-            webpage.nextid += 1;
-            webpage.html = $.html();
-            webpage.save();
-            sendOk("element added");
+            status = element.add(req, $, $target)
             break;
 
             case "set":
             case "change":
+            status = element.change(req, $, $target);
             break;
 
             default:
             return sendErr("bad action");
         }
-
+        if (status.err)
+            return sendErr(status.err);
+        webpage.html = $.html();
+        webpage.save();
+        sendOk(status.message, status.id);
     });
 
-    function sendOk(message) {
-        res.json({"status": "ok", "message": message});
+
+    function sendOk(message, id) {
+        res.json({"status": "ok", "message": message, "id": id});
     }
 
     function sendErr(message) {
@@ -151,24 +116,31 @@ router.post('/editor/query', function(req, res) {
     Handle deletion request
 */
 router.delete("/editor/query", function(req, res) {
-    console.log(req.body.target);
+    if (!req.body.target)
+        return res.json({"status": "error", "message": "no id"});
     Page.findOne({_id: req.session.webpageid, user: req.user.id}, function(err, webpage) {
         if (!webpage)
             return res.json({"status": "error", "message": "bad request"});
-        if (!req.body.target)
-            return res.json({"status": "error", "message": "no id"});
         var $ = cheerio.load(webpage.html)
         var target = $("#"+req.body.target);
         if (target.length === 0)
             return res.json({"status": "error", "message": "not found"});
         if (target.is("body") || req.body.target === "iframe_main")
             return res.json({"status": "error", "message": "not allowed"});
+        var next = undefined;
+        if (target.next().length)
+            next = target.next().attr("id");
+        else if (target.prev().length)
+            next = target.prev().attr("id");
+        else
+            next = target.parent().attr("id");
         target.remove();
         webpage.html = $.html();
         webpage.save();
-        res.json({"status": "ok", "message": "deleted", "next": 0});
+        res.json({"status": "ok", "message": "deleted", "next": next});
     });
 });
+
 
 /*
     Serve user's HTML page
@@ -181,6 +153,7 @@ router.get('/pages/:pageid', function(req, res) {
     })
 });
 
+
 /*
     Handle webpage deletion requests
 */
@@ -191,5 +164,22 @@ router.delete('/pages/delete', function(req, res) {
         return res.json({"status": "error"});
     });
 });
+
+
+/*
+    Get archived webpage
+*/
+router.get('/editor/save', function(req,res) {
+    Page.findOne({_id: req.session.webpageid, user: req.user.id}, function(err, page) {
+        if (!page)
+            return res.sendStatus(404);
+        res.attachment("webpage.zip");
+        var zipFile = new yazl.ZipFile();
+        zipFile.addBuffer(new Buffer(html.prettyPrint(page.html), "utf-8"), "index.html");
+        zipFile.outputStream.pipe(res);
+        zipFile.end();
+    });
+});
+
 
 module.exports = router;

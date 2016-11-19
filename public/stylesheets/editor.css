@@ -26,6 +26,13 @@ dt:not(:first-child) {
     margin-top: 10px;
 }
 
+li > a, li > a:hover, li > a:visited {
+    color: inherit;
+    text-decoration: inherit;
+    display: inline-block;
+    cursor: default;
+}
+
 .bottom {
     margin: 0px;
     padding: 0px;
@@ -119,13 +126,10 @@ dt:not(:first-child) {
     padding: 3px 7px;
 }
 
-.info {
-    background-color: rgb(199, 231, 188);
-}
-
 #info {
     border-radius: 3px;
     padding: 3px 7px;
+    background-color: rgb(199, 231, 188);
 }
 
 .popover {
