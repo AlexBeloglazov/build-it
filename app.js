@@ -7,7 +7,7 @@ var app = express();
 /*
     Load configurations
 */
-var config = require('./config/config');
+var config = require('./helpers/config');
 
 /*
     Connect to MongoDB

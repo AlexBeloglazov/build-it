@@ -2,19 +2,22 @@ var MAIN_CONTAINER = "iframe_main";
 var DIV_INFO = "<dl><dt>You can add:</dt><dd>- Paragraph</dd><dd>- Button</dd><dd>- Something</dd><dt>You can change:</dt><dd>- Color</dd><dd>- Font size</dd></dl>";
 var P_INFO = "<dl><dt>You can add:</dt><dd>- Image</dd><dd>- Links</dd><dt>You can change:</dt><dd>- Text color</dd><dd>- Font size</dd></dl>";
 
-var $frame = null;
-var $target = null;
-var $popOver = null;
-var targetId = MAIN_CONTAINER;
-var topOffset = 0;
-var addedElement;
+var $frame,
+    $target,
+    $popOver,
+    $info,
+    targetId = MAIN_CONTAINER,
+    topOffset = 0,
+    addedElement;
 
 $('document').ready(function() {
 
     // initialize popover
     $popOver = $("#help").popover({html: "true"});
     // grab iframe
-    $frame = $('iframe#main');
+    $frame = $("iframe#main");
+    // grab info span
+    $info = $("#info");
 
     $('.mic').on("click", function() {
         $(".fa-microphone").toggleClass("blue");
@@ -75,7 +78,6 @@ $('document').ready(function() {
 */
 function sendQuery(action, element, target, options) {
     topOffset = $frame.contents().find("body").scrollTop();
-    $frame.stop(true).css("opacity", "0");
     // send a query to the server
     $.ajax({
         url: "editor/query",
@@ -86,14 +88,16 @@ function sendQuery(action, element, target, options) {
         // expected type of reply
         dataType: "json",
         success: function(response) {
-            $frame.attr('src', $frame.attr('src'));
             if (response.status === 'ok') {
+                $frame.stop(true).css("opacity", "0");
                 addedElement = response.id;
+                okStatus(response.message);
                 // reload iframe
                 $frame.attr('src', $frame.attr('src'));
             }
             else {
                 // server couldn't handle request
+                errStatus(response.message);
             }
             console.log(response.message);
         },
@@ -107,7 +111,6 @@ function sendQuery(action, element, target, options) {
 
 function deleteQuery(target) {
     topOffset = $frame.contents().find("body").scrollTop();
-    $frame.stop(true).css("opacity", "0");
     // send a query to the server
     $.ajax({
         url: "editor/query",
@@ -118,13 +121,17 @@ function deleteQuery(target) {
         // expected type of reply
         dataType: "json",
         success: function(response) {
-            $frame.attr('src', $frame.attr('src'));
+            // set id of a sibling to deleted element
+            targetId = response.next || targetId;
             if (response.status === 'ok') {
+                $frame.stop(true).css("opacity", "0");
+                okStatus(response.message);
                 // reload iframe
                 $frame.attr('src', $frame.attr('src'));
             }
             else {
                 // server couldn't handle request
+                errStatus(response.message);
             }
             console.log(response.message);
         },
@@ -148,11 +155,9 @@ function updatePopOver() {
 }
 
 function okStatus(message) {
-    $('span.status').html(message);
-    $('span.dstatus').css('color', 'rgb(104, 148, 60)');
+    $info.removeAttr("style").html(message);
 }
 
 function errStatus(message) {
-    $('span.status').html(message);
-    $('span.dstatus').css('color', 'rgb(172, 58, 58)');
+    $info.css('background-color', 'rgb(231, 197, 188)').html(message);
 }

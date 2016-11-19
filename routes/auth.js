@@ -1,6 +1,6 @@
 var express = require('express');
 var route = express.Router();
-var configuredPassport = require('../config/auth');
+var configuredPassport = require('../helpers/auth');
 
 /*
     Route to facebook auth page
