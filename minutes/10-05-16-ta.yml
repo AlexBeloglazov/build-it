@@ -1,0 +1,12 @@
+date: October 05, 2016
+meeting_type: ta # meeting_type can "group", "ta", or "instructor"
+attendance: [abelogla, piyushka, jpowathi]
+absent: []
+excused_absences: []
+task_progress: [
+    {ubit: abelogla, progress: Added Login and Register pages},
+    {ubit: piyushka, progress: Created a javascript that allows changing css attributes of the web elements},
+    {ubit: jpowathi, progress: Added framework for voice support},
+]
+issues: []
+Notes:  []
