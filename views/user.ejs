@@ -1,0 +1,42 @@
+<% include templates/head.ejs %>
+  <body>
+      <script>
+        if (sessionStorage.getItem("fromEditor")) {
+            sessionStorage.removeItem("fromEditor");
+            window.location.reload(true);
+        }
+      </script>
+      <% include templates/navbar.ejs %>
+      <div style="padding-top: 72px;" class="container">
+          <h2>Welcome back, <%= user ? user.name : ''%></h2>
+          <br>
+          <div class="tiles-holder">
+              <% for(var i=0; i<ids.length; i++) {%>
+                  <div class="preview-wrap" data-pageid="<%=ids[i]._id%>">
+                      <iframe src="user/pages/<%=ids[i]._id%>" class="preview" tabindex="-1"></iframe>
+                      <div class="preview-cover" style="display:none;">
+                          <div class="preview-cover-options">
+                              <a href="user/pages/<%=ids[i]._id%>"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                              <a href="user/editor?webpageid=<%=ids[i]._id%>"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                              <a href="#"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                          </div>
+                          <div class="preview-cover-confirm">
+                              <p>Are you sure?</p>
+                              <a href="#" class="confirm-yes">Yes</a>
+                              <a href="#" class="confirm-no">No</a>
+                          </div>
+                      </div>
+                  </div>
+              <% } %>
+
+              <div class="preview-wrap">
+                  <a href="/user/editor">
+                      <div class="preview-add-page"><i class="fa fa-plus" aria-hidden="true"></i></div>
+                  </a>
+              </div>
+          </div>
+
+      </div>
+      <script src="/javascripts/preview.js"></script>
+  </body>
+</html>

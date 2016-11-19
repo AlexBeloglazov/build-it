@@ -1,0 +1,10 @@
+date: October 12, 2016
+meeting_type: ta # meeting_type can "group", "ta", or "instructor"
+attendance: [abelogla, piyushka, jpowathi]
+absent: []
+excused_absences: []
+task_progress: [
+    {ubit: abelogla, progress: Created MongoDB schema for Users. Added authentification through Facebook API},
+]
+issues: []
+Notes:  Discussed our current progress and made a tentative list of tasks for Sprint3.
