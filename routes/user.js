@@ -83,7 +83,7 @@ router.post('/editor/query', function(req, res) {
         var status;
         switch(req.body.action) {
             case "add":
-            status = element.add(req, $, $target)
+            status = element.add(req, $, $target);
             break;
 
             case "set":
@@ -121,13 +121,13 @@ router.delete("/editor/query", function(req, res) {
     Page.findOne({_id: req.session.webpageid, user: req.user.id}, function(err, webpage) {
         if (!webpage)
             return res.json({"status": "error", "message": "bad request"});
-        var $ = cheerio.load(webpage.html)
+        var $ = cheerio.load(webpage.html);
         var target = $("#"+req.body.target);
         if (target.length === 0)
             return res.json({"status": "error", "message": "not found"});
         if (target.is("body") || req.body.target === "iframe_main")
             return res.json({"status": "error", "message": "not allowed"});
-        var next = undefined;
+        var next;
         if (target.next().length)
             next = target.next().attr("id");
         else if (target.prev().length)
@@ -150,7 +150,7 @@ router.get('/pages/:pageid', function(req, res) {
         if (!webpage)
             return res.sendStatus(404);
         res.send(html.prettyPrint(webpage.html));
-    })
+    });
 });
 
 
