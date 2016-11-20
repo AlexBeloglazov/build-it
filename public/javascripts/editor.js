@@ -10,7 +10,7 @@ var $frame,
     topOffset = 0,
     addedElement;
 
-$('document').ready(function() {
+$('document').ready(function () {
 
     // initialize popover
     $popOver = $("#help").popover({html: "true"});
@@ -19,17 +19,17 @@ $('document').ready(function() {
     // grab info span
     $info = $("#info");
 
-    $('.mic').on("click", function() {
+    $('.mic').on("click", function () {
         $(".fa-microphone").toggleClass("blue");
         $("input[name='speech']").focus();
     });
 
     // handle clicks on iframe elements
-    $frame.on("load", function() {
+    $frame.on("load", function () {
         // get target element in iframe by id
-        $target = $frame.contents().find("#"+(targetId || MAIN_CONTAINER));
+        $target = $frame.contents().find("#" + (targetId || MAIN_CONTAINER));
         // bind click event to iframe elements
-        $($frame.contents().get(0)).on("click", function(e) {
+        $($frame.contents().get(0)).on("click", function (e) {
             $clicked = $(e.target);
             // filter clicked element
             if (!$target || $clicked.is("body") || $clicked.is("html") || $clicked.is("ul")) {
@@ -39,7 +39,7 @@ $('document').ready(function() {
             $target = $clicked;
             targetId = $target.prop("id");
             $target.css({"outline": "2px dashed rgb(87, 176, 219)"});
-            $("#target").html($target.prop("tagName"))
+            $("#target").html($target.prop("tagName"));
             // update help popover according to a clicked element
             updatePopOver();
         });
@@ -47,8 +47,8 @@ $('document').ready(function() {
         $target.click();
         // if new element added, find its offset
         if (addedElement) {
-            $addElement = $frame.contents().find("#"+addedElement);
-            topOffset = $addElement.offset().top + $addElement.innerHeight()/2 - $(window).height()/2;
+            $addElement = $frame.contents().find("#" + addedElement);
+            topOffset = $addElement.offset().top + $addElement.innerHeight() / 2 - $(window).height() / 2;
             addedElement = undefined;
         }
         // scroll to previous position or to newly added element
@@ -70,12 +70,12 @@ $('document').ready(function() {
 });
 
 /*
-    Sends query to the server:
-    action: "add", "change", "set"
-    element: one of the established elements, e.g. "jumbotron", "paragraph" etc.
-    target: id of the selected element
-    options: a js object that contains additional information, e.g. text, modifier etc.
-*/
+ Sends query to the server:
+ action: "add", "change", "set"
+ element: one of the established elements, e.g. "jumbotron", "paragraph" etc.
+ target: id of the selected element
+ options: a js object that contains additional information, e.g. text, modifier etc.
+ */
 function sendQuery(action, element, target, options) {
     topOffset = $frame.contents().find("body").scrollTop();
     // send a query to the server
@@ -87,7 +87,9 @@ function sendQuery(action, element, target, options) {
         contentType: "application/json; charset=utf-8",
         // expected type of reply
         dataType: "json",
-        success: function(response) {
+
+        success: function (response) {
+            console.log(response);
             if (response.status === 'ok') {
                 $frame.stop(true).css("opacity", "0");
                 addedElement = response.id;
@@ -105,9 +107,9 @@ function sendQuery(action, element, target, options) {
 }
 
 /*
-    Sends delete query to the server.
-    target: id of an element to delete, normally its targetId
-*/
+ Sends delete query to the server.
+ target: id of an element to delete, normally its targetId
+ */
 
 function deleteQuery(target) {
     topOffset = $frame.contents().find("body").scrollTop();
@@ -120,7 +122,7 @@ function deleteQuery(target) {
         contentType: "application/json; charset=utf-8",
         // expected type of reply
         dataType: "json",
-        success: function(response) {
+        success: function (response) {
             // set id of a sibling to deleted element
             targetId = response.next || targetId;
             if (response.status === 'ok') {
@@ -140,16 +142,16 @@ function deleteQuery(target) {
 
 // updates help popover
 function updatePopOver() {
-    switch($target.prop("tagName")) {
+    switch ($target.prop("tagName")) {
         case "DIV":
-        $popOver.attr("data-content", DIV_INFO);
-        break;
+            $popOver.attr("data-content", DIV_INFO);
+            break;
 
         case "P":
-        break;
+            break;
 
         default:
-        $popOver.attr("data-content", "Nothing");
+            $popOver.attr("data-content", "Nothing");
 
     }
 }

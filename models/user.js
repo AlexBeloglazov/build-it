@@ -8,5 +8,5 @@ var userSchema = new mongoose.Schema({
 });
 
 // Create model and export
-var User = mongoose.model('user', userSchema)
+var User = mongoose.model('user', userSchema);
 module.exports = User;

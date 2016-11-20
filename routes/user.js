@@ -83,7 +83,7 @@ router.post('/editor/query', function(req, res) {
         var status;
         switch(req.body.action) {
             case "add":
-            status = element.add(req, $, $target)
+            status = element.add(req, $, $target);
             break;
 
             case "set":
@@ -121,7 +121,7 @@ router.delete("/editor/query", function(req, res) {
     Page.findOne({_id: req.session.webpageid, user: req.user.id}, function(err, webpage) {
         if (!webpage)
             return res.json({"status": "error", "message": "bad request"});
-        var $ = cheerio.load(webpage.html)
+        var $ = cheerio.load(webpage.html);
         var target = $("#"+req.body.target);
         if (target.length === 0)
             return res.json({"status": "error", "message": "not found"});

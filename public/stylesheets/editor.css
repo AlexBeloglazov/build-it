@@ -19,7 +19,7 @@ dd {
 }
 
 dl {
-    margin: 0px;
+    margin: 0;
 }
 
 dt:not(:first-child) {
@@ -34,13 +34,13 @@ li > a, li > a:hover, li > a:visited {
 }
 
 .bottom {
-    margin: 0px;
-    padding: 0px;
+    margin: 0;
+    padding: 0;
     position: relative;
     overflow: hidden;
     height: 32px;
     border-top: 1px solid rgb(245, 241, 241);
-    box-shadow: 0px 0px 5px 0px rgb(130, 130, 130);
+    box-shadow: 0 0 5px 0 rgb(130, 130, 130);
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -56,8 +56,8 @@ li > a, li > a:hover, li > a:visited {
     border: none;
     border-bottom: 1px solid rgb(181, 181, 181);
     outline: none;
-    padding: 0px;
-    margin: 0px;
+    padding: 0;
+    margin: 0;
     text-indent: 10px;
     background-color: transparent;
     text-align: center;
@@ -69,7 +69,7 @@ li > a, li > a:hover, li > a:visited {
 
 .bottom .mic {
     min-width: 100px;
-    padding: 0px;
+    padding: 0;
     text-align: center;
     cursor: pointer;
 }
@@ -80,15 +80,15 @@ li > a, li > a:hover, li > a:visited {
 
 .list-unstyled {
     white-space: nowrap;
-    padding: 0px;
-    margin: 0px 0px 0px 15px;
+    padding: 0;
+    margin: 0 0 0 15px;
     /*font-size: 0px;*/
 }
 
 .list-unstyled > li {
     display: inline-block;
-    padding: 0px 7px;
-    margin: 0px;
+    padding: 0 7px;
+    margin: 0;
     line-height: 32px;
     user-select: none;
     cursor: default;
@@ -111,13 +111,13 @@ li > a, li > a:hover, li > a:visited {
 .list-unstyled > li:nth-child(2){
     min-width: 150px;
     text-align: center;
-    padding: 0px 10px 0px 0px;
+    padding: 0 10px 0 0;
 }
 
 .list-unstyled > li:nth-child(4){
     min-width: 80px;
     text-align: center;
-    padding: 0px 10px 0px 0px;
+    padding: 0 10px 0 0;
 }
 
 #target {

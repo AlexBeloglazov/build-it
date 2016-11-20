@@ -79,8 +79,7 @@ function isLoggedIn(req, res, next) {
         // res.status(401).send("You are not logged in");
         res.redirect('/');
     }
-};
-
+}
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');

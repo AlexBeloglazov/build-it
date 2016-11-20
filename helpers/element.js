@@ -2,6 +2,7 @@
     Helper function to add element to a webpage
 */
 function add(req, $, $target) {
+    console.log(req.body);
     var uid = newid();
     // where to add
     switch($target.prop("tagName")) {
@@ -12,6 +13,7 @@ function add(req, $, $target) {
             case 'jumbotron':
             $("<div>").addClass("jumbotron")
                 .attr("id", uid)
+                .attr('contenteditable', 'true')
                 .append($("<h2>").html(req.body.options.text).attr("id", newid()))
                 .appendTo($target);
             break;
@@ -26,11 +28,11 @@ function add(req, $, $target) {
             break;
 
             case 'paragraph':
-            $("<p>").attr("id", uid).html(req.body.options.text).appendTo($target);
+            $("<p>").attr("id", uid).attr('contenteditable', 'true').html(req.body.options.text).appendTo($target);
             break;
 
             case 'h1':
-            $("<h1>").attr("id", uid).html(req.body.options.text).appendTo($target);
+            $("<h1>").attr("id", uid).attr('contenteditable', 'true').html(req.body.options.text).appendTo($target);
             break;
 
             case 'h2':
