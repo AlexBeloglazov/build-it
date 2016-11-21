@@ -2,7 +2,8 @@
     Helper function to add element to a webpage
 */
 function add(req, $, $target) {
-    console.log(req.body);
+    if (!req.body.element)
+        return {"err": "no element"};
     var uid = newid();
     // where to add
     switch($target.prop("tagName")) {
@@ -83,7 +84,7 @@ function add(req, $, $target) {
     Helper funcion to change/set propertie of an element
 */
 function change(req, $, $target) {
-
+    return {};
 }
 
 

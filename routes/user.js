@@ -73,7 +73,7 @@ router.post('/editor/query', function(req, res) {
         return sendErr("no id");
     // grab a webpage user currently is working with
     Page.findOne({_id: req.session.webpageid, user: req.user.id}, function(err, webpage) {
-        // console.log(req.body);
+        console.log(req.body);
         if (err)
             return sendErr("internal error");
         if (!webpage)
@@ -127,7 +127,7 @@ router.delete("/editor/query", function(req, res) {
             return res.json({"status": "error", "message": "not found"});
         if (target.is("body") || req.body.target === "iframe_main")
             return res.json({"status": "error", "message": "not allowed"});
-        var next = undefined;
+        var next;
         if (target.next().length)
             next = target.next().attr("id");
         else if (target.prev().length)
@@ -150,7 +150,7 @@ router.get('/pages/:pageid', function(req, res) {
         if (!webpage)
             return res.sendStatus(404);
         res.send(html.prettyPrint(webpage.html));
-    })
+    });
 });
 
 

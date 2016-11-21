@@ -15,7 +15,11 @@ iframe#main {
 }
 
 dd {
-    margin-left: 15px;
+    margin-left: 10px;
+}
+
+dd > dl {
+    font-size: 90%;
 }
 
 dl {
@@ -115,18 +119,24 @@ li > a, li > a:hover, li > a:visited {
 }
 
 .list-unstyled > li:nth-child(4){
-    min-width: 80px;
+    min-width: 120px;
     text-align: center;
     padding: 0 10px 0 0;
 }
 
+.fa-crosshairs {
+    cursor: pointer;
+}
+
 #target {
+    font-variant: small-caps;
     background-color: rgb(204, 229, 245);
     border-radius: 3px;
     padding: 3px 7px;
 }
 
 #info {
+    font-variant: small-caps;
     border-radius: 3px;
     padding: 3px 7px;
     background-color: rgb(199, 231, 188);

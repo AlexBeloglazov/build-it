@@ -41,7 +41,7 @@ var verifier = function(accessToken, refreshToken, profile, done) {
                     if (err)
                         throw err;
                     return done(null, newUser);
-                })
+                });
             }
         });
     });
