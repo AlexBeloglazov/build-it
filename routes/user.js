@@ -73,7 +73,7 @@ router.post('/editor/query', function(req, res) {
         return sendErr("no id");
     // grab a webpage user currently is working with
     Page.findOne({_id: req.session.webpageid, user: req.user.id}, function(err, webpage) {
-        // console.log(req.body);
+        console.log(req.body);
         if (err)
             return sendErr("internal error");
         if (!webpage)
