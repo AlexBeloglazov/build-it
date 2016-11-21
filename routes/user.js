@@ -2,6 +2,7 @@ var express = require('express');
 var ejs = require('ejs');
 var Page = require('../models/page');
 var cheerio = require('cheerio');
+var html = require('html');
 
 var router = express.Router();
 
@@ -10,9 +11,15 @@ var router = express.Router();
     Landing page for logged user
 */
 router.get('/', function(req, res) {
-    console.log("SESSION: ", req.session);
-    console.log("COOKIE: ", req.cookies);
+    // console.log("SESSION: ", req.session);
+    // console.log("COOKIES: ", req.cookies);
+    // console.log("HEADERS: ", req.headers);
     Page.find({user: req.user.id}, function(err, data) {
+        if (err)
+            return res.sendStatus(500);
+        // res.setHeader("Pragma","no-cache");
+        // res.setHeader("Cache-Control","no-cache, no-store, must-revalidate");
+        // res.setHeader("Expires","0");
         res.render('user', {title: 'build-it', user: req.user, ids: data});
     });
 });
@@ -51,7 +58,7 @@ router.get('/editor', function(req, res) {
             // remember webpage id in session
             req.session.webpageid = webpage._id;
             // pass newly created webpage id to renderer
-            res.render('editor', {user: req.user, pageid: webpage._id});
+            res.redirect('editor?webpageid='+webpage._id);
         });
     }
 });
@@ -62,18 +69,18 @@ router.get('/editor', function(req, res) {
 */
 router.post('/editor/query', function(req, res) {
     // grab a webpage user currently working with
-    Page.findOne({_id: req.session.webpageid}, function(err, webpage) {
-        console.log("Error: ", err);
+    Page.findOne({_id: req.session.webpageid, user: req.user.id}, function(err, webpage) {
         console.log(req.body);
         if (!webpage)
             return sendErr("bad request");
+        if (!req.body.target)
+            return sendErr("no id");
         var $ = cheerio.load(webpage.html);
         var nextid = String(webpage.nextid);
         var target = '#'+req.body.target;
         // handle action
         switch(req.body.action) {
-            case 'add':
-            // figure which element to add
+            case "add":
             switch(req.body.element) {
                 case 'jumbotron':
                 $("<div>").addClass("jumbotron")
@@ -120,14 +127,8 @@ router.post('/editor/query', function(req, res) {
             sendOk("element added");
             break;
 
-            case 'delete':
-            var last = $(target).children().last();
-            if (last.length === 0)
-                return sendErr("no elements in container");
-            last.remove();
-            webpage.html = $.html();
-            webpage.save();
-            sendOk("element deleted");
+            case "set":
+            case "change":
             break;
 
             default:
@@ -147,14 +148,48 @@ router.post('/editor/query', function(req, res) {
 
 
 /*
+    Handle deletion request
+*/
+router.delete("/editor/query", function(req, res) {
+    console.log(req.body.target);
+    Page.findOne({_id: req.session.webpageid, user: req.user.id}, function(err, webpage) {
+        if (!webpage)
+            return res.json({"status": "error", "message": "bad request"});
+        if (!req.body.target)
+            return res.json({"status": "error", "message": "no id"});
+        var $ = cheerio.load(webpage.html)
+        var target = $("#"+req.body.target);
+        if (target.length === 0)
+            return res.json({"status": "error", "message": "not found"});
+        if (target.is("body") || req.body.target === "iframe_main")
+            return res.json({"status": "error", "message": "not allowed"});
+        target.remove();
+        webpage.html = $.html();
+        webpage.save();
+        res.json({"status": "ok", "message": "deleted", "next": 0});
+    });
+});
+
+/*
     Serve user's HTML page
 */
 router.get('/pages/:pageid', function(req, res) {
-    Page.findOne({_id: req.params.pageid}, function(err, webpage) {
-        if (typeof webpage === "undefined")
+    Page.findOne({_id: req.params.pageid, user: req.user.id}, function(err, webpage) {
+        if (!webpage)
             return res.sendStatus(404);
-        res.send(webpage.html);
+        res.send(html.prettyPrint(webpage.html));
     })
+});
+
+/*
+    Handle webpage deletion requests
+*/
+router.delete('/pages/delete', function(req, res) {
+    Page.findOneAndRemove({_id: req.body.pageid, user: req.user.id}, function(err, webpage) {
+        if (webpage)
+            return res.json({"status": "ok"});
+        return res.json({"status": "error"});
+    });
 });
 
 module.exports = router;

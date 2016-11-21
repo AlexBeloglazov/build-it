@@ -1,75 +1,79 @@
-var targetContainerId = "page_body";
+var MAIN_CONTAINER = "iframe_main";
+// var DIV_INFO = "<dl><dt>You can add:</dt><dd>- Paragraph</dd><dd>- Button</dd><dd>- Something</dd><dt>You can change:</dt><dd>- Color</dd><dd>- Font size</dd></dl>";
+// var P_INFO = "<dl><dt>You can add:</dt><dd>- Image</dd><dd>- Links</dd><dt>You can change:</dt><dd>- Text color</dd><dd>- Font size</dd></dl>";
+var DIV_INFO = "<dl><dt>You can add:</dt><dd>- Paragraph</dd><dt>You can change:</dt><dd>- Color</dd><dd>- Font size</dd><dd>- Font style</dd><dd>- Margin</dd><dd>- Links</dd></dl>";
+var P_INFO = "<dl><dt>You can add:</dt><dd>- Image</dd><dd>- Links</dd><dt>You can change:</dt><dd>- Text color</dd><dd>- Font size</dd></dl>";
 
+var $frame = null;
+var $target = null;
+var $popOver = null;
+var targetId = MAIN_CONTAINER;
 
 $('document').ready(function() {
 
-    var frame = $('iframe#main');
-    frame.one("load", function() {
-        frame.on("load", function() {
-            frame.contents().scrollTop(frame.contents().height());
-            frame.animate({
-                opacity: 100
-            }, 4500);
+    // initialize popover
+    $popOver = $("#help").popover({html: "true"});
+    // grab iframe
+    $frame = $('iframe#main');
+
+    $('.mic').on("click", function() {
+        $(".fa-microphone").toggleClass("blue");
+        $("input[name='speech']").focus();
+    });
+
+    $("#download").on("click", function() {
+        $('iframe#main').attr('src', $('iframe#main').attr('src'));
+    });
+
+    // handle clicks on iframe elements
+    $frame.on("load", function() {
+        // get target element in iframe by id
+        $target = $frame.contents().find("#"+(targetId || MAIN_CONTAINER));
+        // bind click event to iframe elements
+        $($frame.contents().get(0)).on("click", function(e) {
+            $clicked = $(e.target);
+            // filter clicked element
+            if (!$target || $clicked.is("body") || $clicked.is("html") || $clicked.is("ul")) {
+                return;
+            }
+            $target.css("outline", "none");
+            $target = $clicked;
+            targetId = $target.prop("id");
+            $target.css({"outline": "2px dashed rgb(87, 176, 219)"});
+            $("#target").html($target.prop("tagName"))
+            // update help popover according to a clicked element
+            updatePopOver();
         });
+        // "click" an element after iframe has been refreshed
+        $target.click();
+        // scroll to target element
+        var targetOffset = (targetId === MAIN_CONTAINER) ? 0 : ($target.offset().top + $target.innerHeight()/2) - $(window).height()/2;
+        $frame.contents().scrollTop(targetOffset);
+        $frame.animate({opacity: 100}, 4500);
     });
 
-    $("a[name='remove']").bind('click', function() {
-        sendQuery('delete', '', targetContainerId, {});
-    });
 
-    $("button[name='addJT']").bind('click', function() {
-        var text = $("input[name='addJT']").val();
-        if (!text)
-            return errStatus("No text provided");
-        sendQuery('add', 'jumbotron', targetContainerId, {"text": text});
-    });
-
-    $("button[name='addParagraph']").bind('click', function() {
-        var text = $("textarea[name='paragraph']").val();
-        if (!text)
-            return errStatus("No text provided");
-        sendQuery('add', 'paragraph', targetContainerId, {"text": text});
-    });
-
-    $("button[name='addH1']").bind('click', function() {
-        var text = $("input[name='addH1']").val();
-        if (!text)
-            return errStatus("No text provided");
-        sendQuery('add', 'h1', targetContainerId, {"text": text});
-    });
-
-    $("button[name='addH2']").bind('click', function() {
-        var text = $("input[name='addH2']").val();
-        if (!text)
-            return errStatus("No text provided");
-        sendQuery('add', 'h2', targetContainerId, {"text": text});
-    });
-
-    $("button[name='addH3']").bind('click', function() {
-        var text = $("input[name='addH3']").val();
-        if (!text)
-            return errStatus("No text provided");
-        sendQuery('add', 'h3', targetContainerId, {"text": text});
-    });
-
-    $("button[name='addButton']").bind('click', function() {
-        sendQuery('add', 'button', targetContainerId, {});
-    });
-
-    $("button[name='addImage']").bind('click', function() {
-        attr = {
-            "link": $("input[name='addImage']").val(),
-            "height": $("input[name='imWidth']").val(),
-            "width": $("input[name='imHeight']").val(),
-        }
-        if (attr.link.length === 0)
-            return errStatus('No link provided');
-        sendQuery('add', 'image', targetContainerId, attr);
-    });
+    // $("button[name='addImage']").bind('click', function() {
+    //     attr = {
+    //         "link": $("input[name='addImage']").val(),
+    //         "height": $("input[name='imWidth']").val(),
+    //         "width": $("input[name='imHeight']").val(),
+    //     }
+    //     if (attr.link.length === 0)
+    //         return errStatus('No link provided');
+    //     sendQuery('add', 'image', targetId, attr);
+    // });
 });
 
+/*
+    Sends query to the server:
+    action: "add", "change", "set"
+    element: one of the established elements, e.g. "jumbotron", "paragraph" etc.
+    target: id of the selected element
+    options: a js object that contains additional information, e.g. text, modifier etc.
+*/
 function sendQuery(action, element, target, options) {
-    $('iframe#main').stop(true).css("opacity", "0");
+    $frame.stop(true).css("opacity", "0");
     // send a query to the server
     $.ajax({
         url: "editor/query",
@@ -80,17 +84,63 @@ function sendQuery(action, element, target, options) {
         // expected type of reply
         dataType: "json",
         success: function(response) {
+            $frame.attr('src', $frame.attr('src'));
             if (response.status === 'ok') {
                 // reload iframe
-                $('iframe#main').attr('src', $('iframe#main').attr('src'));
-                okStatus(response.message);
+                $frame.attr('src', $frame.attr('src'));
             }
             else {
                 // server couldn't handle request
-                errStatus(response.message);
             }
+            console.log(response.message);
         },
     });
+}
+
+/*
+    Sends delete query to the server.
+    target: id of an element to delete, normally its targetId
+*/
+
+function deleteQuery(target) {
+    $frame.stop(true).css("opacity", "0");
+    // send a query to the server
+    $.ajax({
+        url: "editor/query",
+        type: "DELETE",
+        // payload as a string
+        data: JSON.stringify({"target": target}),
+        contentType: "application/json; charset=utf-8",
+        // expected type of reply
+        dataType: "json",
+        success: function(response) {
+            $frame.attr('src', $frame.attr('src'));
+            if (response.status === 'ok') {
+                // reload iframe
+                $frame.attr('src', $frame.attr('src'));
+            }
+            else {
+                // server couldn't handle request
+            }
+            console.log(response.message);
+        },
+    });
+}
+
+// updates help popover
+function updatePopOver() {
+    switch($target.prop("tagName")) {
+        case "DIV":
+        $popOver.attr("data-content", DIV_INFO);
+        break;
+
+        case "P":
+        break;
+
+        default:
+        $popOver.attr("data-content", "Nothing");
+
+    }
 }
 
 function okStatus(message) {
