@@ -45,7 +45,7 @@ var verifier = function(accessToken, refreshToken, profile, done) {
             }
         });
     });
-}
+};
 
 
 /*
