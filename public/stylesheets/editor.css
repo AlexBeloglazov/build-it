@@ -44,7 +44,7 @@ li > a, li > a:hover, li > a:visited {
     overflow: hidden;
     height: 32px;
     border-top: 1px solid rgb(245, 241, 241);
-    box-shadow: 0 0 5px 0 rgb(130, 130, 130);
+    box-shadow: 0px 0px 5px 0px rgb(130, 130, 130);
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -84,15 +84,14 @@ li > a, li > a:hover, li > a:visited {
 
 .list-unstyled {
     white-space: nowrap;
-    padding: 0;
-    margin: 0 0 0 15px;
+    padding: 0px;
+    margin: 0px 0px 0px 15px;
     /*font-size: 0px;*/
 }
 
 .list-unstyled > li {
     display: inline-block;
-    padding: 0 7px;
-    margin: 0;
+    margin: 0px;
     line-height: 32px;
     user-select: none;
     cursor: default;
@@ -133,13 +132,14 @@ li > a, li > a:hover, li > a:visited {
     background-color: rgb(204, 229, 245);
     border-radius: 3px;
     padding: 3px 7px;
+
+.info {
+    background-color: rgb(199, 231, 188);
 }
 
 #info {
-    font-variant: small-caps;
     border-radius: 3px;
     padding: 3px 7px;
-    background-color: rgb(199, 231, 188);
 }
 
 .popover {

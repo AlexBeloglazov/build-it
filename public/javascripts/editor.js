@@ -49,19 +49,39 @@ $('document').ready(function () {
         // get target element in iframe by id
         $target = $frame.contents().find("#" + (targetId || MAIN_CONTAINER));
         // bind click event to iframe elements
-        $($frame.contents().get(0)).on("click", clickOnElement);
+        $($frame.contents().get(0)).on("click", function(e) {
+            $clicked = $(e.target);
+            // filter clicked element
+            if (!$target || $clicked.is("body") || $clicked.is("html") || $clicked.is("ul")) {
+                return;
+            }
+            $target.css("outline", "none");
+            $target = $clicked;
+            targetId = $target.prop("id");
+            $target.css({"outline": "2px dashed rgb(87, 176, 219)"});
+            $("#target").html($target.prop("tagName"))
+            // update help popover according to a clicked element
+            updatePopOver();
+        });
         // "click" an element after iframe has been refreshed
         $target.click();
-        // if new element added, find its offset
-        if (addedElement) {
-            $addElement = $frame.contents().find("#" + addedElement);
-            topOffset = $addElement.offset().top + $addElement.innerHeight() / 2 - $(window).height() / 2;
-            addedElement = undefined;
-        }
-        // scroll to previous position or to newly added element
-        $frame.contents().scrollTop(topOffset);
+        // scroll to target element
+        var targetOffset = (targetId === MAIN_CONTAINER) ? 0 : ($target.offset().top + $target.innerHeight()/2) - $(window).height()/2;
+        $frame.contents().scrollTop(targetOffset);
         $frame.animate({opacity: 100}, 4500);
     });
+
+
+    // $("button[name='addImage']").bind('click', function() {
+    //     attr = {
+    //         "link": $("input[name='addImage']").val(),
+    //         "height": $("input[name='imWidth']").val(),
+    //         "width": $("input[name='imHeight']").val(),
+    //     }
+    //     if (attr.link.length === 0)
+    //         return errStatus('No link provided');
+    //     sendQuery('add', 'image', targetId, attr);
+    // });
 });
 
 /*
