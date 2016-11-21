@@ -13,11 +13,11 @@
           <div class="tiles-holder">
               <% for(var i=0; i<ids.length; i++) {%>
                   <div class="preview-wrap" data-pageid="<%=ids[i]._id%>">
-                      <iframe src="user/pages/<%=ids[i]._id%>" class="preview" tabindex="-1"></iframe>
+                      <iframe src="user/pages/<%=ids[i]._id;%>" class="preview" tabindex="-1"></iframe>
                       <div class="preview-cover" style="display:none;">
                           <div class="preview-cover-options">
-                              <a href="user/pages/<%=ids[i]._id%>"><i class="fa fa-eye" aria-hidden="true"></i></a>
-                              <a href="user/editor?webpageid=<%=ids[i]._id%>"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                              <a href="user/pages/<%=ids[i]._id;%>"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                              <a href="user/editor?webpageid=<%=ids[i]._id;%>"><i class="fa fa-pencil" aria-hidden="true"></i></a>
                               <a href="#"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
                           </div>
                           <div class="preview-cover-confirm">
@@ -27,7 +27,7 @@
                           </div>
                       </div>
                   </div>
-              <% } %>
+              <% }; %>
 
               <div class="preview-wrap">
                   <a href="/user/editor">

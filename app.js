@@ -7,7 +7,7 @@ var app = express();
 /*
     Load configurations
 */
-var config = require('./config/config');
+var config = require('./helpers/config');
 
 /*
     Connect to MongoDB
@@ -79,7 +79,7 @@ function isLoggedIn(req, res, next) {
         // res.status(401).send("You are not logged in");
         res.redirect('/');
     }
-};
+}
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

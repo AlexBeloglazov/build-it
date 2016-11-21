@@ -18,25 +18,127 @@
         <script>
             sessionStorage.setItem("fromEditor", "True");
         </script>
+        <script type="text/javascript">
 
+            var accessToken = "1bb843c663654c2a8915f699825c8d76";
+            var baseUrl = "https://api.api.ai/v1/";
+
+            $(document).ready(function() {
+                $("#input").keypress(function(event) {
+                    if (event.which == 13) {
+                        event.preventDefault();
+                        send();
+                    }
+                });
+                $("#rec").click(function(event) {
+                    switchRecognition();
+                });
+            });
+
+            var recognition;
+
+            function startRecognition() {
+                recognition = new webkitSpeechRecognition();
+                recognition.onstart = function(event) {
+                    updateRec();
+                };
+                recognition.onresult = function(event) {
+                    var text = "";
+                    for (var i = event.resultIndex; i < event.results.length; ++i) {
+                        text += event.results[i][0].transcript;
+                    }
+                    setInput(text);
+                    stopRecognition();
+                };
+                recognition.onend = function() {
+                    stopRecognition();
+                };
+                recognition.lang = "en-US";
+                recognition.start();
+            }
+
+            function stopRecognition() {
+                if (recognition) {
+                    recognition.stop();
+                    recognition = null;
+                }
+                updateRec();
+            }
+
+            function switchRecognition() {
+                if (recognition) {
+                    stopRecognition();
+                } else {
+                    startRecognition();
+                }
+            }
+
+            function setInput(text) {
+                $("#input").val(text);
+                send();
+            }
+
+            function updateRec() {
+                $("#rec").text(recognition ? "Stop" : "Speak");
+            }
+
+            function send() {
+                var text = $("#input").val();
+                $.ajax({
+                    type: "POST",
+                    url: baseUrl + "query?v=20150910",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    headers: {
+                        "Authorization": "Bearer " + accessToken
+                    },
+                    data: JSON.stringify({ query: text, lang: "en", sessionId: "somerandomthing" }),
+
+                    success: function(data) {
+                        var action = data['result']['metadata']['intentName'];
+                        var element = data['result']['parameters']['item'];
+                        var options = {text: "This is an element"};
+                        console.log(action);
+                        console.log(element);
+                        //console.log(data['result']['parameters']);
+                       // console.log(data);
+                        sendQuery(action, element, targetId, options);
+                        setResponse(JSON.stringify(data, undefined, 2));
+                    },
+                    error: function() {
+                        setResponse("Internal Server Error");
+                    }
+                });
+                setResponse("Loading...");
+            }
+
+            function setResponse(val) {
+                $("#response").text(val);
+            }
+
+        </script>
         <iframe id="main" src="pages/<%= pageid%>"></iframe>
 
         <div class="bottom">
 
             <div class="mic">
-                <span class="fa fa-2x fa-microphone" aria-hidden="true"></span>
+                <span id="rec" class="fa fa-2x fa-microphone" aria-hidden="true"></span>
             </div>
-            <input type="text" name="speech" value="">
+            <input id="input" type="text" name="speech" value="">
+
             <ul class="list-unstyled">
                 <li><i class="fa fa-lg fa-info-circle" aria-hidden="true"></i></li>
                 <li><span class="info" id="info">waiting for user</span></li>
                 <li><i class="fa fa-lg fa-crosshairs" aria-hidden="true"></i></li>
                 <li><span id="target"></span></li>
                 <li id="help" data-toggle="popover" data-trigger="hover" data-container="body" data-placement="top" title="What can I do with the element?"><i class="fa fa-lg fa-question" aria-hidden="true"></i></li>
-                <li id="download" title="Download the page"><i class="fa fa-lg fa-download" aria-hidden="true"></i></li>
+                <li id="download" title="Download the page"><a href="editor/save"><i class="fa fa-lg fa-download" aria-hidden="true"></i></li></a>
             </ul>
 
         </div>
 
     </body>
 </html>
+
+<!-- SOURCES -->
+<!-- : https://docs.api.ai/docs/sdks -->
