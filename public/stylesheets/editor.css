@@ -23,7 +23,7 @@ dd > dl {
 }
 
 dl {
-    margin: 0;
+    margin: 0px;
 }
 
 dt:not(:first-child) {
@@ -38,8 +38,8 @@ li > a, li > a:hover, li > a:visited {
 }
 
 .bottom {
-    margin: 0;
-    padding: 0;
+    margin: 0px;
+    padding: 0px;
     position: relative;
     overflow: hidden;
     height: 32px;
@@ -60,8 +60,8 @@ li > a, li > a:hover, li > a:visited {
     border: none;
     border-bottom: 1px solid rgb(181, 181, 181);
     outline: none;
-    padding: 0;
-    margin: 0;
+    padding: 0px;
+    margin: 0px;
     text-indent: 10px;
     background-color: transparent;
     text-align: center;
@@ -73,7 +73,7 @@ li > a, li > a:hover, li > a:visited {
 
 .bottom .mic {
     min-width: 100px;
-    padding: 0;
+    padding: 0px;
     text-align: center;
     cursor: pointer;
 }
@@ -91,6 +91,7 @@ li > a, li > a:hover, li > a:visited {
 
 .list-unstyled > li {
     display: inline-block;
+    padding: 0px 7px;
     margin: 0px;
     line-height: 32px;
     user-select: none;
@@ -114,13 +115,13 @@ li > a, li > a:hover, li > a:visited {
 .list-unstyled > li:nth-child(2){
     min-width: 150px;
     text-align: center;
-    padding: 0 10px 0 0;
+    padding: 0px 10px 0px 0px;
 }
 
 .list-unstyled > li:nth-child(4){
     min-width: 120px;
     text-align: center;
-    padding: 0 10px 0 0;
+    padding: 0px 10px 0px 0px;
 }
 
 .fa-crosshairs {
@@ -132,14 +133,13 @@ li > a, li > a:hover, li > a:visited {
     background-color: rgb(204, 229, 245);
     border-radius: 3px;
     padding: 3px 7px;
-
-.info {
-    background-color: rgb(199, 231, 188);
 }
 
 #info {
+    font-variant: small-caps;
     border-radius: 3px;
     padding: 3px 7px;
+    background-color: rgb(199, 231, 188);
 }
 
 .popover {

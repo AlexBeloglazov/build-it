@@ -59,7 +59,7 @@ $('document').ready(function () {
             $target = $clicked;
             targetId = $target.prop("id");
             $target.css({"outline": "2px dashed rgb(87, 176, 219)"});
-            $("#target").html($target.prop("tagName"))
+            $("#target").html($target.prop("tagName"));
             // update help popover according to a clicked element
             updatePopOver();
         });
@@ -84,13 +84,6 @@ $('document').ready(function () {
     // });
 });
 
-/*
- Sends query to the server:
- action: "add", "change", "set"
- element: one of the established elements, e.g. "jumbotron", "paragraph" etc.
- target: id of the selected element
- options: a js object that contains additional information, e.g. text, modifier etc.
- */
 
 $('body').on('focus', '[contenteditable]', function() {
     var $this = $(this);
@@ -106,6 +99,14 @@ $('body').on('focus', '[contenteditable]', function() {
     return $this;
 });
 
+
+/*
+     Sends query to the server:
+     action: "add", "change", "set"
+     element: one of the established elements, e.g. "jumbotron", "paragraph" etc.
+     target: id of the selected element
+     options: a js object that contains additional information, e.g. text, modifier etc.
+ */
 function sendQuery(action, element, target, options) {
     topOffset = $frame.contents().find("body").scrollTop();
     // send a query to the server
