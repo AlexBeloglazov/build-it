@@ -71,6 +71,21 @@ $('document').ready(function () {
  target: id of the selected element
  options: a js object that contains additional information, e.g. text, modifier etc.
  */
+
+$('body').on('focus', '[contenteditable]', function() {
+    var $this = $(this);
+    $this.data('before', $this.html());
+    console.log("test");
+    return $this;
+}).on('blur keyup paste input', '[contenteditable]', function() {
+    var $this = $(this);
+    if ($this.data('before') !== $this.html()) {
+        $this.data('before', $this.html());
+        console.log("change");
+    }
+    return $this;
+});
+
 function sendQuery(action, element, target, options) {
     topOffset = $frame.contents().find("body").scrollTop();
     // send a query to the server

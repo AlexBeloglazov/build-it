@@ -14,7 +14,23 @@
         <title>Build-it | Editor</title>
     </head>
     <body>
+        <script>
+            var contents = document.querySelectorAll("[contenteditable=true]");
+            [].forEach.call(contents, function (content) {
 
+                content.addEventListener("focus", function () {
+                    content.setAttribute("data-initial-text", content.innerHTML);
+                });
+                content.addEventListener("blur", function () {
+
+                    if (content.getAttribute("data-initial-text") !== content.innerHTML) {
+                       // Handlers for content-editable elements
+                        console.log("New data when content change.");
+                        console.log(content.innerHTML);
+                    }
+                });
+            });
+        </script>
         <script>
             sessionStorage.setItem("fromEditor", "True");
         </script>
@@ -100,8 +116,7 @@
                         var options = {text: "This is an element"};
                         console.log(action);
                         console.log(element);
-                        //console.log(data['result']['parameters']);
-                       // console.log(data);
+
                         sendQuery(action, element, targetId, options);
                         setResponse(JSON.stringify(data, undefined, 2));
                     },

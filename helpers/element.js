@@ -12,7 +12,7 @@ function add(req, $, $target) {
         switch(req.body.element) {
 
             case 'jumbotron':
-            $("<div>").addClass("jumbotron")
+            $("<div>").addClass("jumbotron").addClass("editable")
                 .attr("id", uid)
                 .attr('contenteditable', 'true')
                 .append($("<h2>").html(req.body.options.text).attr("id", newid()))
@@ -29,11 +29,11 @@ function add(req, $, $target) {
             break;
 
             case 'paragraph':
-            $("<p>").attr("id", uid).attr('contenteditable', 'true').html(req.body.options.text).appendTo($target);
+            $("<p>").attr("id", uid).addClass("editable").attr('contenteditable', 'true').html(req.body.options.text).appendTo($target);
             break;
 
             case 'h1':
-            $("<h1>").attr("id", uid).attr('contenteditable', 'true').html(req.body.options.text).appendTo($target);
+            $("<h1>").attr("id", uid).addClass("editable").attr('contenteditable', 'true').html(req.body.options.text).appendTo($target);
             break;
 
             case 'h2':
@@ -45,7 +45,7 @@ function add(req, $, $target) {
             break;
 
             case 'button':
-            $("<button>").attr("id", uid).addClass("btn btn-primary").html("Button").appendTo($target);
+            $("<button>").attr("id", uid).addClass("editable").addClass("btn btn-primary").html("Button").appendTo($target);
             break;
         }
         break; // end of DIV case
