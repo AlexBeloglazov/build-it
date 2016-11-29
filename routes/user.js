@@ -80,6 +80,8 @@ router.post('/editor/query', function(req, res) {
             return sendErr("bad request");
         var $ = cheerio.load(webpage.html);
         var $target = $('#'+req.body.target);
+        if (!$target.length)
+            return sendErr("not found");
         var status;
         switch(req.body.action) {
             case "add":
@@ -122,22 +124,37 @@ router.delete("/editor/query", function(req, res) {
         if (!webpage)
             return res.json({"status": "error", "message": "bad request"});
         var $ = cheerio.load(webpage.html);
-        var target = $("#"+req.body.target);
-        if (target.length === 0)
-            return res.json({"status": "error", "message": "not found"});
-        if (target.is("body") || req.body.target === "iframe_main")
+        var $target = $("#"+req.body.target);
+        if ($target.length === 0)
+            return res.json({"status": "error", "message": "id not found"});
+        // filter elements allowed to delete
+        if ($target.is("body") || req.body.target === "iframe_main")
             return res.json({"status": "error", "message": "not allowed"});
-        var next;
-        if (target.next().length)
-            next = target.next().attr("id");
-        else if (target.prev().length)
-            next = target.prev().attr("id");
+        var $next;
+        // check if element is navigation bar
+        if ($target.hasClass("navigationbar"))
+            $target = $target.parent(); // select <nav>
+        // check if element is sidebar
+        if ($target.hasClass("sidebar")) {
+            $target = $target.parent(); // select div.col
+            $("#iframe_main").removeClass("col-sm-10"); // restore width
+        }
+        // check if element is panel/navbar item
+        if ($target.is("a") && $target.parent().is("li"))
+            $target = $target.parent(); // select <li>
+        if ($target.next().length)
+            $next = $target.next();
+        else if ($target.prev().length)
+            $next = $target.prev();
         else
-            next = target.parent().attr("id");
-        target.remove();
+            $next = $target.parent();
+        // check if next is a list item
+        if ($next.is("li"))
+            $next = $next.find("a"); // select <a> inside
+        $target.remove();
         webpage.html = $.html();
         webpage.save();
-        res.json({"status": "ok", "message": "deleted", "next": next});
+        res.json({"status": "ok", "message": "deleted", "next": $next.attr("id") || $next.parent().attr("id")});
     });
 });
 

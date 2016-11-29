@@ -1,18 +1,18 @@
 var MAIN_CONTAINER = "iframe_main";
-var MAIN_INFO = "<dl> <dt>You can add:</dt> <dd>&bull; Navigational bar</dd> <dd>&bull; Side panel <dl> <dd>- to left</dd> <dd>- to right</dd> </dl> </dd> <dd>&bull; Header <dl> <dd>- large</dd> <dd>- medium</dd> <dd>- small</dd> <dd>- extra small</dd> </dl> </dd> <dd>&bull; Paragraph</dd> <dd>&bull; Jumbotron</dd> <dd>&bull; Image</dd> <dd>&bull; Link</dd> <dd>&bull; Button <dl> <dd>- large</dd> <dd>- small</dd> <dd>- extra small</dd> </dl> </dd> <dd>&bull; Footer</dd> <dt>You can change:</dt> <dd>&bull; Background color <dl> <dd>- blue</dd> <dd>- green</dd> <dd>- red</dd> <dd>- orange</dd> <dd>- white</dd> </dl> </dd> <dt>You can delete it</dt> </dl>";
+var MAIN_INFO = "<dl> <dt>You can add:</dt> <dd>&bull; Navigational bar</dd> <dd>&bull; Side bar <dl> <dd>- to left</dd> <dd>- to right</dd> </dl> </dd> <dd>&bull; Header <dl> <dd>- large</dd> <dd>- medium</dd> <dd>- small</dd> <dd>- extra small</dd> </dl> </dd> <dd>&bull; Paragraph</dd> <dd>&bull; Jumbotron</dd> <dd>&bull; Image</dd> <dd>&bull; Link</dd> <dd>&bull; Button <dl> <dd>- large</dd> <dd>- standard (default)</dd> <dd>- small</dd> </dl> </dd> <dd>&bull; Footer</dd> <dt>You can change:</dt> <dd>&bull; Background color <dl> <dd>- blue</dd> <dd>- green</dd> <dd>- red</dd> <dd>- orange</dd> <dd>- white</dd> </dl> </dd> <dt>You can delete it</dt> </dl>";
 var H1_INFO = "<dl> <dt>You can change:</dt> <dd>&bull; Size <dl> <dd>- medium</dd> <dd>- small</dd> <dd>- extra small</dd> </dl> </dd> <dd>&bull; Alignment <dl> <dd>- left</dd> <dd>- center</dd> <dd>- right</dd> </dl> </dd> <dt>You can delete it</dt> </dl>";
 var H2_INFO = "<dl> <dt>You can change:</dt> <dd>&bull; Size <dl> <dd>- large</dd> <dd>- small</dd> <dd>- extra small</dd> </dl> </dd> <dd>&bull; Alignment <dl> <dd>- left</dd> <dd>- center</dd> <dd>- right</dd> </dl> </dd> <dt>You can delete it</dt> </dl>";
 var H3_INFO = "<dl> <dt>You can change:</dt> <dd>&bull; Size <dl> <dd>- large</dd> <dd>- medium</dd> <dd>- extra small</dd> </dl> </dd> <dd>&bull; Alignment <dl> <dd>- left</dd> <dd>- center</dd> <dd>- right</dd> </dl> </dd> <dt>You can delete it</dt> </dl>";
 var H4_INFO = "<dl> <dt>You can change:</dt> <dd>&bull; Size <dl> <dd>- large</dd> <dd>- medium</dd> <dd>- small</dd> </dl> </dd> <dd>&bull; Alignment <dl> <dd>- left</dd> <dd>- center</dd> <dd>- right</dd> </dl> </dd> <dt>You can delete it</dt> </dl>";
 var A_INFO = "<dl> <dt>You can change:</dt> <dd>&bull; Size <dl> <dd>- large</dd> <dd>- medium</dd> <dd>- small</dd> </dl> </dd> <dt>You can delete it</dt> </dl>";
 var BUTTON_INFO = "<dl> <dt>You can change:</dt> <dd>&bull; Size <dl> <dd>- large</dd> <dd>- standard</dd> <dd>- small</dd> </dl> </dd> <dd>&bull; Color <dl> <dd>- blue</dd> <dd>- green</dd> <dd>- red</dd> <dd>- orange</dd> <dd>- white</dd> </dl> </dd> </dl>";
-var LI_INFO = "<dl> <dt>You can change:</dt> <dd>&bull; Text</dd> <dt>You can delete it</dt> </dl>";
-var UL_INFO = "<dl> <dt>You can't do anything</dt> </dl>";
-var IMG_INFO = "<dl> <dt>You can change:</dt> <dd>&bull; Alignment <dl> <dd>- left</dd> <dd>- center</dd> <dd>- right</dd> </dl> </dd> </dl>";
-var FOOTER_INFO = "<dl> <dt>You can add:</dt> <dd>&bull; Paragraph</dd> <dd>&bull; Link</dd> <dt>You can change:</dt> <dd>&bull; Color <dl> <dd>- black</dd> <dd>- grey</dd> <dd>- blue</dd> </dl> </dd> <dt>You can delete it</dt> </dl>";
+var NAV_ITEM_INFO = "<dl> <dt>You can change:</dt> <dd>&bull; Text</dd> <dt>You can delete it</dt> </dl>";
+var SIDEBAR_INFO = "<dl> <dt>You can add:</dt> <dd>&bull; New sidebar item </dd> <dt>You can delete it</dt> </dl>";
+var IMG_INFO = "<dl> <dt>You can change:</dt> <dd>&bull; Alignment <dl> <dd>- left</dd> <dd>- center</dd> <dd>- right</dd> </dl> </dd> <dt>You can delete it</dt> </dl>";
+var FOOTER_INFO = "<dl> <dt>You can change:</dt> <dd>&bull; Text</dd> <dd>&bull; Color <dl> <dd>- black</dd> <dd>- grey</dd> <dd>- blue</dd> </dl> </dd> <dt>You can delete it</dt> </dl>";
 var P_INFO = "<dl> <dt>You can add:</dt> <dd>&bull; Images</dd> <dd>&bull; Links</dd> <dt>You can change:</dt> <dd>&bull; Text color <dl> <dd>- black</dd> <dd>- grey</dd> </dl> </dd> <dd>&bull; Font size <dl> <dd>- large</dd> <dd>- medium</dd> <dd>- small</dd> </dl> </dd> <dt>You can delete it</dt> </dl>";
 var JUMBO_INFO = "<dl> <dt>You can add:</dt> <dd>&bull; Headers <dl> <dd>- large</dd> <dd>- medium</dd> <dd>- small</dd> <dd>- extra small</dd> </dl> </dd> <dd>&bull; Paragraph</dd> <dd>&bull; Button <dl> <dd>- large</dd> <dd>- small</dd> <dd>- extra small</dd> </dl> </dd> <dt>You can change:</dt> <dd>&bull; Color <dl> <dd>- blue</dd> <dd>- green</dd> <dd>- red</dd> <dd>- orange</dd> <dd>- white</dd> </dl> </dd> <dd>&bull; Font size <dl> <dd>- large</dd> <dd>- medium</dd> <dd>- small</dd> </dl> </dd> <dt>You can delete it</dt> </dl>";
-
+var NAVBAR_INFO = "<dl> <dt>You can add:</dt> <dd>&bull; New page item </dd> <dt>You can delete it</dt> </dl>";
 
 var $frame,
     $target,
@@ -49,39 +49,19 @@ $('document').ready(function () {
         // get target element in iframe by id
         $target = $frame.contents().find("#" + (targetId || MAIN_CONTAINER));
         // bind click event to iframe elements
-        $($frame.contents().get(0)).on("click", function(e) {
-            $clicked = $(e.target);
-            // filter clicked element
-            if (!$target || $clicked.is("body") || $clicked.is("html") || $clicked.is("ul")) {
-                return;
-            }
-            $target.css("outline", "none");
-            $target = $clicked;
-            targetId = $target.prop("id");
-            $target.css({"outline": "2px dashed rgb(87, 176, 219)"});
-            $("#target").html($target.prop("tagName"));
-            // update help popover according to a clicked element
-            updatePopOver();
-        });
+        $($frame.contents().get(0)).on("click", clickOnElement);
         // "click" an element after iframe has been refreshed
         $target.click();
-        // scroll to target element
-        var targetOffset = (targetId === MAIN_CONTAINER) ? 0 : ($target.offset().top + $target.innerHeight()/2) - $(window).height()/2;
-        $frame.contents().scrollTop(targetOffset);
+        // if new element added, find its offset
+        if (addedElement) {
+            $addElement = $frame.contents().find("#"+(addedElement));
+            topOffset = $addElement.offset().top + $addElement.innerHeight()/2 - $(window).height()/2;
+            addedElement = undefined;
+        }
+        // scroll to previous position or to newly added element
+        $frame.contents().scrollTop(topOffset);
         $frame.animate({opacity: 100}, 4500);
     });
-
-
-    // $("button[name='addImage']").bind('click', function() {
-    //     attr = {
-    //         "link": $("input[name='addImage']").val(),
-    //         "height": $("input[name='imWidth']").val(),
-    //         "width": $("input[name='imHeight']").val(),
-    //     }
-    //     if (attr.link.length === 0)
-    //         return errStatus('No link provided');
-    //     sendQuery('add', 'image', targetId, attr);
-    // });
 });
 
 
@@ -132,7 +112,6 @@ function sendQuery(action, element, target, options) {
                 // server couldn't handle request
                 errStatus(response.message);
             }
-            console.log(response.message);
         },
     });
 }
@@ -176,7 +155,7 @@ function deleteQuery(target) {
 function clickOnElement(e) {
     var $clicked = $(e.target);
     // filter clicked element
-    if (!$target || $clicked.is("body") || $clicked.is("html")) {
+    if (!$target || $clicked.is("body") || $clicked.is("html") || $clicked.hasClass("row") || $clicked.hasClass("navbar") || $clicked.hasClass("col-sm-3")) {
         return;
     }
     $target.css("outline", "none");
@@ -199,17 +178,17 @@ function updatePopOver() {
             $targetDisplay.html("page body");
             $popOver.attr("data-content", MAIN_INFO);
         }
-        else if ($target.hasClass("navbar")) {
+        else if ($target.hasClass("navigationbar")) {
             $targetDisplay.html("navigation bar");
             $popOver.attr("data-content", NAVBAR_INFO);
+        }
+        else if ($target.hasClass("sidebar")) {
+            $targetDisplay.html("side bar");
+            $popOver.attr("data-content", SIDEBAR_INFO);
         }
         else if ($target.hasClass("jumbotron")) {
             $targetDisplay.html("jumbotron");
             $popOver.attr("data-content", JUMBO_INFO);
-        }
-        else if ($target.hasClass("panel")) {
-            $targetDisplay.html("panel");
-            $popOver.attr("data-content", PANEL_INFO);
         }
         break;
 
@@ -226,16 +205,6 @@ function updatePopOver() {
         case "IMG":
         $targetDisplay.html("image");
         $popOver.attr("data-content", IMG_INFO);
-        break;
-
-        case "UL":
-        $targetDisplay.html("panel menu");
-        $popOver.attr("data-content", UL_INFO);
-        break;
-
-        case "LI":
-        $targetDisplay.html("panel item");
-        $popOver.attr("data-content", LI_INFO);
         break;
 
         case "H1":
@@ -262,6 +231,10 @@ function updatePopOver() {
         if ($target.hasClass("btn")) {
             $targetDisplay.html("button");
             $popOver.attr("data-content", BUTTON_INFO);
+        }
+        else if ($target.parent().parent().hasClass("nav") || $target.parent().parent().hasClass("sidebar")) {
+            $targetDisplay.html("navigation item");
+            $popOver.attr("data-content", NAV_ITEM_INFO);
         }
         else {
             $targetDisplay.html("link");
