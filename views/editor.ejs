@@ -152,6 +152,82 @@
 
         </div>
 
+        <!-- Modal -->
+        <div class="modal fade" id="modalProperties" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Set properties</h4>
+                    </div>
+                    <div class="modal-body">
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a  href="#text" data-toggle="tab">Text</a></li>
+                            <li><a href="#link" data-toggle="tab">Link</a></li>
+                            <li><a href="#size" data-toggle="tab">Size</a></li>
+                            <li><a href="#margin" data-toggle="tab">Margin</a></li>
+                            <li><a href="#padding" data-toggle="tab">Padding</a></li>
+                        </ul>
+                    </div>
+                    <div class="tab-content modal-body">
+                        <div class="tab-pane active" id="text">
+                            <textarea></textarea>
+                            <hr>
+                            <button type="button" class="btn btn-success" data-dismiss="modal">Save</button>
+                        </div>
+                        <div class="tab-pane" id="link">
+                            <textarea placeholder="Enter URL address"></textarea>
+                            <hr>
+                            <button type="button" class="btn btn-success" data-dismiss="modal">Save</button>
+                        </div>
+                        <div class="tab-pane" id="size">
+                            <div class="text-center center-line">
+                                <input type="number" name="width" placeholder="Width" value="">
+                                <span>X</span>
+                                <input type="number" name="height" placeholder="Heigth" value="">
+                            </div>
+                            <hr>
+                            <button type="button" class="btn btn-success" data-dismiss="modal">Save</button>
+                        </div>
+                        <div class="tab-pane" id="margin">
+                            <div class="text-center">
+                                <input type="number" name="top" placeholder="Top" value="">
+                            </div>
+                            <div class="text-center center-line">
+                                <input type="number" name="left" placeholder="Left" value="">
+                                <span>X</span>
+                                <input type="number" name="right" placeholder="Right" value="">
+                            </div>
+                            <div class="text-center">
+                                <input type="number" name="bottom" placeholder="Bottom" value="">
+                            </div>
+                            <hr>
+                            <button type="button" class="btn btn-success" data-dismiss="modal">Save</button>
+                        </div>
+                        <div class="tab-pane" id="padding">
+                            <div class="text-center">
+                                <input type="number" name="top" placeholder="Top" value="">
+                            </div>
+                            <div class="text-center center-line">
+                                <input type="number" name="left" placeholder="Left" value="">
+                                <span>X</span>
+                                <input type="number" name="right" placeholder="Right" value="">
+                            </div>
+                            <div class="text-center">
+                                <input type="number" name="bottom" placeholder="Bottom" value="">
+                            </div>
+                            <hr>
+                            <button type="button" class="btn btn-success" data-dismiss="modal">Save</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- End of modal content-->
+
+            </div>
+        </div>
+
     </body>
 </html>
 

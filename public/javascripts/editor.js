@@ -50,6 +50,9 @@ $('document').ready(function () {
         $target = $frame.contents().find("#" + (targetId || MAIN_CONTAINER));
         // bind click event to iframe elements
         $($frame.contents().get(0)).on("click", clickOnElement);
+        $($frame.contents().get(0)).on("dblclick", function() {
+            $("#modalProperties").modal("toggle");
+        });
         // "click" an element after iframe has been refreshed
         $target.click();
         // if new element added, find its offset
