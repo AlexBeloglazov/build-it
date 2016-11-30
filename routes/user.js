@@ -69,35 +69,33 @@ router.get('/editor', function(req, res) {
     Handle editing request
 */
 router.post('/editor/query', function(req, res) {
-    if (!req.body.target)
-        return sendErr("no id");
+    if (!req.body.target) return sendErr("no id");
     // grab a webpage user currently is working with
     Page.findOne({_id: req.session.webpageid, user: req.user.id}, function(err, webpage) {
         console.log(req.body);
-        if (err)
-            return sendErr("internal error");
-        if (!webpage)
-            return sendErr("bad request");
+        if (err) return sendErr("internal error");
+        if (!webpage) return sendErr("bad request");
         var $ = cheerio.load(webpage.html);
         var $target = $('#'+req.body.target);
-        if (!$target.length)
-            return sendErr("not found");
+        if (!$target.length) return sendErr("not found");
         var status;
         switch(req.body.action) {
             case "add":
+            if (!req.body.element) return sendErr("no element");
             status = element.add(req, $, $target);
             break;
 
             case "set":
             case "change":
+            if (!req.body.options || !req.body.options.property || !req.body.options.value)
+                return sendErr("no parameters");
             status = element.change(req, $, $target);
             break;
 
             default:
             return sendErr("bad action");
         }
-        if (status.err)
-            return sendErr(status.err);
+        if (status.err) return sendErr(status.err);
         webpage.html = $.html();
         webpage.save();
         sendOk(status.message, status.id);
@@ -131,16 +129,19 @@ router.delete("/editor/query", function(req, res) {
         if ($target.is("body") || req.body.target === "iframe_main")
             return res.json({"status": "error", "message": "not allowed"});
         var $next;
+        // check if element is image
+        if ($target.is("img"))
+            $target = $target.parent(); // select wrapper
         // check if element is navigation bar
-        if ($target.hasClass("navigationbar"))
+        else if ($target.hasClass("navigationbar"))
             $target = $target.parent(); // select <nav>
         // check if element is sidebar
-        if ($target.hasClass("sidebar")) {
+        else if ($target.hasClass("sidebar")) {
             $target = $target.parent(); // select div.col
             $("#iframe_main").removeClass("col-sm-10"); // restore width
         }
         // check if element is panel/navbar item
-        if ($target.is("a") && $target.parent().is("li"))
+        else if ($target.is("a") && $target.parent().is("li"))
             $target = $target.parent(); // select <li>
         if ($target.next().length)
             $next = $target.next();
@@ -154,7 +155,7 @@ router.delete("/editor/query", function(req, res) {
         $target.remove();
         webpage.html = $.html();
         webpage.save();
-        res.json({"status": "ok", "message": "deleted", "next": $next.attr("id") || $next.parent().attr("id")});
+        res.json({"status": "ok", "message": "deleted", "next": $next.attr("id") || "iframe_main"});
     });
 });
 

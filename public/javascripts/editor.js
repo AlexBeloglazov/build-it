@@ -1,17 +1,17 @@
 var MAIN_CONTAINER = "iframe_main";
-var MAIN_INFO = "<dl> <dt>You can add:</dt> <dd>&bull; Navigational bar</dd> <dd>&bull; Side bar <dl> <dd>- to left</dd> <dd>- to right</dd> </dl> </dd> <dd>&bull; Header <dl> <dd>- large</dd> <dd>- medium</dd> <dd>- small</dd> <dd>- extra small</dd> </dl> </dd> <dd>&bull; Paragraph</dd> <dd>&bull; Jumbotron</dd> <dd>&bull; Image</dd> <dd>&bull; Link</dd> <dd>&bull; Button <dl> <dd>- large</dd> <dd>- standard (default)</dd> <dd>- small</dd> </dl> </dd> <dd>&bull; Footer</dd> <dt>You can change:</dt> <dd>&bull; Background color <dl> <dd>- blue</dd> <dd>- green</dd> <dd>- red</dd> <dd>- orange</dd> <dd>- white</dd> </dl> </dd> <dt>You can delete it</dt> </dl>";
-var H1_INFO = "<dl> <dt>You can change:</dt> <dd>&bull; Size <dl> <dd>- medium</dd> <dd>- small</dd> <dd>- extra small</dd> </dl> </dd> <dd>&bull; Alignment <dl> <dd>- left</dd> <dd>- center</dd> <dd>- right</dd> </dl> </dd> <dt>You can delete it</dt> </dl>";
-var H2_INFO = "<dl> <dt>You can change:</dt> <dd>&bull; Size <dl> <dd>- large</dd> <dd>- small</dd> <dd>- extra small</dd> </dl> </dd> <dd>&bull; Alignment <dl> <dd>- left</dd> <dd>- center</dd> <dd>- right</dd> </dl> </dd> <dt>You can delete it</dt> </dl>";
-var H3_INFO = "<dl> <dt>You can change:</dt> <dd>&bull; Size <dl> <dd>- large</dd> <dd>- medium</dd> <dd>- extra small</dd> </dl> </dd> <dd>&bull; Alignment <dl> <dd>- left</dd> <dd>- center</dd> <dd>- right</dd> </dl> </dd> <dt>You can delete it</dt> </dl>";
-var H4_INFO = "<dl> <dt>You can change:</dt> <dd>&bull; Size <dl> <dd>- large</dd> <dd>- medium</dd> <dd>- small</dd> </dl> </dd> <dd>&bull; Alignment <dl> <dd>- left</dd> <dd>- center</dd> <dd>- right</dd> </dl> </dd> <dt>You can delete it</dt> </dl>";
+var MAIN_INFO = "<dl> <dt>You can add:</dt> <dd>&bull; Navigational bar</dd> <dd>&bull; Side bar <dl> <dd>- to left</dd> <dd>- to right</dd> </dl> </dd> <dd>&bull; Header <dl> <dd>- large</dd> <dd>- medium</dd> <dd>- small</dd> <dd>- extra small</dd> </dl> </dd> <dd>&bull; Paragraph</dd> <dd>&bull; Jumbotron</dd> <dd>&bull; Image</dd> <dd>&bull; Link</dd> <dd>&bull; Button <dl> <dd>- large</dd> <dd>- medium (default)</dd> <dd>- small</dd> <dd>- extra small</dd> </dl> </dd> <dd>&bull; Footer</dd> <dt>You can change:</dt> <dd>&bull; Background color <dl> <dd>- blue</dd> <dd>- green</dd> <dd>- red</dd> <dd>- orange</dd> <dd>- white</dd> </dl> </dd> <dt>You can delete it</dt> </dl>";
+var H1_INFO = "<dl> <dt>You can change:</dt> <dd>&bull; Size <dl> <dd>- medium</dd> <dd>- small</dd> <dd>- extra small</dd> </dl> </dd> <dd>&bull; Alignment <dl> <dd>- left</dd> <dd>- center</dd> <dd>- right</dd> </dl> </dd> <dd>&bull; Text color <dl> <dd>- black</dd> <dd>- grey</dd> <dd>- orange</dd> <dd>- green</dd> <dd>- red</dd> <dd>- blue</dd> </dl> </dd> <dt>You can delete it</dt> </dl>";
+var H2_INFO = "<dl> <dt>You can change:</dt> <dd>&bull; Size <dl> <dd>- large</dd> <dd>- small</dd> <dd>- extra small</dd> </dl> </dd> <dd>&bull; Alignment <dl> <dd>- left</dd> <dd>- center</dd> <dd>- right</dd> </dl> </dd> <dd>&bull; Text color <dl> <dd>- black</dd> <dd>- grey</dd> <dd>- orange</dd> <dd>- green</dd> <dd>- red</dd> <dd>- blue</dd> </dl> </dd> <dt>You can delete it</dt> </dl>";
+var H3_INFO = "<dl> <dt>You can change:</dt> <dd>&bull; Size <dl> <dd>- large</dd> <dd>- medium</dd> <dd>- extra small</dd> </dl> </dd> <dd>&bull; Alignment <dl> <dd>- left</dd> <dd>- center</dd> <dd>- right</dd> </dl> </dd> <dd>&bull; Text color <dl> <dd>- black</dd> <dd>- grey</dd> <dd>- orange</dd> <dd>- green</dd> <dd>- red</dd> <dd>- blue</dd> </dl> </dd> <dt>You can delete it</dt> </dl>";
+var H4_INFO = "<dl> <dt>You can change:</dt> <dd>&bull; Size <dl> <dd>- large</dd> <dd>- medium</dd> <dd>- small</dd> <dd>- extra small</dd> </dl> </dd> <dd>&bull; Alignment <dl> <dd>- left</dd> <dd>- center</dd> <dd>- right</dd> </dl> </dd> <dd>&bull; Text color <dl> <dd>- black</dd> <dd>- grey</dd> <dd>- orange</dd> <dd>- green</dd> <dd>- red</dd> <dd>- blue</dd> </dl> </dd> <dt>You can delete it</dt> </dl>";
 var A_INFO = "<dl> <dt>You can change:</dt> <dd>&bull; Size <dl> <dd>- large</dd> <dd>- medium</dd> <dd>- small</dd> </dl> </dd> <dt>You can delete it</dt> </dl>";
-var BUTTON_INFO = "<dl> <dt>You can change:</dt> <dd>&bull; Size <dl> <dd>- large</dd> <dd>- standard</dd> <dd>- small</dd> </dl> </dd> <dd>&bull; Color <dl> <dd>- blue</dd> <dd>- green</dd> <dd>- red</dd> <dd>- orange</dd> <dd>- white</dd> </dl> </dd> </dl>";
+var BUTTON_INFO = "<dl> <dt>You can change:</dt> <dd>&bull; Size <dl> <dd>- large</dd> <dd>- medium</dd> <dd>- small</dd> <dd>- extra small</dd> </dl> </dd> <dd>&bull; Color <dl> <dd>- blue</dd> <dd>- green</dd> <dd>- red</dd> <dd>- orange</dd> <dd>- white</dd> </dl> </dd> </dl>";
 var NAV_ITEM_INFO = "<dl> <dt>You can change:</dt> <dd>&bull; Text</dd> <dt>You can delete it</dt> </dl>";
 var SIDEBAR_INFO = "<dl> <dt>You can add:</dt> <dd>&bull; New sidebar item </dd> <dt>You can delete it</dt> </dl>";
 var IMG_INFO = "<dl> <dt>You can change:</dt> <dd>&bull; Alignment <dl> <dd>- left</dd> <dd>- center</dd> <dd>- right</dd> </dl> </dd> <dt>You can delete it</dt> </dl>";
-var FOOTER_INFO = "<dl> <dt>You can change:</dt> <dd>&bull; Text</dd> <dd>&bull; Color <dl> <dd>- black</dd> <dd>- grey</dd> <dd>- blue</dd> </dl> </dd> <dt>You can delete it</dt> </dl>";
-var P_INFO = "<dl> <dt>You can add:</dt> <dd>&bull; Images</dd> <dd>&bull; Links</dd> <dt>You can change:</dt> <dd>&bull; Text color <dl> <dd>- black</dd> <dd>- grey</dd> </dl> </dd> <dd>&bull; Font size <dl> <dd>- large</dd> <dd>- medium</dd> <dd>- small</dd> </dl> </dd> <dt>You can delete it</dt> </dl>";
-var JUMBO_INFO = "<dl> <dt>You can add:</dt> <dd>&bull; Headers <dl> <dd>- large</dd> <dd>- medium</dd> <dd>- small</dd> <dd>- extra small</dd> </dl> </dd> <dd>&bull; Paragraph</dd> <dd>&bull; Button <dl> <dd>- large</dd> <dd>- small</dd> <dd>- extra small</dd> </dl> </dd> <dt>You can change:</dt> <dd>&bull; Color <dl> <dd>- blue</dd> <dd>- green</dd> <dd>- red</dd> <dd>- orange</dd> <dd>- white</dd> </dl> </dd> <dd>&bull; Font size <dl> <dd>- large</dd> <dd>- medium</dd> <dd>- small</dd> </dl> </dd> <dt>You can delete it</dt> </dl>";
+var FOOTER_INFO = "<dl> <dt>You can change:</dt> <dd>&bull; Text</dd> <dd>&bull; Color <dl> <dd>- black</dd> <dd>- grey</dd> </dl> </dd> <dt>You can delete it</dt> </dl>";
+var P_INFO = "<dl> <dt>You can add:</dt> <dd>&bull; Images</dd> <dd>&bull; Links</dd> <dt>You can change:</dt> <dd>&bull; Text color <dl> <dd>- black</dd> <dd>- grey</dd> <dd>- orange</dd> <dd>- green</dd> <dd>- red</dd> <dd>- blue</dd> </dl> </dd> <dd>&bull; Font size <dl> <dd>- large</dd> <dd>- medium</dd> <dd>- small</dd> <dd>- extra small</dd> </dl> </dd> <dt>You can delete it</dt> </dl>";
+var JUMBO_INFO = "<dl> <dt>You can add:</dt> <dd>&bull; Headers <dl> <dd>- large</dd> <dd>- medium</dd> <dd>- small</dd> <dd>- extra small</dd> </dl> </dd> <dd>&bull; Paragraph</dd> <dd>&bull; Button <dl> <dd>- large</dd> <dd>- medium (default)</dd> <dd>- small</dd> <dd>- extra small</dd> </dl> </dl> </dd> <dt>You can change:</dt> <dd>&bull; Color <dl> <dd>- grey</dd> <dd>- blue</dd> <dd>- green</dd> <dd>- red</dd> <dd>- orange</dd> </dl> </dd> <dt>You can delete it</dt> </dl>";
 var NAVBAR_INFO = "<dl> <dt>You can add:</dt> <dd>&bull; New page item </dd> <dt>You can delete it</dt> </dl>";
 
 var $frame,
@@ -155,15 +155,21 @@ function deleteQuery(target) {
 function clickOnElement(e) {
     var $clicked = $(e.target);
     // filter clicked element
-    if (!$target || $clicked.is("body") || $clicked.is("html") || $clicked.hasClass("row") || $clicked.hasClass("navbar") || $clicked.hasClass("col-sm-3")) {
-        return;
-    }
+    if (!$target ||
+        $clicked.is("body") ||
+        $clicked.is("html") ||
+        $clicked.hasClass("row") ||
+        $clicked.hasClass("navbar") ||
+        $clicked.hasClass("col-sm-2") ||
+        $clicked.hasClass("wrap")
+    ) return;
     $target.css("outline", "none");
     $target = $clicked;
     targetId = $target.prop("id");
     $target.css({"outline": "2px dashed rgb(87, 176, 219)"});
     // update help popover according to a clicked element
     updatePopOver();
+    return false;
 }
 
 
@@ -242,6 +248,7 @@ function updatePopOver() {
         }
         break;
     }
+    return false;
 }
 
 function okStatus(message) {
