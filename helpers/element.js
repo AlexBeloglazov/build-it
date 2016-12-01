@@ -308,9 +308,52 @@ function change(req, $, $target) {
             else return {"err": "not allowed"};
             break;
 
+            case "custom":
+            if (!req.body.options.size.width && !req.body.options.size.height)
+                return {"err": "no size"};
+            if ($target.is("img")) {
+                $target.attr("width", req.body.options.size.width);
+                $target.attr("height", req.body.options.size.height);
+            }
+            else return {"err": "not allowed"};
+            break;
+
             default:
             return {"err": "unknown size"};
         }
+        break;
+
+        // Text
+        case "text":
+        if ($target.is("a, p, h1, h2, h3, h4")) {
+            $target.html(req.body.options.value);
+        }
+        else return {"err": "not allowed"};
+        break;
+
+        // URL
+        case "url":
+        if ($target.is("a"))
+            $target.attr("href", req.body.options.value);
+        else if ($target.is("img"))
+            $target.attr("src", req.body.options.value);
+        else return {"err": "not allowed"};
+        break;
+
+        // Margin
+        case "margin":
+        $target.css("margin-top", req.body.options.value.top+"px");
+        $target.css("margin-right", req.body.options.value.right+"px");
+        $target.css("margin-bottom", req.body.options.value.bottom+"px");
+        $target.css("margin-left", req.body.options.value.left+"px");
+        break;
+
+        // Padding
+        case "padding":
+        $target.css("padding-top", req.body.options.value.top+"px");
+        $target.css("padding-right", req.body.options.value.right+"px");
+        $target.css("padding-bottom", req.body.options.value.bottom+"px");
+        $target.css("padding-left", req.body.options.value.left+"px");
         break;
 
         // Font Color

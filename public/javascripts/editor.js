@@ -13,6 +13,8 @@ var FOOTER_INFO = "<dl> <dt>You can change:</dt> <dd>&bull; Text</dd> <dd>&bull;
 var P_INFO = "<dl> <dt>You can add:</dt> <dd>&bull; Images</dd> <dd>&bull; Links</dd> <dt>You can change:</dt> <dd>&bull; Text color <dl> <dd>- black</dd> <dd>- grey</dd> <dd>- orange</dd> <dd>- green</dd> <dd>- red</dd> <dd>- blue</dd> </dl> </dd> <dd>&bull; Font size <dl> <dd>- large</dd> <dd>- medium</dd> <dd>- small</dd> <dd>- extra small</dd> </dl> </dd> <dt>You can delete it</dt> </dl>";
 var JUMBO_INFO = "<dl> <dt>You can add:</dt> <dd>&bull; Headers <dl> <dd>- large</dd> <dd>- medium</dd> <dd>- small</dd> <dd>- extra small</dd> </dl> </dd> <dd>&bull; Paragraph</dd> <dd>&bull; Button <dl> <dd>- large</dd> <dd>- medium (default)</dd> <dd>- small</dd> <dd>- extra small</dd> </dl> </dl> </dd> <dt>You can change:</dt> <dd>&bull; Color <dl> <dd>- grey</dd> <dd>- blue</dd> <dd>- green</dd> <dd>- red</dd> <dd>- orange</dd> </dl> </dd> <dt>You can delete it</dt> </dl>";
 var NAVBAR_INFO = "<dl> <dt>You can add:</dt> <dd>&bull; New page item </dd> <dt>You can delete it</dt> </dl>";
+var UNKNOWN_INFO = "<dl> <dt>You can't do anything</dt> </dl>";
+
 
 var $frame,
     $target,
@@ -22,6 +24,9 @@ var $frame,
     targetId = MAIN_CONTAINER,
     topOffset = 0,
     addedElement;
+var dictation_obj,
+    dictation_working,
+    dictation_text;
 
 $('document').ready(function () {
 
@@ -50,9 +55,7 @@ $('document').ready(function () {
         $target = $frame.contents().find("#" + (targetId || MAIN_CONTAINER));
         // bind click event to iframe elements
         $($frame.contents().get(0)).on("click", clickOnElement);
-        $($frame.contents().get(0)).on("dblclick", function() {
-            $("#modalProperties").modal("toggle");
-        });
+        $($frame.contents().get(0)).on("dblclick", "a, div.jumbotron, img, p, h1, h2, h3, h4, footer", dblClickOnElement);
         // "click" an element after iframe has been refreshed
         $target.click();
         // if new element added, find its offset
@@ -68,19 +71,19 @@ $('document').ready(function () {
 });
 
 
-$('body').on('focus', '[contenteditable]', function() {
-    var $this = $(this);
-    $this.data('before', $this.html());
-    console.log("test");
-    return $this;
-}).on('blur keyup paste input', '[contenteditable]', function() {
-    var $this = $(this);
-    if ($this.data('before') !== $this.html()) {
-        $this.data('before', $this.html());
-        console.log("change");
-    }
-    return $this;
-});
+// $('body').on('focus', '[contenteditable]', function() {
+//     var $this = $(this);
+//     $this.data('before', $this.html());
+//     console.log("test");
+//     return $this;
+// }).on('blur keyup paste input', '[contenteditable]', function() {
+//     var $this = $(this);
+//     if ($this.data('before') !== $this.html()) {
+//         $this.data('before', $this.html());
+//         console.log("change");
+//     }
+//     return $this;
+// });
 
 
 /*
@@ -164,6 +167,7 @@ function clickOnElement(e) {
         $clicked.hasClass("row") ||
         $clicked.hasClass("navbar") ||
         $clicked.hasClass("col-sm-2") ||
+        // $clicked.hasClass("container") ||
         $clicked.hasClass("wrap")
     ) return;
     $target.css("outline", "none");
@@ -198,6 +202,10 @@ function updatePopOver() {
         else if ($target.hasClass("jumbotron")) {
             $targetDisplay.html("jumbotron");
             $popOver.attr("data-content", JUMBO_INFO);
+        }
+        else {
+            $targetDisplay.html("unknown");
+            $popOver.attr("data-content", UNKNOWN_INFO);
         }
         break;
 
@@ -250,8 +258,176 @@ function updatePopOver() {
             $popOver.attr("data-content", A_INFO);
         }
         break;
+
+        default:
+        $targetDisplay.html("unknown");
+        $popOver.attr("data-content", UNKNOWN_INFO);
     }
     return false;
+}
+
+function dblClickOnElement(e) {
+    var textDim = {};
+    e.stopPropagation();
+    // Deactivate dictation button
+    $("#text .btn").removeClass("active");
+    // Enable tabs
+    $(".nav-tabs li").removeClass("disabled active").children().attr("data-toggle", "tab");
+    $(".tab-content div").removeClass("active");
+    // Setting values
+    $("#text > textarea").val($target.html());
+    $("#size input[name='width']").val($target.outerWidth());
+    $("#size input[name='height']").val($target.outerHeight());
+    textDim.top = $target.css("margin-top");
+    textDim.right = $target.css("margin-right");
+    textDim.bottom = $target.css("margin-bottom");
+    textDim.left = $target.css("margin-left");
+    margin = {
+        top: textDim.top !== null ? parseInt(textDim.top) : 0,
+        right: textDim.right !== null ? parseInt(textDim.right) : 0,
+        bottom: textDim.bottom !== null ? parseInt(textDim.bottom) : 0,
+        left: textDim.left !== null ? parseInt(textDim.left) : 0
+    };
+    $("#margin input[name='top']").val(margin.top);
+    $("#margin input[name='right']").val(margin.right);
+    $("#margin input[name='bottom']").val(margin.bottom);
+    $("#margin input[name='left']").val(margin.left);
+    textDim.top = $target.css("padding-top");
+    textDim.right = $target.css("padding-right");
+    textDim.bottom = $target.css("padding-bottom");
+    textDim.left = $target.css("padding-left");
+    padding = {
+        top: textDim.top !== null ? parseInt(textDim.top) : 0,
+        right: textDim.right !== null ? parseInt(textDim.right) : 0,
+        bottom: textDim.bottom !== null ? parseInt(textDim.bottom) : 0,
+        left: textDim.left !== null ? parseInt(textDim.left) : 0
+    };
+    $("#padding input[name='top']").val(padding.top);
+    $("#padding input[name='right']").val(padding.right);
+    $("#padding input[name='bottom']").val(padding.bottom);
+    $("#padding input[name='left']").val(padding.left);
+    if ($target.is("a")) {
+        $("#link > textarea").val($target.attr("href"));
+        // activate text tab
+        $(".nav-tabs a[href='#text']").parent().addClass("active");
+        $("div#text").addClass("active");
+        // disable size tab
+        $(".nav-tabs a[href='#size']").attr("data-toggle", "").parent().addClass("disabled");
+
+    }
+    else if ($target.is("img")) {
+        $("#link > textarea").val($target.attr("src"));
+        // activate link tab
+        $(".nav-tabs a[href='#link']").parent().addClass("active");
+        $("div#link").addClass("active");
+        // disable text field
+        $(".nav-tabs a[href='#text']").attr("data-toggle", "").parent().addClass("disabled");
+    }
+    else if ($target.is("p, h1, h2, h3, h4, footer")) {
+        // activate text tab
+        $(".nav-tabs a[href='#text']").parent().addClass("active");
+        $("div#text").addClass("active");
+        // disable link, size tabs
+        $(".nav-tabs a[href='#link']").attr("data-toggle", "").parent().addClass("disabled");
+        $(".nav-tabs a[href='#size']").attr("data-toggle", "").parent().addClass("disabled");
+    }
+    else {
+        // activate margin tab
+        $(".nav-tabs a[href='#margin']").parent().addClass("active");
+        $("div#margin").addClass("active");
+        // disable text, link, size tabs
+        $(".nav-tabs a[href='#text']").attr("data-toggle", "").parent().addClass("disabled");
+        $(".nav-tabs a[href='#link']").attr("data-toggle", "").parent().addClass("disabled");
+        $(".nav-tabs a[href='#size']").attr("data-toggle", "").parent().addClass("disabled");
+
+    }
+    $("#modalProperties").modal("toggle");
+}
+
+function modalDictation(b) {
+    if (dictation_working) {
+        reset();
+    }
+    else {
+        $(b).addClass("active");
+        dictation_obj = new webkitSpeechRecognition();
+        dictation_obj.continuous = true;
+        dictation_obj.maxAlternatives = 5;
+        dictation_obj.interimResults = true;
+        dictation_obj.lang = "en-US";
+        dictation_obj.onend = reset;
+        dictation_obj.onerror = reset;
+        dictation_obj.onresult = function(e) {
+            var final_transcript = $("#text textarea").val();
+            if (typeof(e.results) == 'undefined') {
+              reset();
+              return;
+            }
+            for (var i = e.resultIndex; i < e.results.length; ++i) {
+              var val = e.results[i][0].transcript;
+              if (e.results[i].isFinal)
+                final_transcript += " " + val;
+            }
+            $("#text textarea").val(final_transcript);
+        };
+        dictation_working = true;
+        dictation_obj.start();
+    }
+
+    function reset() {
+        dictation_working = false;
+        dictation_obj.stop();
+        dictation_obj = undefined;
+        $("#dictation").removeClass("active");
+    }
+}
+
+function modalText() {
+    var text = $("#text textarea").val();
+    setTimeout(function() {
+        sendQuery("set", "", targetId, {"property": "text", "value": text});
+    }, 300);
+}
+
+function modalLink() {
+    var url = $("#link textarea").val();
+    setTimeout(function() {
+        sendQuery("set", "", targetId, {"property": "url", "value": url});
+    }, 300);
+}
+
+function modalSize() {
+    var size = {
+        "width": $("#size input[name='width']").val() || 0,
+        "height": $("#size input[name='height']").val() || 0
+    };
+    setTimeout(function() {
+        sendQuery("set", "", targetId, {"property": "size", "value": "custom", "size": size});
+    }, 300);
+}
+
+function modalMargin() {
+    var margin = {
+        "top": $("#margin input[name='top']").val() || 0,
+        "right": $("#margin input[name='right']").val() || 0,
+        "bottom": $("#margin input[name='bottom']").val() || 0,
+        "left": $("#margin input[name='left']").val() || 0
+    };
+    setTimeout(function() {
+        sendQuery("set", "", targetId, {"property": "margin", "value": margin});
+    }, 300);
+}
+
+function modalPadding() {
+    var padding = {
+        "top": $("#padding input[name='top']").val() || 0,
+        "right": $("#padding input[name='right']").val() || 0,
+        "bottom": $("#padding input[name='bottom']").val() || 0,
+        "left": $("#padding input[name='left']").val() || 0
+    };
+    setTimeout(function() {
+        sendQuery("set", "", targetId, {"property": "padding", "value": padding});
+    }, 300);
 }
 
 function okStatus(message) {

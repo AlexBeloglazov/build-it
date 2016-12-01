@@ -164,7 +164,7 @@
                     </div>
                     <div class="modal-body">
                         <ul class="nav nav-tabs">
-                            <li class="active"><a  href="#text" data-toggle="tab">Text</a></li>
+                            <li><a href="#text" data-toggle="tab">Text</a></li>
                             <li><a href="#link" data-toggle="tab">Link</a></li>
                             <li><a href="#size" data-toggle="tab">Size</a></li>
                             <li><a href="#margin" data-toggle="tab">Margin</a></li>
@@ -175,12 +175,13 @@
                         <div class="tab-pane active" id="text">
                             <textarea></textarea>
                             <hr>
-                            <button type="button" class="btn btn-success" data-dismiss="modal">Save</button>
+                            <button onclick="modalText();" type="button" class="btn btn-success" data-dismiss="modal">Save</button>
+                            <button id="dictation" onclick="modalDictation(this);" type="button" class="btn btn-default"><i class="fa fa-microphone" aria-hidden="true"></i></button>
                         </div>
                         <div class="tab-pane" id="link">
                             <textarea placeholder="Enter URL address"></textarea>
                             <hr>
-                            <button type="button" class="btn btn-success" data-dismiss="modal">Save</button>
+                            <button onclick="modalLink();" type="button" class="btn btn-success" data-dismiss="modal">Save</button>
                         </div>
                         <div class="tab-pane" id="size">
                             <div class="text-center center-line">
@@ -189,7 +190,7 @@
                                 <input type="number" name="height" placeholder="Heigth" value="">
                             </div>
                             <hr>
-                            <button type="button" class="btn btn-success" data-dismiss="modal">Save</button>
+                            <button onclick="modalSize();" type="button" class="btn btn-success" data-dismiss="modal">Save</button>
                         </div>
                         <div class="tab-pane" id="margin">
                             <div class="text-center">
@@ -204,7 +205,7 @@
                                 <input type="number" name="bottom" placeholder="Bottom" value="">
                             </div>
                             <hr>
-                            <button type="button" class="btn btn-success" data-dismiss="modal">Save</button>
+                            <button onclick="modalMargin();" type="button" class="btn btn-success" data-dismiss="modal">Save</button>
                         </div>
                         <div class="tab-pane" id="padding">
                             <div class="text-center">
@@ -219,7 +220,7 @@
                                 <input type="number" name="bottom" placeholder="Bottom" value="">
                             </div>
                             <hr>
-                            <button type="button" class="btn btn-success" data-dismiss="modal">Save</button>
+                            <button onclick="modalPadding();" type="button" class="btn btn-success" data-dismiss="modal">Save</button>
                         </div>
                     </div>
                 </div>
