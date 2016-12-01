@@ -167,7 +167,7 @@ router.get('/pages/:pageid', function(req, res) {
     Page.findOne({_id: req.params.pageid, user: req.user.id}, function(err, webpage) {
         if (!webpage)
             return res.sendStatus(404);
-        res.send(html.prettyPrint(webpage.html));
+        res.send(webpage.html);
     });
 });
 

@@ -6,7 +6,7 @@ module.exports = {
         saveUninitialized: false
     },
 
-    db: { url: 'mongodb://localhost:27017/buildit'},
+    db: { url: process.env.MONGODB_ULI || 'mongodb://localhost:27017/buildit'},
 
     auth: {
 

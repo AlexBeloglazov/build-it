@@ -39,9 +39,13 @@ $('document').ready(function () {
     // grab target span
     $targetDisplay = $("#target");
 
-    $('.mic').on("click", function () {
-        $(".fa-microphone").toggleClass("blue");
-        $("input[name='speech']").focus();
+    $('.mic').on("click", function() {
+        $("#rec").toggleClass("blue");
+        // $(".bottom input[name='speech']").focus();
+    });
+
+    $("#modalProperties").on("hide.bs.modal", function(){
+        if (dictation_obj) dictation_obj.stop();
     });
 
     // select iframes's body on click on crosshair
@@ -50,12 +54,18 @@ $('document').ready(function () {
     });
 
     // handle clicks on iframe elements
-    $frame.on("load", function () {
+    $frame.on("load", function() {
         // get target element in iframe by id
         $target = $frame.contents().find("#" + (targetId || MAIN_CONTAINER));
         // bind click event to iframe elements
         $($frame.contents().get(0)).on("click", clickOnElement);
         $($frame.contents().get(0)).on("dblclick", "a, div.jumbotron, img, p, h1, h2, h3, h4, footer", dblClickOnElement);
+        $($frame.contents().get(0)).on("keypress", function(e) {
+            e.preventDefault();
+            if(e.keyCode == 32){
+                $(".mic").click();
+            }
+        });
         // "click" an element after iframe has been refreshed
         $target.click();
         // if new element added, find its offset
@@ -105,7 +115,7 @@ function sendQuery(action, element, target, options) {
         // expected type of reply
         dataType: "json",
 
-        success: function (response) {
+        success: function(response) {
             console.log(response);
             if (response.status === 'ok') {
                 $frame.stop(true).css("opacity", "0");
@@ -137,7 +147,7 @@ function deleteQuery(target) {
         contentType: "application/json; charset=utf-8",
         // expected type of reply
         dataType: "json",
-        success: function (response) {
+        success: function(response) {
             // set id of a sibling to deleted element
             targetId = response.next || targetId;
             if (response.status === 'ok') {
@@ -346,7 +356,7 @@ function dblClickOnElement(e) {
 
 function modalDictation(b) {
     if (dictation_working) {
-        reset();
+        return reset();
     }
     else {
         $(b).addClass("active");
@@ -361,14 +371,11 @@ function modalDictation(b) {
             var final_transcript = $("#text textarea").val();
             if (typeof(e.results) == 'undefined') {
               reset();
-              return;
             }
             for (var i = e.resultIndex; i < e.results.length; ++i) {
-              var val = e.results[i][0].transcript;
               if (e.results[i].isFinal)
-                final_transcript += " " + val;
+                $("#text textarea").get(0).value += " " + e.results[i][0].transcript;
             }
-            $("#text textarea").val(final_transcript);
         };
         dictation_working = true;
         dictation_obj.start();
@@ -376,9 +383,14 @@ function modalDictation(b) {
 
     function reset() {
         dictation_working = false;
-        dictation_obj.stop();
+        if (dictation_obj) dictation_obj.stop();
         dictation_obj = undefined;
         $("#dictation").removeClass("active");
+    }
+    function capitalize(s) {
+      return s.replace(/\S/, function(m) {
+        return m.toUpperCase();
+      });
     }
 }
 
