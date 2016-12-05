@@ -137,6 +137,9 @@ function add(req, $, $target) {
             addFooter();
         else return {"err": "not allowed"};
         break;
+
+        default:
+        return {"err": "not such element"};
     }
     return {"message": "element added", "id": uid};
 
