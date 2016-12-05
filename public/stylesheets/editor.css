@@ -166,6 +166,12 @@ li > a, li > a:hover, li > a:visited {
     outline: none;
 }
 
+#mic-wait {
+    float:right;
+    position:relative;
+    top: 5px;
+}
+
 .tab-pane input {
     border: 1px solid rgb(223, 223, 223);
     outline: none;

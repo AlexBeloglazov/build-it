@@ -279,6 +279,7 @@ function updatePopOver() {
 function dblClickOnElement(e) {
     var textDim = {};
     e.stopPropagation();
+    $("#mic-wait").hide();
     // Deactivate dictation button
     $("#text .btn").removeClass("active");
     // Enable tabs
@@ -360,9 +361,10 @@ function modalDictation(b) {
     }
     else {
         $(b).addClass("active");
+        $("#mic-wait").show();
         dictation_obj = new webkitSpeechRecognition();
         dictation_obj.continuous = true;
-        dictation_obj.maxAlternatives = 5;
+        dictation_obj.maxAlternatives = 1;
         dictation_obj.interimResults = true;
         dictation_obj.lang = "en-US";
         dictation_obj.onend = reset;
@@ -386,6 +388,7 @@ function modalDictation(b) {
         if (dictation_obj) dictation_obj.stop();
         dictation_obj = undefined;
         $("#dictation").removeClass("active");
+        $("#mic-wait").hide();
     }
     function capitalize(s) {
       return s.replace(/\S/, function(m) {
