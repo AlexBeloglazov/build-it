@@ -58,7 +58,7 @@ function add(req, $, $target) {
 
         // Image
         case "image":
-        if (!req.body.options && !req.body.options.link) return {"err": "no link"};
+        if (!req.body.options || !req.body.options.link) return {"err": "no link"};
         if ($target.attr("id") === MAIN_CONTAINER || $target.is("p"))
             addImage();
         else return {"err": "not allowed"};
@@ -139,7 +139,7 @@ function add(req, $, $target) {
         break;
 
         default:
-        return {"err": "not such element"};
+        return {"err": "no such element"};
     }
     return {"message": "element added", "id": uid};
 
@@ -187,8 +187,7 @@ function add(req, $, $target) {
     }
     function addJumbotron() {
         var $jumbotron = $("<div>").addClass("jumbotron")
-            .attr("id", uid)
-            .append($("<h2>").html(req.body.options.text).attr("id", newid()));
+            .attr("id", uid);
         addToPosition($jumbotron);
     }
     function addImage() {
