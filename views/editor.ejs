@@ -111,13 +111,41 @@
                     data: JSON.stringify({ query: text, lang: "en", sessionId: "somerandomthing" }),
 
                     success: function(data) {
-                        var action = data['result']['metadata']['intentName'];
-                        var element = data['result']['parameters']['item'];
-                        var options = {text: "This is an element"};
-                        console.log(action);
-                        console.log(element);
 
-                        sendQuery(action, element, targetId, options);
+                        var actionType = data['result']['metadata']['intentName'];
+                        switch (actionType) {
+                            case "add": {
+                                var element = data['result']['parameters']['item'];
+                                var position = data['result']['parameters']['location'];
+
+                                if (position == "") {
+                                    position = "below";
+                                }
+
+                                sendQuery(actionType, element, targetId, {"position": position});
+                                break;
+                            }
+
+                            case "change": {
+                                var variables = data['result']['parameters'];
+                                for (var key in variables) {
+                                    if (variables.hasOwnProperty(key)) {
+                                        if (variables[key] != "") {
+                                            var targetProperty = key;
+                                            var targetValue = variables[key];
+                                        }
+                                    }
+                                }
+
+                                sendQuery(actionType, "", targetId, {"property": targetProperty, "value": targetValue});
+                                break;
+                            }
+
+                            case "delete": {
+                                deleteQuery(targetId);
+                                break;
+                            }
+                        }
                         setResponse(JSON.stringify(data, undefined, 2));
                     },
                     error: function() {

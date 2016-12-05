@@ -193,7 +193,7 @@ function add(req, $, $target) {
             "id": uid,
             "src": req.body.options.link,
             "height": req.body.options.height,
-            "width": req.body.options.width,
+            "width": req.body.options.width
         }));
         addToPosition($image);
     }
