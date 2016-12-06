@@ -236,7 +236,7 @@ function add(req, $, $target) {
     function addLink() {
         req.body.options.link = req.body.options.link || "#";
         req.body.options.text = req.body.options.text || "Link";
-        var $link = $("<button>", {"id": uid, "href": req.body.options.link}).html(req.body.options.text);
+        var $link = $("<a>").attr({"id": uid, "href": req.body.options.link}).html(req.body.options.text);
         addToPosition($link);
     }
     function addFooter() {

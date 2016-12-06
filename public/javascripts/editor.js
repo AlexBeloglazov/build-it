@@ -39,6 +39,8 @@ $('document').ready(function () {
     // grab target span
     $targetDisplay = $("#target");
 
+    $("#mic-wait").hide();
+
     $('.mic').on("click", function() {
         $("#rec").toggleClass("blue");
         // $(".bottom input[name='speech']").focus();
@@ -279,7 +281,6 @@ function updatePopOver() {
 function dblClickOnElement(e) {
     var textDim = {};
     e.stopPropagation();
-    $("#mic-wait").hide();
     // Deactivate dictation button
     $("#text .btn").removeClass("active");
     // Enable tabs
@@ -361,6 +362,7 @@ function modalDictation(b) {
     }
     else {
         $(b).addClass("active");
+        dictation_text = $(b).parent().find("textarea");
         $("#mic-wait").show();
         dictation_obj = new webkitSpeechRecognition();
         dictation_obj.continuous = true;
@@ -370,13 +372,13 @@ function modalDictation(b) {
         dictation_obj.onend = reset;
         dictation_obj.onerror = reset;
         dictation_obj.onresult = function(e) {
-            var final_transcript = $("#text textarea").val();
+            var final_transcript = dictation_text.val();
             if (typeof(e.results) == 'undefined') {
               reset();
             }
             for (var i = e.resultIndex; i < e.results.length; ++i) {
               if (e.results[i].isFinal)
-                $("#text textarea").get(0).value += " " + e.results[i][0].transcript;
+                dictation_text.get(0).value += " " + e.results[i][0].transcript;
             }
         };
         dictation_working = true;
@@ -444,6 +446,8 @@ function modalPadding() {
         sendQuery("set", "", targetId, {"property": "padding", "value": padding});
     }, 300);
 }
+
+
 
 function okStatus(message) {
     $infoDisplay.removeAttr("style").html(message);

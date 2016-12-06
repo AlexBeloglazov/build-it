@@ -15,30 +15,12 @@
     </head>
     <body>
         <script>
-            var contents = document.querySelectorAll("[contenteditable=true]");
-            [].forEach.call(contents, function (content) {
-
-                content.addEventListener("focus", function () {
-                    content.setAttribute("data-initial-text", content.innerHTML);
-                });
-                content.addEventListener("blur", function () {
-
-                    if (content.getAttribute("data-initial-text") !== content.innerHTML) {
-                       // Handlers for content-editable elements
-                        console.log("New data when content change.");
-                        console.log(content.innerHTML);
-                    }
-                });
-            });
-        </script>
-        <script>
             sessionStorage.setItem("fromEditor", "True");
         </script>
         <script type="text/javascript">
 
             var accessToken = "1bb843c663654c2a8915f699825c8d76";
             var baseUrl = "https://api.api.ai/v1/";
-
             $(document).ready(function() {
                 $("#input").keypress(function(event) {
                     if (event.which == 13) {
@@ -50,9 +32,7 @@
                     switchRecognition();
                 });
             });
-
             var recognition;
-
             function startRecognition() {
                 recognition = new webkitSpeechRecognition();
                 recognition.onstart = function(event) {
@@ -72,7 +52,6 @@
                 recognition.lang = "en-US";
                 recognition.start();
             }
-
             function stopRecognition() {
                 if (recognition) {
                     recognition.stop();
@@ -80,7 +59,6 @@
                 }
                 updateRec();
             }
-
             function switchRecognition() {
                 if (recognition) {
                     stopRecognition();
@@ -88,16 +66,13 @@
                     startRecognition();
                 }
             }
-
             function setInput(text) {
                 $("#input").val(text);
                 send();
             }
-
             function updateRec() {
                 $("#rec").text(recognition ? "Stop" : "Speak");
             }
-
             function send() {
                 var text = $("#input").val();
                 $.ajax({
@@ -109,15 +84,61 @@
                         "Authorization": "Bearer " + accessToken
                     },
                     data: JSON.stringify({ query: text, lang: "en", sessionId: "somerandomthing" }),
-
                     success: function(data) {
-                        var action = data['result']['metadata']['intentName'];
-                        var element = data['result']['parameters']['item'];
-                        var options = {text: "This is an element"};
-                        console.log(action);
-                        console.log(element);
-
-                        sendQuery(action, element, targetId, options);
+                        var actionType = data['result']['metadata']['intentName'];
+                        switch (actionType) {
+                            case "add": {
+                                var element = data['result']['parameters']['item'];
+                                var position = data['result']['parameters']['location'];
+                                if (position == "") {
+                                    position = "below";
+                                }
+                                if (element === "image")
+                                    $("#modalAddImage").on("hide.bs.modal", function(e) {
+                                        link = $(e.target).find("textarea").val();
+                                        width = $(e.target).find("input[name='width']").val();
+                                        height = $(e.target).find("input[name='height']").val();
+                                        setTimeout(function() {
+                                            sendQuery(actionType, element, targetId, {"link": link, "height": height, "width": width});
+                                        }, 300);
+                                    }).modal("toggle").find("textarea").val("");
+                                else if (element === "paragraph")
+                                    $("#modalAddText").on("hide.bs.modal", function(e) {
+                                            if (dictation_obj) dictation_obj.stop();
+                                            text = $(e.target).find("textarea").val();
+                                            setTimeout(function() {
+                                                sendQuery("add", element, targetId, {"text": text});
+                                            }, 300);
+                                        }).modal("toggle").find("textarea").val("");
+                                else if (element === "link")
+                                    $("#modalAddLink").on("hide.bs.modal", function(e) {
+                                            text = $(e.target).find("input[name='linkName']").val();
+                                            link = $(e.target).find("textarea").val();
+                                            setTimeout(function() {
+                                                sendQuery("add", element, targetId, {"text": text, "link": link});
+                                            }, 300);
+                                        }).modal("toggle").find("textarea").val("");
+                                else sendQuery(actionType, element, targetId, {"position": position});
+                                break;
+                            }
+                            case "change": {
+                                var variables = data['result']['parameters'];
+                                for (var key in variables) {
+                                    if (variables.hasOwnProperty(key)) {
+                                        if (variables[key] != "") {
+                                            var targetProperty = key;
+                                            var targetValue = variables[key];
+                                        }
+                                    }
+                                }
+                                sendQuery(actionType, "", targetId, {"property": targetProperty, "value": targetValue});
+                                break;
+                            }
+                            case "delete": {
+                                deleteQuery(targetId);
+                                break;
+                            }
+                        }
                         setResponse(JSON.stringify(data, undefined, 2));
                     },
                     error: function() {
@@ -126,7 +147,6 @@
                 });
                 setResponse("Loading...");
             }
-
             function setResponse(val) {
                 $("#response").text(val);
             }
@@ -229,6 +249,75 @@
 
             </div>
         </div>
+
+        <!-- Modal modalAddText -->
+        <div class="modal fade" id="modalAddText" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- modalAddText content-->
+                <div class="modal-content">
+                    <div class="tab-content modal-body">
+
+                        <textarea></textarea>
+                        <hr>
+                        <button onclick="" type="button" class="btn btn-success" data-dismiss="modal">Add</button>
+                        <button id="dictation" onclick="modalDictation(this);" type="button" class="btn btn-default"><i class="fa fa-microphone" aria-hidden="true"></i></button>
+                        <img id="mic-wait" src="/images/fspin.svg" height="25px" alt="">
+                   
+                    </div>
+                </div>
+                <!-- End of modalAddText content-->
+
+            </div>
+        </div>
+        <!-- End of modalAddText modal-->
+
+        <!-- Modal modalAddLink -->
+        <div class="modal fade" id="modalAddLink" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- modalAddLink content-->
+                <div class="modal-content">
+                    <div class="modal-body">
+                    
+                        <input style="margin-bottom: 5px;" type="text" name="linkName" placeholder="Enter Link name"></input>
+                        <textarea placeholder="Enter URL address"></textarea>
+                        <hr>
+                        <button onclick="" type="button" class="btn btn-success" data-dismiss="modal">Add</button>
+                       
+                    </div>
+                </div>
+                <!-- End of modalAddLink content-->
+
+            </div>
+        </div>
+        <!-- End of modalAddLink modal-->
+
+        <!-- Modal modalAddImage -->
+        <div class="modal fade" id="modalAddImage" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- modalAddImage content-->
+                <div class="modal-content">
+                    <div class="modal-body">
+
+                        <textarea placeholder="Enter Image URL address"></textarea>
+                        <p class="text-center text-muted" style="margin-top: 20px;">Optionally:</p>
+                        <div class="text-center center-line">
+                                <input type="number" name="width" placeholder="Width" value="">
+                                <span>X</span>
+                                <input type="number" name="height" placeholder="Heigth" value="">
+                            </div>
+                        <hr>
+                        <button onclick="" type="button" class="btn btn-success" data-dismiss="modal">Add</button>
+
+                    </div>
+                </div>
+                <!-- End of modalAddImage content-->
+
+            </div>
+        </div>
+        <!-- End of modalAddImage modal-->
 
     </body>
 </html>
