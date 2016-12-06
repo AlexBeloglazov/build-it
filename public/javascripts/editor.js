@@ -23,7 +23,8 @@ var $frame,
     $targetDisplay,
     targetId = MAIN_CONTAINER,
     topOffset = 0,
-    addedElement;
+    addedElement,
+    $input;
 var dictation_obj,
     dictation_working,
     dictation_text;
@@ -38,8 +39,10 @@ $('document').ready(function () {
     $infoDisplay = $("#info");
     // grab target span
     $targetDisplay = $("#target");
+    // grab a main input
+    $input = $("#input");
 
-    $("#mic-wait").hide();
+    $(".mic-wait").hide();
 
     $('.mic').on("click", function() {
         $("#rec").toggleClass("blue");
@@ -361,10 +364,11 @@ function modalDictation(b) {
         return reset();
     }
     else {
-        $(b).addClass("active");
         dictation_text = $(b).parent().find("textarea");
-        $("#mic-wait").show();
         dictation_obj = new webkitSpeechRecognition();
+        if (!dictation_obj) return;
+        $(".mic-wait").show();
+        $(b).addClass("active");
         dictation_obj.continuous = true;
         dictation_obj.maxAlternatives = 1;
         dictation_obj.interimResults = true;
@@ -389,8 +393,8 @@ function modalDictation(b) {
         dictation_working = false;
         if (dictation_obj) dictation_obj.stop();
         dictation_obj = undefined;
-        $("#dictation").removeClass("active");
-        $("#mic-wait").hide();
+        $(b).removeClass("active");
+        $(".mic-wait").hide();
     }
     function capitalize(s) {
       return s.replace(/\S/, function(m) {
@@ -454,5 +458,5 @@ function okStatus(message) {
 }
 
 function errStatus(message) {
-    $infoDisplay.css('background-color', 'rgb(231, 197, 188)').html(message);
+    $infoDisplay.css({"background-color": "rgb(231, 197, 188)", "color": "rgb(209, 122, 99)"}).html(message);
 }

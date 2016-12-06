@@ -53,7 +53,7 @@ li > a, li > a:hover, li > a:visited {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    color: rgb(159, 159, 159);
+    color: rgb(154, 154, 154);
     font-family: "Oxygen";
     font-weight: 100;
     background-color: rgb(237, 237, 237);
@@ -134,16 +134,20 @@ li > a, li > a:hover, li > a:visited {
 }
 
 #target {
+    /*font-weight: bold;*/
     font-variant: small-caps;
     background-color: rgb(204, 229, 245);
+    color: rgb(104, 160, 196);
     border-radius: 3px;
     padding: 3px 7px;
 }
 
 #info {
+    /*font-weight: bold;*/
     font-variant: small-caps;
     border-radius: 3px;
     padding: 3px 7px;
+    color: rgb(104, 163, 83);
     background-color: rgb(199, 231, 188);
 }
 
@@ -166,7 +170,7 @@ li > a, li > a:hover, li > a:visited {
     outline: none;
 }
 
-#mic-wait {
+.mic-wait {
     float:right;
     position:relative;
     top: 5px;

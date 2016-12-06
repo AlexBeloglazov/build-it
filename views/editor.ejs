@@ -22,7 +22,7 @@
             var accessToken = "1bb843c663654c2a8915f699825c8d76";
             var baseUrl = "https://api.api.ai/v1/";
             $(document).ready(function() {
-                $("#input").keypress(function(event) {
+                $input.keypress(function(event) {
                     if (event.which == 13) {
                         event.preventDefault();
                         send();
@@ -35,8 +35,9 @@
             var recognition;
             function startRecognition() {
                 recognition = new webkitSpeechRecognition();
+                recognition.lang = "en-US";
                 recognition.onstart = function(event) {
-                    updateRec();
+                    $input.val("");
                 };
                 recognition.onresult = function(event) {
                     var text = "";
@@ -45,11 +46,9 @@
                     }
                     setInput(text);
                     stopRecognition();
+                    recognition = undefined;
                 };
-                recognition.onend = function() {
-                    stopRecognition();
-                };
-                recognition.lang = "en-US";
+
                 recognition.start();
             }
             function stopRecognition() {
@@ -57,7 +56,7 @@
                     recognition.stop();
                     recognition = null;
                 }
-                updateRec();
+                $input.val("");
             }
             function switchRecognition() {
                 if (recognition) {
@@ -67,14 +66,12 @@
                 }
             }
             function setInput(text) {
-                $("#input").val(text);
+                $input.val(text);
                 send();
             }
-            function updateRec() {
-                $("#rec").text(recognition ? "Stop" : "Speak");
-            }
+
             function send() {
-                var text = $("#input").val();
+                var text = $input.val();
                 $.ajax({
                     type: "POST",
                     url: baseUrl + "query?v=20150910",
@@ -85,14 +82,12 @@
                     },
                     data: JSON.stringify({ query: text, lang: "en", sessionId: "somerandomthing" }),
                     success: function(data) {
+                        console.log("Reply from parser!");
                         var actionType = data['result']['metadata']['intentName'];
                         switch (actionType) {
                             case "add": {
                                 var element = data['result']['parameters']['item'];
                                 var position = data['result']['parameters']['location'];
-                                if (position == "") {
-                                    position = "below";
-                                }
                                 if (element === "image")
                                     $("#modalAddImage").on("hide.bs.modal", function(e) {
                                         link = $(e.target).find("textarea").val();
@@ -107,7 +102,7 @@
                                             if (dictation_obj) dictation_obj.stop();
                                             text = $(e.target).find("textarea").val();
                                             setTimeout(function() {
-                                                sendQuery("add", element, targetId, {"text": text});
+                                                sendQuery("add", element, targetId, {"text": text, "position": position});
                                             }, 300);
                                         }).modal("toggle").find("textarea").val("");
                                 else if (element === "link")
@@ -139,16 +134,13 @@
                                 break;
                             }
                         }
-                        setResponse(JSON.stringify(data, undefined, 2));
+                        // setResponse(JSON.stringify(data, undefined, 2));
                     },
                     error: function() {
-                        setResponse("Internal Server Error");
+                        errStatus("parser error");
                     }
                 });
-                setResponse("Loading...");
-            }
-            function setResponse(val) {
-                $("#response").text(val);
+                console.log("Sent req to parser!");
             }
 
         </script>
@@ -196,8 +188,8 @@
                             <textarea></textarea>
                             <hr>
                             <button onclick="modalText();" type="button" class="btn btn-success" data-dismiss="modal">Save</button>
-                            <button id="dictation" onclick="modalDictation(this);" type="button" class="btn btn-default"><i class="fa fa-microphone" aria-hidden="true"></i></button>
-                            <img id="mic-wait" src="/images/fspin.svg" height="25px" alt="">
+                            <button onclick="modalDictation(this);" type="button" class="btn btn-default"><i class="fa fa-microphone" aria-hidden="true"></i></button>
+                            <img class="mic-wait" src="/images/fspin.svg" height="25px" alt="">
                         </div>
                         <div class="tab-pane" id="link">
                             <textarea placeholder="Enter URL address"></textarea>
@@ -257,13 +249,13 @@
                 <!-- modalAddText content-->
                 <div class="modal-content">
                     <div class="tab-content modal-body">
-
-                        <textarea></textarea>
-                        <hr>
-                        <button onclick="" type="button" class="btn btn-success" data-dismiss="modal">Add</button>
-                        <button id="dictation" onclick="modalDictation(this);" type="button" class="btn btn-default"><i class="fa fa-microphone" aria-hidden="true"></i></button>
-                        <img id="mic-wait" src="/images/fspin.svg" height="25px" alt="">
-                   
+                        <div class="">
+                            <textarea></textarea>
+                            <hr>
+                            <button onclick="" type="button" class="btn btn-success" data-dismiss="modal">Add</button>
+                            <button onclick="modalDictation(this);" type="button" class="btn btn-default"><i class="fa fa-microphone" aria-hidden="true"></i></button>
+                            <img class="mic-wait" src="/images/fspin.svg" height="25px" alt="">
+                        </div>
                     </div>
                 </div>
                 <!-- End of modalAddText content-->
@@ -279,12 +271,12 @@
                 <!-- modalAddLink content-->
                 <div class="modal-content">
                     <div class="modal-body">
-                    
+
                         <input style="margin-bottom: 5px;" type="text" name="linkName" placeholder="Enter Link name"></input>
                         <textarea placeholder="Enter URL address"></textarea>
                         <hr>
                         <button onclick="" type="button" class="btn btn-success" data-dismiss="modal">Add</button>
-                       
+
                     </div>
                 </div>
                 <!-- End of modalAddLink content-->
