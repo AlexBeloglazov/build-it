@@ -39,13 +39,21 @@
             function startRecognition() {
                 recognition = new webkitSpeechRecognition();
                 recognition.lang = "en-US";
+                recognition.onerror = function() {
+                    errStatus("recognition error");
+                    recognition.stop();
+                };
                 recognition.onstart = function(event) {
-                    $input.val("");
                     $(".mic-wait2").show();
                     $("#info").hide();
+                    $input.val("");
                 };
-                recognition.onend = reset;
-                recognition.onerror = recognition.stop;
+                recognition.onend = function () {
+                    $(".mic-wait2").hide();
+                    $("#info").show();
+                    $("#rec").removeClass("blue");
+                    recognition = null;
+                };
                 recognition.onresult = function(event) {
                     var text = "";
                     for (var i = event.resultIndex; i < event.results.length; ++i) {
@@ -56,13 +64,6 @@
                     send();
                 };
                 recognition.start();
-            }
-
-            function reset() {
-                $(".mic-wait2").hide();
-                $("#rec").removeClass("blue");
-                $("#info").show();
-                recognition = null;
             }
 
             function switchRecognition() {
