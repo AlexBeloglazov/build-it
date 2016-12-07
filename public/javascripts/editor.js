@@ -42,11 +42,10 @@ $('document').ready(function () {
     // grab a main input
     $input = $("#input");
 
-    $(".mic-wait").hide();
+    $(".mic-wait, .mic-wait2").hide();
 
     $('.mic').on("click", function() {
         $("#rec").toggleClass("blue");
-        // $(".bottom input[name='speech']").focus();
     });
 
     $("#modalProperties").on("hide.bs.modal", function(){

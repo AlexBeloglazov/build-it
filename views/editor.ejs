@@ -19,8 +19,10 @@
         </script>
         <script type="text/javascript">
 
-            var accessToken = "1bb843c663654c2a8915f699825c8d76";
+            var accessToken = "2cab735d86b04a8490b8ea27ff35bd7";
             var baseUrl = "https://api.api.ai/v1/";
+            var texts = ["paragraph", "h1", "h2", "h3", "h4"];
+
             $(document).ready(function() {
                 $input.keypress(function(event) {
                     if (event.which == 13) {
@@ -32,6 +34,7 @@
                     switchRecognition();
                 });
             });
+
             var recognition;
             function startRecognition() {
                 recognition = new webkitSpeechRecognition();
@@ -39,6 +42,7 @@
                 recognition.onstart = function(event) {
                     $input.val("");
                     $(".mic-wait2").show();
+                    $("#info").hide();
                 };
                 recognition.onend = reset;
                 recognition.onerror = recognition.stop;
@@ -49,16 +53,18 @@
                     }
                     recognition.stop();
                     $input.val(text);
-                    // send();
+                    send();
                 };
-
                 recognition.start();
             }
+
             function reset() {
                 $(".mic-wait2").hide();
-                $(".mic").removeClass("blue");
+                $("#rec").removeClass("blue");
+                $("#info").show();
                 recognition = null;
             }
+
             function switchRecognition() {
                 if (recognition) {
                     recognition.stop();
@@ -79,7 +85,6 @@
                     },
                     data: JSON.stringify({ query: text, lang: "en", sessionId: "somerandomthing" }),
                     success: function(data) {
-                        console.log("Reply from parser!");
                         var actionType = data['result']['metadata']['intentName'];
                         switch (actionType) {
                             case "add": {
@@ -94,12 +99,12 @@
                                             sendQuery(actionType, element, targetId, {"link": link, "height": height, "width": width});
                                         }, 300);
                                     }).modal("toggle").find("textarea").val("");
-                                else if (element === "paragraph")
+                                else if (texts.indexOf(element) > -1)
                                     $("#modalAddText").on("hide.bs.modal", function(e) {
                                             if (dictation_obj) dictation_obj.stop();
                                             text = $(e.target).find("textarea").val();
                                             setTimeout(function() {
-                                                sendQuery("add", element, targetId, {"text": text, "position": position});
+                                                sendQuery(actionType, element, targetId, {"text": text, "position": position});
                                             }, 300);
                                         }).modal("toggle").find("textarea").val("");
                                 else if (element === "link")
@@ -107,7 +112,7 @@
                                             text = $(e.target).find("input[name='linkName']").val();
                                             link = $(e.target).find("textarea").val();
                                             setTimeout(function() {
-                                                sendQuery("add", element, targetId, {"text": text, "link": link});
+                                                sendQuery(actionType, element, targetId, {"text": text, "link": link});
                                             }, 300);
                                         }).modal("toggle").find("textarea").val("");
                                 else sendQuery(actionType, element, targetId, {"position": position});
@@ -131,13 +136,12 @@
                                 break;
                             }
                         }
-                        // setResponse(JSON.stringify(data, undefined, 2));
                     },
                     error: function() {
                         errStatus("parser error");
                     }
                 });
-                console.log("Sent req to parser!");
+                okStatus("request sent");
             }
 
         </script>
@@ -148,11 +152,11 @@
             <div class="mic">
                 <span id="rec" class="fa fa-2x fa-microphone" aria-hidden="true"></span>
             </div>
-            <input id="input" type="text" name="speech" value=""><img class="mic-wait2" src="/images/fspin.svg" height="25px" alt=""></input>
+            <input id="input" type="text" name="speech" value="">
 
             <ul class="list-unstyled">
                 <li><i class="fa fa-lg fa-info-circle" aria-hidden="true"></i></li>
-                <li><span id="info">waiting for user</span></li>
+                <li><img class="mic-wait2" src="/images/fspin.svg" height="25px" alt=""><span id="info">waiting for user</span></li>
                 <li><i class="fa fa-lg fa-crosshairs" aria-hidden="true"></i></li>
                 <li><span id="target"></span></li>
                 <li id="help" data-toggle="popover" data-trigger="hover" data-container="body" data-placement="top" title="What can I do with the element?"><i class="fa fa-lg fa-question" aria-hidden="true"></i></li>

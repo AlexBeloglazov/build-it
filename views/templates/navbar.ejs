@@ -4,6 +4,7 @@
         <div class="header-right">
             <%# <a href="/register" class="btn btn-default">Sign up</a>%>
             <% if (user) {%>
+                <a href="/user" class="btn btn-default">My Pages</a>
                 <a href="/user/logout" class="btn btn-default">Logout</a>
             <% } else { %>
                 <a href="/auth/facebook" class=""><i class="fa fa-2x fa-facebook-square"></i></a>
