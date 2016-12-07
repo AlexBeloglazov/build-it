@@ -366,15 +366,16 @@ function modalDictation(b) {
     else {
         dictation_text = $(b).parent().find("textarea");
         dictation_obj = new webkitSpeechRecognition();
-        if (!dictation_obj) return;
-        $(".mic-wait").show();
-        $(b).addClass("active");
         dictation_obj.continuous = true;
         dictation_obj.maxAlternatives = 1;
         dictation_obj.interimResults = true;
         dictation_obj.lang = "en-US";
         dictation_obj.onend = reset;
         dictation_obj.onerror = reset;
+        dictation_obj.onstart = function() {
+            $(".mic-wait").show();
+            $(b).addClass("active");
+        };
         dictation_obj.onresult = function(e) {
             var final_transcript = dictation_text.val();
             if (typeof(e.results) == 'undefined') {

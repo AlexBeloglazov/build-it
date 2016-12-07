@@ -28,7 +28,7 @@
                         send();
                     }
                 });
-                $(".mic").click(function(event) {
+                $(".mic").click(function() {
                     switchRecognition();
                 });
             });
@@ -38,36 +38,33 @@
                 recognition.lang = "en-US";
                 recognition.onstart = function(event) {
                     $input.val("");
+                    $(".mic-wait2").show();
                 };
+                recognition.onend = reset;
+                recognition.onerror = recognition.stop;
                 recognition.onresult = function(event) {
                     var text = "";
                     for (var i = event.resultIndex; i < event.results.length; ++i) {
                         text += event.results[i][0].transcript;
                     }
-                    setInput(text);
-                    stopRecognition();
-                    recognition = undefined;
+                    recognition.stop();
+                    $input.val(text);
+                    // send();
                 };
 
                 recognition.start();
             }
-            function stopRecognition() {
-                if (recognition) {
-                    recognition.stop();
-                    recognition = null;
-                }
-                $input.val("");
+            function reset() {
+                $(".mic-wait2").hide();
+                $(".mic").removeClass("blue");
+                recognition = null;
             }
             function switchRecognition() {
                 if (recognition) {
-                    stopRecognition();
+                    recognition.stop();
                 } else {
                     startRecognition();
                 }
-            }
-            function setInput(text) {
-                $input.val(text);
-                send();
             }
 
             function send() {
@@ -151,7 +148,7 @@
             <div class="mic">
                 <span id="rec" class="fa fa-2x fa-microphone" aria-hidden="true"></span>
             </div>
-            <input id="input" type="text" name="speech" value="">
+            <input id="input" type="text" name="speech" value=""><img class="mic-wait2" src="/images/fspin.svg" height="25px" alt=""></input>
 
             <ul class="list-unstyled">
                 <li><i class="fa fa-lg fa-info-circle" aria-hidden="true"></i></li>
