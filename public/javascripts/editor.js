@@ -39,6 +39,8 @@ $('document').ready(function () {
     // grab target span
     $targetDisplay = $("#target");
 
+    $("#mic-wait").hide();
+
     $('.mic').on("click", function() {
         $("#rec").toggleClass("blue");
         // $(".bottom input[name='speech']").focus();
@@ -360,21 +362,23 @@ function modalDictation(b) {
     }
     else {
         $(b).addClass("active");
+        dictation_text = $(b).parent().find("textarea");
+        $("#mic-wait").show();
         dictation_obj = new webkitSpeechRecognition();
         dictation_obj.continuous = true;
-        dictation_obj.maxAlternatives = 5;
+        dictation_obj.maxAlternatives = 1;
         dictation_obj.interimResults = true;
         dictation_obj.lang = "en-US";
         dictation_obj.onend = reset;
         dictation_obj.onerror = reset;
         dictation_obj.onresult = function(e) {
-            var final_transcript = $("#text textarea").val();
+            var final_transcript = dictation_text.val();
             if (typeof(e.results) == 'undefined') {
               reset();
             }
             for (var i = e.resultIndex; i < e.results.length; ++i) {
               if (e.results[i].isFinal)
-                $("#text textarea").get(0).value += " " + e.results[i][0].transcript;
+                dictation_text.get(0).value += " " + e.results[i][0].transcript;
             }
         };
         dictation_working = true;
@@ -386,6 +390,7 @@ function modalDictation(b) {
         if (dictation_obj) dictation_obj.stop();
         dictation_obj = undefined;
         $("#dictation").removeClass("active");
+        $("#mic-wait").hide();
     }
     function capitalize(s) {
       return s.replace(/\S/, function(m) {
@@ -441,6 +446,8 @@ function modalPadding() {
         sendQuery("set", "", targetId, {"property": "padding", "value": padding});
     }, 300);
 }
+
+
 
 function okStatus(message) {
     $infoDisplay.removeAttr("style").html(message);
