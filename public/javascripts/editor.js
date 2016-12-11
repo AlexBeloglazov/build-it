@@ -1,17 +1,19 @@
 var MAIN_CONTAINER = "iframe_main";
-var MAIN_INFO = "<dl> <dt>You can add:</dt> <dd>&bull; Navigational bar</dd> <dd>&bull; Side panel <dl> <dd>- to left</dd> <dd>- to right</dd> </dl> </dd> <dd>&bull; Header <dl> <dd>- large</dd> <dd>- medium</dd> <dd>- small</dd> <dd>- extra small</dd> </dl> </dd> <dd>&bull; Paragraph</dd> <dd>&bull; Jumbotron</dd> <dd>&bull; Image</dd> <dd>&bull; Link</dd> <dd>&bull; Button <dl> <dd>- large</dd> <dd>- small</dd> <dd>- extra small</dd> </dl> </dd> <dd>&bull; Footer</dd> <dt>You can change:</dt> <dd>&bull; Background color <dl> <dd>- blue</dd> <dd>- green</dd> <dd>- red</dd> <dd>- orange</dd> <dd>- white</dd> </dl> </dd> <dt>You can delete it</dt> </dl>";
-var H1_INFO = "<dl> <dt>You can change:</dt> <dd>&bull; Size <dl> <dd>- medium</dd> <dd>- small</dd> <dd>- extra small</dd> </dl> </dd> <dd>&bull; Alignment <dl> <dd>- left</dd> <dd>- center</dd> <dd>- right</dd> </dl> </dd> <dt>You can delete it</dt> </dl>";
-var H2_INFO = "<dl> <dt>You can change:</dt> <dd>&bull; Size <dl> <dd>- large</dd> <dd>- small</dd> <dd>- extra small</dd> </dl> </dd> <dd>&bull; Alignment <dl> <dd>- left</dd> <dd>- center</dd> <dd>- right</dd> </dl> </dd> <dt>You can delete it</dt> </dl>";
-var H3_INFO = "<dl> <dt>You can change:</dt> <dd>&bull; Size <dl> <dd>- large</dd> <dd>- medium</dd> <dd>- extra small</dd> </dl> </dd> <dd>&bull; Alignment <dl> <dd>- left</dd> <dd>- center</dd> <dd>- right</dd> </dl> </dd> <dt>You can delete it</dt> </dl>";
-var H4_INFO = "<dl> <dt>You can change:</dt> <dd>&bull; Size <dl> <dd>- large</dd> <dd>- medium</dd> <dd>- small</dd> </dl> </dd> <dd>&bull; Alignment <dl> <dd>- left</dd> <dd>- center</dd> <dd>- right</dd> </dl> </dd> <dt>You can delete it</dt> </dl>";
+var MAIN_INFO = "<dl> <dt>You can add:</dt> <dd>&bull; Navigational bar</dd> <dd>&bull; Side bar <dl> <dd>- to left</dd> <dd>- to right</dd> </dl> </dd> <dd>&bull; Header <dl> <dd>- large</dd> <dd>- medium</dd> <dd>- small</dd> <dd>- extra small</dd> </dl> </dd> <dd>&bull; Paragraph</dd> <dd>&bull; Jumbotron</dd> <dd>&bull; Image</dd> <dd>&bull; Link</dd> <dd>&bull; Button <dl> <dd>- large</dd> <dd>- medium (default)</dd> <dd>- small</dd> <dd>- extra small</dd> </dl> </dd> <dd>&bull; Footer</dd> <dt>You can delete it</dt> </dl>";
+var H1_INFO = "<dl> <dt>You can change:</dt> <dd>&bull; Size <dl> <dd>- medium</dd> <dd>- small</dd> <dd>- extra small</dd> </dl> </dd> <dd>&bull; Alignment <dl> <dd>- left</dd> <dd>- center</dd> <dd>- right</dd> </dl> </dd> <dd>&bull; Text color <dl> <dd>- black</dd> <dd>- grey</dd> <dd>- orange</dd> <dd>- green</dd> <dd>- red</dd> <dd>- blue</dd> </dl> </dd> <dt>You can delete it</dt> </dl>";
+var H2_INFO = "<dl> <dt>You can change:</dt> <dd>&bull; Size <dl> <dd>- large</dd> <dd>- small</dd> <dd>- extra small</dd> </dl> </dd> <dd>&bull; Alignment <dl> <dd>- left</dd> <dd>- center</dd> <dd>- right</dd> </dl> </dd> <dd>&bull; Text color <dl> <dd>- black</dd> <dd>- grey</dd> <dd>- orange</dd> <dd>- green</dd> <dd>- red</dd> <dd>- blue</dd> </dl> </dd> <dt>You can delete it</dt> </dl>";
+var H3_INFO = "<dl> <dt>You can change:</dt> <dd>&bull; Size <dl> <dd>- large</dd> <dd>- medium</dd> <dd>- extra small</dd> </dl> </dd> <dd>&bull; Alignment <dl> <dd>- left</dd> <dd>- center</dd> <dd>- right</dd> </dl> </dd> <dd>&bull; Text color <dl> <dd>- black</dd> <dd>- grey</dd> <dd>- orange</dd> <dd>- green</dd> <dd>- red</dd> <dd>- blue</dd> </dl> </dd> <dt>You can delete it</dt> </dl>";
+var H4_INFO = "<dl> <dt>You can change:</dt> <dd>&bull; Size <dl> <dd>- large</dd> <dd>- medium</dd> <dd>- small</dd> <dd>- extra small</dd> </dl> </dd> <dd>&bull; Alignment <dl> <dd>- left</dd> <dd>- center</dd> <dd>- right</dd> </dl> </dd> <dd>&bull; Text color <dl> <dd>- black</dd> <dd>- grey</dd> <dd>- orange</dd> <dd>- green</dd> <dd>- red</dd> <dd>- blue</dd> </dl> </dd> <dt>You can delete it</dt> </dl>";
 var A_INFO = "<dl> <dt>You can change:</dt> <dd>&bull; Size <dl> <dd>- large</dd> <dd>- medium</dd> <dd>- small</dd> </dl> </dd> <dt>You can delete it</dt> </dl>";
-var BUTTON_INFO = "<dl> <dt>You can change:</dt> <dd>&bull; Size <dl> <dd>- large</dd> <dd>- standard</dd> <dd>- small</dd> </dl> </dd> <dd>&bull; Color <dl> <dd>- blue</dd> <dd>- green</dd> <dd>- red</dd> <dd>- orange</dd> <dd>- white</dd> </dl> </dd> </dl>";
-var LI_INFO = "<dl> <dt>You can change:</dt> <dd>&bull; Text</dd> <dt>You can delete it</dt> </dl>";
-var UL_INFO = "<dl> <dt>You can't do anything</dt> </dl>";
-var IMG_INFO = "<dl> <dt>You can change:</dt> <dd>&bull; Alignment <dl> <dd>- left</dd> <dd>- center</dd> <dd>- right</dd> </dl> </dd> </dl>";
-var FOOTER_INFO = "<dl> <dt>You can add:</dt> <dd>&bull; Paragraph</dd> <dd>&bull; Link</dd> <dt>You can change:</dt> <dd>&bull; Color <dl> <dd>- black</dd> <dd>- grey</dd> <dd>- blue</dd> </dl> </dd> <dt>You can delete it</dt> </dl>";
-var P_INFO = "<dl> <dt>You can add:</dt> <dd>&bull; Images</dd> <dd>&bull; Links</dd> <dt>You can change:</dt> <dd>&bull; Text color <dl> <dd>- black</dd> <dd>- grey</dd> </dl> </dd> <dd>&bull; Font size <dl> <dd>- large</dd> <dd>- medium</dd> <dd>- small</dd> </dl> </dd> <dt>You can delete it</dt> </dl>";
-var JUMBO_INFO = "<dl> <dt>You can add:</dt> <dd>&bull; Headers <dl> <dd>- large</dd> <dd>- medium</dd> <dd>- small</dd> <dd>- extra small</dd> </dl> </dd> <dd>&bull; Paragraph</dd> <dd>&bull; Button <dl> <dd>- large</dd> <dd>- small</dd> <dd>- extra small</dd> </dl> </dd> <dt>You can change:</dt> <dd>&bull; Color <dl> <dd>- blue</dd> <dd>- green</dd> <dd>- red</dd> <dd>- orange</dd> <dd>- white</dd> </dl> </dd> <dd>&bull; Font size <dl> <dd>- large</dd> <dd>- medium</dd> <dd>- small</dd> </dl> </dd> <dt>You can delete it</dt> </dl>";
+var BUTTON_INFO = "<dl> <dt>You can change:</dt> <dd>&bull; Size <dl> <dd>- large</dd> <dd>- medium</dd> <dd>- small</dd> <dd>- extra small</dd> </dl> </dd> <dd>&bull; Color <dl> <dd>- blue</dd> <dd>- green</dd> <dd>- red</dd> <dd>- orange</dd> <dd>- white</dd> </dl> </dd> </dl>";
+var NAV_ITEM_INFO = "<dl> <dt>You can change:</dt> <dd>&bull; Text</dd> <dt>You can delete it</dt> </dl>";
+var SIDEBAR_INFO = "<dl> <dt>You can add:</dt> <dd>&bull; New sidebar item </dd> <dt>You can delete it</dt> </dl>";
+var IMG_INFO = "<dl> <dt>You can change:</dt> <dd>&bull; Alignment <dl> <dd>- left</dd> <dd>- center</dd> <dd>- right</dd> </dl> </dd> <dt>You can delete it</dt> </dl>";
+var FOOTER_INFO = "<dl> <dt>You can change:</dt> <dd>&bull; Text</dd> <dd>&bull; Color <dl> <dd>- black</dd> <dd>- grey</dd> </dl> </dd> <dt>You can delete it</dt> </dl>";
+var P_INFO = "<dl> <dt>You can add:</dt> <dd>&bull; Images</dd> <dd>&bull; Links</dd> <dt>You can change:</dt> <dd>&bull; Text color <dl> <dd>- black</dd> <dd>- grey</dd> <dd>- orange</dd> <dd>- green</dd> <dd>- red</dd> <dd>- blue</dd> </dl> </dd> <dd>&bull; Font size <dl> <dd>- large</dd> <dd>- medium</dd> <dd>- small</dd> <dd>- extra small</dd> </dl> </dd> <dt>You can delete it</dt> </dl>";
+var JUMBO_INFO = "<dl> <dt>You can add:</dt> <dd>&bull; Headers <dl> <dd>- large</dd> <dd>- medium</dd> <dd>- small</dd> <dd>- extra small</dd> </dl> </dd> <dd>&bull; Paragraph</dd> <dd>&bull; Button <dl> <dd>- large</dd> <dd>- medium (default)</dd> <dd>- small</dd> <dd>- extra small</dd> </dl> </dl> </dd> <dt>You can change:</dt> <dd>&bull; Color <dl> <dd>- grey</dd> <dd>- blue</dd> <dd>- green</dd> <dd>- red</dd> <dd>- orange</dd> </dl> </dd> <dt>You can delete it</dt> </dl>";
+var NAVBAR_INFO = "<dl> <dt>You can add:</dt> <dd>&bull; New page item </dd> <dt>You can delete it</dt> </dl>";
+var UNKNOWN_INFO = "<dl> <dt>You can't do anything</dt> </dl>";
 
 
 var $frame,
@@ -21,7 +23,11 @@ var $frame,
     $targetDisplay,
     targetId = MAIN_CONTAINER,
     topOffset = 0,
-    addedElement;
+    addedElement,
+    $input;
+var dictation_obj,
+    dictation_working,
+    dictation_text;
 
 $('document').ready(function () {
 
@@ -33,10 +39,17 @@ $('document').ready(function () {
     $infoDisplay = $("#info");
     // grab target span
     $targetDisplay = $("#target");
+    // grab a main input
+    $input = $("#input");
 
-    $('.mic').on("click", function () {
-        $(".fa-microphone").toggleClass("blue");
-        $("input[name='speech']").focus();
+    $(".mic-wait, .mic-wait2").hide();
+
+    $('.mic').on("click", function() {
+        $("#rec").toggleClass("blue");
+    });
+
+    $("#modalProperties").on("hide.bs.modal", function(){
+        if (dictation_obj) dictation_obj.stop();
     });
 
     // select iframes's body on click on crosshair
@@ -45,59 +58,46 @@ $('document').ready(function () {
     });
 
     // handle clicks on iframe elements
-    $frame.on("load", function () {
+    $frame.on("load", function() {
         // get target element in iframe by id
         $target = $frame.contents().find("#" + (targetId || MAIN_CONTAINER));
         // bind click event to iframe elements
-        $($frame.contents().get(0)).on("click", function(e) {
-            $clicked = $(e.target);
-            // filter clicked element
-            if (!$target || $clicked.is("body") || $clicked.is("html") || $clicked.is("ul")) {
-                return;
+        $($frame.contents().get(0)).on("click", clickOnElement);
+        $($frame.contents().get(0)).on("dblclick", "a, div.jumbotron, img, p, h1, h2, h3, h4, footer", dblClickOnElement);
+        $($frame.contents().get(0)).on("keypress", function(e) {
+            e.preventDefault();
+            if(e.keyCode == 32){
+                $(".mic").click();
             }
-            $target.css("outline", "none");
-            $target = $clicked;
-            targetId = $target.prop("id");
-            $target.css({"outline": "2px dashed rgb(87, 176, 219)"});
-            $("#target").html($target.prop("tagName"));
-            // update help popover according to a clicked element
-            updatePopOver();
         });
         // "click" an element after iframe has been refreshed
         $target.click();
-        // scroll to target element
-        var targetOffset = (targetId === MAIN_CONTAINER) ? 0 : ($target.offset().top + $target.innerHeight()/2) - $(window).height()/2;
-        $frame.contents().scrollTop(targetOffset);
+        // if new element added, find its offset
+        if (addedElement) {
+            $addElement = $frame.contents().find("#"+(addedElement));
+            topOffset = $addElement.offset().top + $addElement.innerHeight()/2 - $(window).height()/2;
+            addedElement = undefined;
+        }
+        // scroll to previous position or to newly added element
+        $frame.contents().scrollTop(topOffset);
         $frame.animate({opacity: 100}, 4500);
     });
-
-
-    // $("button[name='addImage']").bind('click', function() {
-    //     attr = {
-    //         "link": $("input[name='addImage']").val(),
-    //         "height": $("input[name='imWidth']").val(),
-    //         "width": $("input[name='imHeight']").val(),
-    //     }
-    //     if (attr.link.length === 0)
-    //         return errStatus('No link provided');
-    //     sendQuery('add', 'image', targetId, attr);
-    // });
 });
 
 
-$('body').on('focus', '[contenteditable]', function() {
-    var $this = $(this);
-    $this.data('before', $this.html());
-    console.log("test");
-    return $this;
-}).on('blur keyup paste input', '[contenteditable]', function() {
-    var $this = $(this);
-    if ($this.data('before') !== $this.html()) {
-        $this.data('before', $this.html());
-        console.log("change");
-    }
-    return $this;
-});
+// $('body').on('focus', '[contenteditable]', function() {
+//     var $this = $(this);
+//     $this.data('before', $this.html());
+//     console.log("test");
+//     return $this;
+// }).on('blur keyup paste input', '[contenteditable]', function() {
+//     var $this = $(this);
+//     if ($this.data('before') !== $this.html()) {
+//         $this.data('before', $this.html());
+//         console.log("change");
+//     }
+//     return $this;
+// });
 
 
 /*
@@ -119,7 +119,7 @@ function sendQuery(action, element, target, options) {
         // expected type of reply
         dataType: "json",
 
-        success: function (response) {
+        success: function(response) {
             console.log(response);
             if (response.status === 'ok') {
                 $frame.stop(true).css("opacity", "0");
@@ -132,7 +132,6 @@ function sendQuery(action, element, target, options) {
                 // server couldn't handle request
                 errStatus(response.message);
             }
-            console.log(response.message);
         },
     });
 }
@@ -152,7 +151,7 @@ function deleteQuery(target) {
         contentType: "application/json; charset=utf-8",
         // expected type of reply
         dataType: "json",
-        success: function (response) {
+        success: function(response) {
             // set id of a sibling to deleted element
             targetId = response.next || targetId;
             if (response.status === 'ok') {
@@ -176,15 +175,22 @@ function deleteQuery(target) {
 function clickOnElement(e) {
     var $clicked = $(e.target);
     // filter clicked element
-    if (!$target || $clicked.is("body") || $clicked.is("html")) {
-        return;
-    }
+    if (!$target ||
+        $clicked.is("body") ||
+        $clicked.is("html") ||
+        $clicked.hasClass("row") ||
+        $clicked.hasClass("navbar") ||
+        $clicked.hasClass("col-sm-2") ||
+        // $clicked.hasClass("container") ||
+        $clicked.hasClass("wrap")
+    ) return;
     $target.css("outline", "none");
     $target = $clicked;
     targetId = $target.prop("id");
     $target.css({"outline": "2px dashed rgb(87, 176, 219)"});
     // update help popover according to a clicked element
     updatePopOver();
+    return false;
 }
 
 
@@ -199,17 +205,21 @@ function updatePopOver() {
             $targetDisplay.html("page body");
             $popOver.attr("data-content", MAIN_INFO);
         }
-        else if ($target.hasClass("navbar")) {
+        else if ($target.hasClass("navigationbar")) {
             $targetDisplay.html("navigation bar");
             $popOver.attr("data-content", NAVBAR_INFO);
+        }
+        else if ($target.hasClass("sidebar")) {
+            $targetDisplay.html("side bar");
+            $popOver.attr("data-content", SIDEBAR_INFO);
         }
         else if ($target.hasClass("jumbotron")) {
             $targetDisplay.html("jumbotron");
             $popOver.attr("data-content", JUMBO_INFO);
         }
-        else if ($target.hasClass("panel")) {
-            $targetDisplay.html("panel");
-            $popOver.attr("data-content", PANEL_INFO);
+        else {
+            $targetDisplay.html("unknown");
+            $popOver.attr("data-content", UNKNOWN_INFO);
         }
         break;
 
@@ -226,16 +236,6 @@ function updatePopOver() {
         case "IMG":
         $targetDisplay.html("image");
         $popOver.attr("data-content", IMG_INFO);
-        break;
-
-        case "UL":
-        $targetDisplay.html("panel menu");
-        $popOver.attr("data-content", UL_INFO);
-        break;
-
-        case "LI":
-        $targetDisplay.html("panel item");
-        $popOver.attr("data-content", LI_INFO);
         break;
 
         case "H1":
@@ -263,18 +263,200 @@ function updatePopOver() {
             $targetDisplay.html("button");
             $popOver.attr("data-content", BUTTON_INFO);
         }
+        else if ($target.parent().parent().hasClass("nav") || $target.parent().parent().hasClass("sidebar")) {
+            $targetDisplay.html("navigation item");
+            $popOver.attr("data-content", NAV_ITEM_INFO);
+        }
         else {
             $targetDisplay.html("link");
             $popOver.attr("data-content", A_INFO);
         }
         break;
+
+        default:
+        $targetDisplay.html("unknown");
+        $popOver.attr("data-content", UNKNOWN_INFO);
+    }
+    return false;
+}
+
+function dblClickOnElement(e) {
+    var textDim = {};
+    e.stopPropagation();
+    // Deactivate dictation button
+    $("#text .btn").removeClass("active");
+    // Enable tabs
+    $(".nav-tabs li").removeClass("disabled active").children().attr("data-toggle", "tab");
+    $(".tab-content div").removeClass("active");
+    // Setting values
+    $("#text > textarea").val($target.html());
+    $("#size input[name='width']").val($target.outerWidth());
+    $("#size input[name='height']").val($target.outerHeight());
+    textDim.top = $target.css("margin-top");
+    textDim.right = $target.css("margin-right");
+    textDim.bottom = $target.css("margin-bottom");
+    textDim.left = $target.css("margin-left");
+    margin = {
+        top: textDim.top !== null ? parseInt(textDim.top) : 0,
+        right: textDim.right !== null ? parseInt(textDim.right) : 0,
+        bottom: textDim.bottom !== null ? parseInt(textDim.bottom) : 0,
+        left: textDim.left !== null ? parseInt(textDim.left) : 0
+    };
+    $("#margin input[name='top']").val(margin.top);
+    $("#margin input[name='right']").val(margin.right);
+    $("#margin input[name='bottom']").val(margin.bottom);
+    $("#margin input[name='left']").val(margin.left);
+    textDim.top = $target.css("padding-top");
+    textDim.right = $target.css("padding-right");
+    textDim.bottom = $target.css("padding-bottom");
+    textDim.left = $target.css("padding-left");
+    padding = {
+        top: textDim.top !== null ? parseInt(textDim.top) : 0,
+        right: textDim.right !== null ? parseInt(textDim.right) : 0,
+        bottom: textDim.bottom !== null ? parseInt(textDim.bottom) : 0,
+        left: textDim.left !== null ? parseInt(textDim.left) : 0
+    };
+    $("#padding input[name='top']").val(padding.top);
+    $("#padding input[name='right']").val(padding.right);
+    $("#padding input[name='bottom']").val(padding.bottom);
+    $("#padding input[name='left']").val(padding.left);
+    if ($target.is("a")) {
+        $("#link > textarea").val($target.attr("href"));
+        // activate text tab
+        $(".nav-tabs a[href='#text']").parent().addClass("active");
+        $("div#text").addClass("active");
+        // disable size tab
+        $(".nav-tabs a[href='#size']").attr("data-toggle", "").parent().addClass("disabled");
+
+    }
+    else if ($target.is("img")) {
+        $("#link > textarea").val($target.attr("src"));
+        // activate link tab
+        $(".nav-tabs a[href='#link']").parent().addClass("active");
+        $("div#link").addClass("active");
+        // disable text field
+        $(".nav-tabs a[href='#text']").attr("data-toggle", "").parent().addClass("disabled");
+    }
+    else if ($target.is("p, h1, h2, h3, h4, footer")) {
+        // activate text tab
+        $(".nav-tabs a[href='#text']").parent().addClass("active");
+        $("div#text").addClass("active");
+        // disable link, size tabs
+        $(".nav-tabs a[href='#link']").attr("data-toggle", "").parent().addClass("disabled");
+        $(".nav-tabs a[href='#size']").attr("data-toggle", "").parent().addClass("disabled");
+    }
+    else {
+        // activate margin tab
+        $(".nav-tabs a[href='#margin']").parent().addClass("active");
+        $("div#margin").addClass("active");
+        // disable text, link, size tabs
+        $(".nav-tabs a[href='#text']").attr("data-toggle", "").parent().addClass("disabled");
+        $(".nav-tabs a[href='#link']").attr("data-toggle", "").parent().addClass("disabled");
+        $(".nav-tabs a[href='#size']").attr("data-toggle", "").parent().addClass("disabled");
+
+    }
+    $("#modalProperties").modal("toggle");
+}
+
+function modalDictation(b) {
+    if (dictation_working) {
+        return reset();
+    }
+    else {
+        dictation_text = $(b).parent().find("textarea");
+        dictation_obj = new webkitSpeechRecognition();
+        dictation_obj.continuous = true;
+        dictation_obj.maxAlternatives = 1;
+        dictation_obj.interimResults = true;
+        dictation_obj.lang = "en-US";
+        dictation_obj.onend = reset;
+        dictation_obj.onerror = reset;
+        dictation_obj.onstart = function() {
+            $(".mic-wait").show();
+            $(b).addClass("active");
+        };
+        dictation_obj.onresult = function(e) {
+            var final_transcript = dictation_text.val();
+            if (typeof(e.results) == 'undefined') {
+              reset();
+            }
+            for (var i = e.resultIndex; i < e.results.length; ++i) {
+              if (e.results[i].isFinal)
+                dictation_text.get(0).value += " " + e.results[i][0].transcript;
+            }
+        };
+        dictation_working = true;
+        dictation_obj.start();
+    }
+
+    function reset() {
+        dictation_working = false;
+        if (dictation_obj) dictation_obj.stop();
+        dictation_obj = undefined;
+        $(b).removeClass("active");
+        $(".mic-wait").hide();
+    }
+    function capitalize(s) {
+      return s.replace(/\S/, function(m) {
+        return m.toUpperCase();
+      });
     }
 }
+
+function modalText() {
+    var text = $("#text textarea").val();
+    setTimeout(function() {
+        sendQuery("set", "", targetId, {"property": "text", "value": text});
+    }, 300);
+}
+
+function modalLink() {
+    var url = $("#link textarea").val();
+    setTimeout(function() {
+        sendQuery("set", "", targetId, {"property": "url", "value": url});
+    }, 300);
+}
+
+function modalSize() {
+    var size = {
+        "width": $("#size input[name='width']").val() || 0,
+        "height": $("#size input[name='height']").val() || 0
+    };
+    setTimeout(function() {
+        sendQuery("set", "", targetId, {"property": "size", "value": "custom", "size": size});
+    }, 300);
+}
+
+function modalMargin() {
+    var margin = {
+        "top": $("#margin input[name='top']").val() || 0,
+        "right": $("#margin input[name='right']").val() || 0,
+        "bottom": $("#margin input[name='bottom']").val() || 0,
+        "left": $("#margin input[name='left']").val() || 0
+    };
+    setTimeout(function() {
+        sendQuery("set", "", targetId, {"property": "margin", "value": margin});
+    }, 300);
+}
+
+function modalPadding() {
+    var padding = {
+        "top": $("#padding input[name='top']").val() || 0,
+        "right": $("#padding input[name='right']").val() || 0,
+        "bottom": $("#padding input[name='bottom']").val() || 0,
+        "left": $("#padding input[name='left']").val() || 0
+    };
+    setTimeout(function() {
+        sendQuery("set", "", targetId, {"property": "padding", "value": padding});
+    }, 300);
+}
+
+
 
 function okStatus(message) {
     $infoDisplay.removeAttr("style").html(message);
 }
 
 function errStatus(message) {
-    $infoDisplay.css('background-color', 'rgb(231, 197, 188)').html(message);
+    $infoDisplay.css({"background-color": "rgb(231, 197, 188)", "color": "rgb(209, 122, 99)"}).html(message);
 }
