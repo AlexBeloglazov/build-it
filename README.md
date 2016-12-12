@@ -1,7 +1,7 @@
 ##Build-It##
 - **Group Members:** Alex Beloglazov, Jacob Verghese, Piyush Kathuria
 - **Url:** https://buildpage.herokuapp.com/
-- **License:** [Please fill this in]
+- **License:** GNU GPL v3
 
 
 ##Description##
